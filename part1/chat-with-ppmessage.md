@@ -1,21 +1,21 @@
-# CHAT WITH SERVICE USER WHO PROVIDE SERVICE VIA PPMESSAGE
+# CHAT WITH SERVICE USERS WHO PROVIDE SERVICE VIA PPMESSAGE
 
-PPMessage官网部署了PPCom，网站用户可以通过PPCom和PPMessage的客服人员对话。
-
+In [ppmessage.com](https://ppmessage.com), you can chat with PPMessage's service via PPCom. 
 -------
 
-#### 体验PPMessage的客服服务
+#### Try PPCom 
 
-1. 打开 [PPMessage官网](https://ppmessage.com)，将鼠标移至右下角的悬浮图标（PPCom）上， PPCom 会弹出"开始聊天"的提示。
+1. Open [ppmessage.com](https://ppmessage.com). You will see a floating icon (called PPCom) in right-bottom corner. Move your mouse over PPCOm, it will show a 'Start Chat' card with welcome info.
 
-2. 点击 PPCom, PPCom 会打开聊天窗口，在窗口下方的输入栏里输入文字，点击Enter（回车键）即可发送消息。
+2. Click PPCom, in result it will open a chat window. you can type words in the textarea below the chat window and send message to our service by typing Enter key.
 
-3. 现在你应该可以收到客服的回复了:)。除了文字，PPCom 还支持发送图片、文件和表情。
+3. Our service should have received your message and give you a reply by now. Apart from text message, you can also send image, file and emoji message via PPCom. 
 
-4. 使用过程中如有任何问题，你都可以通过 PPMessage 官网的 PPCom 向客服咨询。
+4. Whatever questions you have when using PPMessage, you can come here and ask us. 
 
 
-#### 部署PPMessage客服服务
+#### Deploy PPCom in your website
 
-你的网站也可以像PPMessage官网一样具备客服服务功能。你所需要做的只是在PPMessage官网注册一个账号，并在你的网站嵌入一段代码。
-具体部署流程请查看[部署PPMessage](../part2/README.md)。
+Your website can also have a PPCom, just like [ppmessage.com](https://ppmessage.com). All you have to do is register an account in ppmesage.com and insert a line of code into your website.
+
+You can find more details in [Deploy PPmessage](../part2/README.md)
