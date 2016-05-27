@@ -1,4 +1,4 @@
-# 与 PPMessage 客服对话
+# CHAT WITH SERVICE USER WHO PROVIDE SERVICE VIA PPMESSAGE
 
 PPMessage官网部署了PPCom，网站用户可以通过PPCom和PPMessage的客服人员对话。
 
