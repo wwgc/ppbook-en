@@ -1,10 +1,9 @@
-# PPMessage 如何工作
+# How PPMessage work
 
-PPMessage客服平台包括PPConsole，PPKefu，PPCom，PPMessage服务器四部分。前三者属于客服端范畴，都连接着PPMessage服务器。
-
+PPMessage includes PPConsole, PPKefu, PPCom and PPMessage Server. The former three are client applicaitons that connect PPMessage Server.
 --------
 
-#### PPKefu, PPConsole, PPCom 与 PPMessage服务器
+#### PPKefu, PPConsole, PPCom and PPMessage Server
 
     +--------------------+     1      +-----------------------+      2      +--------------------+
     |  Customer Client   +----------->+        Server         +------------>+   Service Client   |
@@ -23,18 +22,18 @@ PPMessage客服平台包括PPConsole，PPKefu，PPCom，PPMessage服务器四部
                                       +-----------------------+
 
 
-1. 网站用户通过 PPCom 发送消息，PPMessage 服务器接受消息并进行处理。
+1. Website visitor send message to service agent via PPCom. PPMessage Server receives and handle the message before sending it to service agent.
 
-2. 服务器给客服推送消息，客服通过 PPKefu 接收消息。
+2. PPMessage Server sends the message to service agents, who receive and view it by PPKefu.
 
-3. 客服通过 PPKefu 发送消息，PPMessage 服务器接收消息并进行处理。
+3. Service agents send message to Website user via PPKefu. PPMessage Server receives and handle the message before sending it to Website user.
 
-4. 服务器给网站用户推送消息，用户通过 PPCOM 接收消息。
+4. PPMessage Server send the message to Website user, who recevie and view the message via PPCom.
 
-5. 客服管理员登录PPConsole后， 从服务器加载与其账号相关的信息。
+5. Service Agent Administrator sign in to PPConsole, which loads all information about the service team from PPMessage Server.
 
-6. 客服管理员通过 PPConsole 进行管理团队，修改配置等操作后，保存相应信息到服务器。
+6. Service Agent Administrator modify service team settings, add/remove service agents, save changes to PPMessage Server.
 
-7. 客服管理员通过PPConsole，获取在第三方网站部署PPCom所需的代码，设置PPCom显示样式、默认行为。
+7. Service Agent Administrator gets the code to deploy PPCom in PPConsole, and modify settings to change PPCom's looking.
 
-8. 客服管理员通过PPConsole，打开并自动登录PPKefu。
+8. Service Agent Adminstrator can sign in to PPKefu in PPConsole.

@@ -1,16 +1,17 @@
 # PPCom Web SDK
 
-Web SDK帮助开发者在Web端集成PPCom。
-
+PPCom Web SDK enables developer to integrate PPCom in websites.
 ----
 
-#### 集成 Web SDK
-集成Web sdk之前你应该在PPConsole创建一个客服团队，然后在**团队设置-基本信息**栏获取团队uuid(下文的app_uuid），之后可以选择**嵌入代码**或者**加载文件**两种方式进行Web集成。
+#### Integrate PPCom Web SDK
+First of all, you must register an account in PPConsole(PPConsole will automatically create a service team for you and set you as the `Service Agent Administrator`). After that, you can find your serice team's `app_uuid` in PPConsole's settings page(**Team Settings/Basic Info**).
 
-#### 嵌入代码
-PPConsole的**团队设置-应用集成**栏目提供了最简版本的嵌入代码。要在某一个网页中集成PPCom，只需要复制嵌入代码并将其插入到网页html文件的**body**标签之中即可。
+There is two ways to integrate PPCom in your website.
 
-最简版的嵌入代码示例如下，你可以参考下文的 **Web SDK接口** 修改window.ppSettings对象。如果你想要调用其他的SDK接口，请使用下文的**加载文件**方式集成PPCom。
+#### Insert Code
+PPConsole's settings page(**Team Settings/Integration**) provides the min-version insert code. To integrate PPCom in a website, open the source file(index.html e.g.) of the website, then copy the code and insert it into the `<body></body>` tag. After refresh the website, you should see PPCom appear in the right-botttom corner of the website. 
+
+The min-version insert code is as follows. You can change `window.ppSettings` if you want(Check the `Web SDK API`). If you want to have access to all SDK APIs, please use the second way to integrate PPCom.
 
 ```html
 <script>
@@ -22,69 +23,68 @@ window.ppSettings = {
 </script>
 ```
 
-#### 加载文件
-使用直接加载Javascript文件的方法集成PPCom，能确保你调用任何接口之前，PPCom SDK已经加载完毕。
+#### Load File
+This is the recommended way to integreate PPCom for developers who want to access all PPCom Web SDK APIs. Using this way to integrate PPCom gurantees that PPCom Web SDK is fully loaded before you invoke any SDK API. 
 
-方法很简单，只需要将下列代码插入到html文件的**head**标签里，然后就可以在你的js源码里调用PPCom SDK接口。具体接口请参考下文的 **Web SDK接口**。
+The method is simple, just insert below code to your website's source file(index.html e.g.). Then you can invoke PPCom Web SDK APIs in you js code. Check below **Web SDK APIs** for more details.
 
 ```html
 <script src="https://ppmessage.com/ppcom/assets/pp-library.min.js" type="text/javascript"></script>
 ```
 
-#### Web SDK 接口
+#### Web SDK APIs
 
-- 配置选项
+- ppSettings
   
-  在调用`PP.boot`或`PP.update`时传入的参数和`window.ppSettings`格式一样。如果调用时不传入参数，会以`window.ppSettings`作为替代参数。
+  When invoke `PP.boot` or `PP.update`, the parameter you pass should have the same format as `window.ppSettings`. If you don't provide a parameter, `window.ppSettings` is used instead.
   
-  `window.ppSettings`内容如下所示：
+  The format of `window.ppSettings` is:
 
   ```javascript
   window.ppSettings = {
-	// app_uuid，必填字段，是客服团队的uuid，可在PPConsole的 团队设置-基本信息 中找到
-	app_uuid: "xxxxxx",
+    // required, it is your service team' uuid, can be found in PPConsole/Team Settings/Basic Info
+    app_uuid: "xxxxxx",
 	
-    // 第三方用户email，可选字段，不填则会以匿名用户身份启动PPCom，否则以具名用户身份启动PPCom
+    // optional, it is the website visitor's email. If provided, PPMessage Server uses this email to target this visitor. Otherwise PPMessage Server treats this visitor as an anonymous user.
 	user_email: "somebody.web@ppmessage.com",
-    // 用户姓名，可选字段，客服看到的PPCom用户的名称
+    
+    // optional, it is the website visitor's display name.
     user_name: "张三",
-    // 用户头像，可选字段，客服看到的PPCom用户的头像
+
+    // optional, it is the website visitor's avatar
     user_icon: "http://xxxx.com/avatar.png",
-	// 语言配置，可选字段，zh-CN:"中文"，en:"英文", 默认为中文，决定PPCom界面显示语言
+    
+    // optional, it is the language PPCom uses. it can be either 'zh-CN' or 'en', default is 'zh-CN'.
 	language: "zh-CN",
   };
   ```
 
 - `PPCom.boot`
   
-  以匿名或具名用户的身份启动PPCom。一旦启动PPCom，再次调用`PP.boot`不会重启PPCom。如果确实需要重启PPCom，你需要先调用`PP.shutdown`，然后调用`PP.boot`。
+  bootstrap PPCom. Once PPCom is bootstraped, invoke `PP.boot` again will not re-bootstrap PPCom. If you need to re-bootstrap PPCom, you need to at first invoke `PP.shoutdown`, then invoke `PP.boot` again.
   
-  参数可选，不填写参数的话，则默认使用`window.ppSettings`来启动`PPCom`。
-  
+  the parameter is optional. If you don't provide parameter, `window.ppSettings` will be used instead.
+
   ```javascript
   PP.boot({
-    app_uuid: 'your-app_uuid',
+    app_uuid: 'your-app-uuid',
     user_name: 'ppcom-user-name',
     user_icon: 'ppcom-user-icon',
     language: 'zh-CN'
   }, function(isSucess, errorCode) {
-    //回调函数
+    // callback
   });
   ```
 
 - `PPCom.update`
   
-  当需要更换PPCom用户，更新PPCom用户的信息（邮箱，头像，显示名称）时，调用PP.update方法。
+  Invoke `PP.update` to change PPCom's current user, or update PPCom user's information(email, icon, name).
   
-  参数可选，不填写参数的话，则默认使用`window.ppSettings`来更新`PPCom`。
-  
+  the parameter is optional. If you don't provide it, `window.ppSettings` will be used instead.
+
   ```javascript
-  /**
-   * @description 更新 PPCom
-   * @return 无返回值
-   */
   PP.update({
-    app_uuid: 'your-app_uuid',
+    app_uuid: 'your-app-uuid',
     user_email: 'somebody.web@ppmessage.com',
     user_name: 'new-user-name',
     user_icon: 'new-user-icon'
@@ -94,67 +94,56 @@ window.ppSettings = {
   
 - `PP.show`
  
-  显示`PPCom`消息面板。消息面板指的是对话列表或对话界面。用户可以通过在对话列表和对话界面，点击最小化按钮隐藏消息面板。要重新显示消息面板，调用`PP.show`。
+  Show `PPCom Message Interface`. `PPCom Message Interface` is either the conversation list interface or chat window interface, in which user can hide `PPCom Message Interface` by click the minimize button. To show `PPCom Message Interface`, invoke `PP.show`.
 
   ```javascript
-  /**
-   * @description 显示 PPCom
-   * @return 无返回值
-   */
   PP.show();
   ```
 
 - `PP.hide`
  
-  隐藏`PPCom`消息面板。消息面板指的是对话列表或对话界面。用户可以通过在对话列表和对话界面，点击最小化按钮关闭消息面板。
+  Hide `PPCom Message Interface`. `PPCom Message Interface` is either the conversation list interface or chat window interface, in which user can hide `PPCom Message Interface` by click the minimize button. To hide `PPCom Message Interface` programmatically, invoke `PP.hide`.
   
   ```javascript
-  /**
-   * @description 隐藏 PPCom
-   * @return 无返回值
-   */
   PP.dismiss();
   ```
 
 - `PPCom.shutdown`
   
-  完全移除PPCom，但是不会清空window.ppSettings对象。一旦关闭PPCom，如果想要重新显示PPCom，需要调用PP.boot方法。
-
-  当用户注销的时候，可以调用此接口销毁用户数据，此接口将会移除掉PPCom。
+  Clearly remove PPCom. it will not delete `window.ppSettings` though. To display PPCom again, invoke `PP.boot`. 
 
   ```javascript
-  /**
-   * @description 关闭 PPCom
-   * @return 无返回值
-   */
   PP.shutdown();
   ```
 
 
-#### 使用Web SDK
+#### Web SDK API
 
-当PPCom启动时，会根据开发者传入的参数去PPMessage服务器创建或获取一个用户（该用户属于PPMessage系统，与开发者网站用户不是一个概念）。如果PPCom启动时带着`user_email`参数，则称用户为具名用户，否则称为匿名用户。具名用户通过`user_email`将开发者网站用户和PPMessage系统用户关联起来。 
+When PPCom bootstrap, it sends a request to `PPMessage Server` to create(if that user doesn't exist) and return a `PPMessage User` based on the parameter passed to `PP.boot`. If `user_email` is not specified, `PPMessage Server` will generate a random email address for this user.
 
-典型情景：一个有自己的用户系统（支持用户登录）的网站，集成了PPCom Web SDK。网站用户在网站上可能做出登录，修改头像，修改昵称，退出登录等操作。针对网站用户的不同行为，网站开发者需要调用不同的SDK接口来正确地显示PPCom。
+Classic occations: suppose you have a website with its own user system and you integrate PPCom with you website. Your website user can do operations like sign in, modify profile and logout. When user performs these operations, you should invoke PPCom Web SDK API to display PPCom correctly.
 
-考虑以下用户行为：
+Consider below user operations:
 
-* **网站用户打开网站**
+* **User open your website**
 
-  用户在浏览网站，但是没有登录，此时应该将该用户视为匿名用户，并以匿名用户的身份启动PPCom。开发者可以给匿名用户指定默认名称和默认头像，如果没有指定的话，PPMessage系统会给匿名用户创建名称（根据用户IP）和头像（随机头像）。PPCom会在浏览器缓存中存储匿名用户信息，除非用户清空浏览器缓存，否则下次打开网站还是会用之前创建的匿名用户启动PPCom。
+  User opens your website and remains as a visitor. You should bootstrap PPCom as a visitor. The parameter you pass to `PP.boot` should not contain `user_email`. `user_icon` and `user_name` are optional, if you don't provide them, PPMessage Server will generate random icon and name for this user.
   
-  如果你想让PPCom在网站一打开就自动出现，只需要创建`window.ppSettings`对象即可，SDK加载完成后会自动以此对象作为参数启动PPCom。
+  If you want PPCom to appear upon website is opened, just create `window.ppSettings` and load it before `pp-library-min.js`. When the SDK is loaded, it will bootstrap PPCom automatically based on `window.ppSettings`.
 
-  ```javascript
+  ```html
+  <script>
   window.ppSettings = {
       app_uuid: 'your-app-uuid',
       user_name: 'anonymous-user',
       user_icon: 'http://xxx/anonymous-user/icon.png',
       language: 'zh-CN'
   };
+  </script>
+  <script src="https://ppmessage.com/ppcom/assets/pp-library.min.js" type="text/javascript"></script>
   ```
   
-  如果你想要自己控制PPCom何时出现，则不要创建`window.ppSettings`对象，而是直接调用`PP.boot`方法。
+  If you want to manually control when PPCom bootstraps, don't create `window.ppSettings`, invoke `PP.boot` instead.
   
   ```javascript
   PP.boot({
@@ -165,9 +154,9 @@ window.ppSettings = {
   });
   ```
   
-* **网站用户登录**
- 
-  网站用户登录网站后，开发者需要以具名用户的身份更新PPCom。这样，当网站客服收到网站用户的消息时，就能知道该用户是网站的注册用户。关键在于调用`PP.update`时传入的参数对象里必须包含`user_email`。如果网站支持显示用户名称和用户头像，开发者应该同时传入`user_name`和`user_icon`。如果没有指定的话，PPMessage系统会给该用户创建名称（根据用户IP）和头像（随机头像）。
+* **User sign in** 
+  
+  When a visitor signs in to your website, you should change PPCom's current user to be current sign-in user. The key is to provide `user_email` when pass parameter to invoke `PP.update`. `PPMessage Server` will create or return the `PPMessage User` based on `user_email`. You can provide `user_name` and `user_icon` if needed, or `PPMessage Server` will generate random `user_name` or `user_icon` instead.
   
   ```javascript
   PP.update({
@@ -179,9 +168,9 @@ window.ppSettings = {
   });
   ```
 
-* **网站用户修改自身信息**
+* **User modify his profile**
 
-  网站用户修改了自身信息（显示名称、头像）后，开发者需要告诉PPCom更新用户信息。`user_email`标识需要更新的用户。
+  When user modify his profile in your website, you should invoke `PP.update` to tell `PPMessage Server` to update `PPMessage User`(use `user_email` to target the `PPMessage User`).
   
   ```javascript
   PP.update({
@@ -193,9 +182,9 @@ window.ppSettings = {
   });
   ```
  
-* **网站用户退出登录**
+* **User logout from your website**
 
-  网站用户退出登录后，开发者需要以匿名用户身份更新PPCom。之前创建的匿名用户在本地已经缓存，所以此次不会创建新的匿名用户。
+  When user logout from your website, you should update PPCom to reset current user to be a website visitor.
   
   ```javascript
     PP.update({
@@ -206,16 +195,14 @@ window.ppSettings = {
     });
   ```
   
-#### 错误码
+#### Error Code
 
-当`window.ppSettings`的配置信息有误而导致`PPCom`无法正常显示的时候，`PPCom`会在浏览器的`console`中打印出相应的错误信息和错误码。
+When something goes wrong and PPCom fails to bootstrap, it will print error info and erro code in browser console.
 
-下面是所有可能出现的错误码所对应的错误描述信息。
-
-Error Code(错误码) | Error description(错误描述)
+Error Code        | Error description
 ----------------- | -------------------------------
-10000             | app_uuid 填写有误
-10001             | 找不到 user_email 对应的用户，可能未注册或者邮箱填写有误
-10002             | PPCom 暂时还无法运行在 IE9 或以下版本中
-10003             | 无法连接PPMessage服务器
-10004             | user_email 不是有效的邮箱
+10000             | app_uuid is not valid
+10001             | can't get `PPMessage User` linked to provided `user_email`
+10002             | PPCom can't run in IE browser (version<=9)
+10003             | PPCom can't connect to PPMessage Server
+10004             | `user_email` is not valid

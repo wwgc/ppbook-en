@@ -1,12 +1,12 @@
-# PPCom 消息分发策略
+# PPCom Message Dispatch Policy
 
-客服管理员可以在PPConsole的 **团队设置-消息分发** 设置PPCom的消息分发策略。这会影响PPCom用户在建立和客服的对话时，哪些客服会加入到对话中。
+`Service Agent Administrator` can set `PPCom Message Dispatch Policy` in `PPConsole/Team Settings/Message Dispatch`. Dispatch Policy decides which service agents should be added to chat when `PPCom User` establishs chat with service agents.
 
 --------
 
-#### 目标客服
+#### Target Service Agents
 
-目标客服指的是PPCom用户请求建立和客服间的对话时，可以加入到这个对话中的客服。
+`Target Service Agents`: When `PPCom User` establishs chat with service agents, service agents who can be added to the chat is `Target Service Agents`.
 
 当用户点击PPCom`聊天图标`或者`开始对话输入框`时，如果之前没有建立过对话，那么系统就会寻找能为他服务的`目标客服`，之后建立该用户和`目标客服`之间的对话。
 

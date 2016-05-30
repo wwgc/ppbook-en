@@ -1,3 +1,3 @@
 # TRY
 
-* [TALK WITH SERVICE USER WHO PROVICE SERVICE VIA PPMESSAGE](chat-with-ppmessage.md)
+* [TALK WITH PPMESSAGE'S SERVICE AGENTS](chat-with-ppmessage.md)
