@@ -1,75 +1,75 @@
-## PPCom iOS SDK 集成使用说明：
+## PPCom iOS SDK
 
-### 界面
+### Interface
 
-#### iOS SDK 包含三个界面：
+#### iOS SDK includes three interfaces:
 
-- 会话列表界面
-- 聊天界面
-- 会话成员界面
+- `Conversation List`
+- `Conversation Window`
+- `Conversation Member`
 
-#### 会话列表界面
+#### Conversation List
 
-会话列表界面对应的是`PPConversationsViewController`，与当前用户所对应的所有会话都会显示在这个`Controller`中。点击会话列表中的任一`Conversation`，就可以打开此会话对应的聊天界面，进行聊天。此界面也是`SDK`的入口界面。
+`Conversation List` interface is corresponding to `PPConversationsViewController`, all conversations that belongs to current user will show in this `Controller`. Click a conversation will open this conversation's `Conversation Window` interface. This is also the root interface of PPCom iOS SDK.
 
-#### 聊天界面
+#### Converation Window
 
-聊天界面对应的是`PPMessagesViewController`，用户可以在手机上通过此界面与客服进行对话沟通。
+`Conversation Window` interface is corresponding to `PPMessagesViewController`, PPCom user can chat with service agents in conversation window.
 
-#### 会话成员界面
+#### Conversation Member
 
-在聊天界面中，点击右上角的`Group`按钮，将会显示当前正在聊天的`Conversation`的所有成员界面。即`PPGroupMembersViewController`。在此界面中，展示了当前会话下的所有成员信息，用户可以点击任一客服人员，选择单独与其进行对话咨询。
+In `Conversation Window` interface, if you click the `group` button in right-top corner, it will open `Conversation Member` interface(corresponding to `PPGroupMembersViewController`), which shows all members of current conversation. Conversaiton members include the PPCom user and one or more service agents. You can click one of service agents to open a new conversation with him.
 
-### 集成
+### Integration
 
-#### 第一步 从官网下载`PPComLib.framework`和`PPComLib.bundle`
-  [下载 PPCom iOS SDK]()
-  
-#### 第二步 导入到项目中
+#### Download `PPComLib.framework`和`PPComLib.bundle`
+  [Download PPCom iOS SDK]()
 
-直接拖动`PPComLib.framework`和`PPComLib.bundle`到你的项目中去，松开鼠标之后，`XCode`会提示你设置一些拷贝信息，这个时候勾选上`Copy items if needed`前面的复选框，以确保真正的拷贝到了你的项目中去。
+#### Import Into Your Project
 
-#### 第三步 导入动态链接库
+Open your project via Xcode, then drag `PPComLib.framework` and `PPComLib.bundle` into it. In the window Xcode popups, check `Copy items if needed` option to ensure files are copied to your project.
 
-添加动态链接库`libicucore.dylib`或`libicucore.tbd`到你的项目中。在`TARGETS-General`面板中，点击最下面的`+`号，在弹出的对话框按钮中搜索`libicucore.dylib`或`libicucore.tbd`，然后点击`Add`将其添加至你的项目中。
+#### Import Dynamic Link Library
 
-#### 第四步 修改项目编译参数
+Click the "+" button in the bottom of `TARGET/general` interface. In the window Xcode popups, search `libicucore.dylib` or `libicucore.tbd` and add it to your project.
 
-在项目的`TARGETS-Build Settings`设置中找到`Other Linker Flags`选项，然后将其值添加如下参数`-ObjC -all_load`，以确保能够编译通过。
+#### Modify Project Compile Parameters
 
-#### 第五步 引入头文件
+In `TARGETS/Build Settings` interface, find `Other Linker Flags` option, and add parameter `-ObjC -all_load` to it.
+
+#### Import Header Files
 
 ```obj-c
 #import <PPComLib/PPComLib.h>
 ```
-    
-#### 第五步 继承`PPConversationsViewController`，并初始化
+
+#### Inherit `PPConversationsViewController`, Initialize
 
 ```obj-c
-// FeedbackMessagesViewController.h 文件
+// FeedbackMessagesViewController.h
 #import <PPComLib/PPComLib.h>
-    
+
 @interface FeedbackMessagesViewController : PPConversationsViewController
 @end
-    
-// FeedbackMessagesViewController.m 文件
+
+// FeedbackMessagesViewController.m
 #import FeedbackMessagesViewController.h
-    
+
 @implementation FeedbackMessagesViewController ()
-    
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-        
-    self.title = @"会话列表";
-    self.appUUID = `从官网申请到的APP_UUID`;
-        
-    [self initialize]; // 匿名用户初始化
-    [self initializeWithUserEmail:USER_EMAIL] // 具名用户初始化，二者只能选其一
+
+    self.title = @"Conversation List";
+    self.appUUID = `your-app-uuid`;
+
+    // use one of below two method to initialize
+    [self initialize];                         // initializa without email
+    [self initializeWithUserEmail:USER_EMAIL]  // initializa with email
 }
-    
+
 @end
 ```
 
-### 小结
-
-至此，iOS SDK 的集成与使用，已经全部介绍完毕。在集成过程中，如果有任何不明白的地方，您可以参考附件中提供的`PPComDemo`项目来进行配置，或者可以访问我们的[官网](https://www.ppmessage.com)咨询客服。
+### Demos
+You can check `PPComDemo` project to find how to use the iOS SDK. You can ask us in [PPMessage Official site](https://ppmessage.com) if you have any questions.

@@ -1,49 +1,38 @@
-# PPCom 界面和使用
+# PPCom Interface
 
-PPCom的界面可分为三部分来描述。
+PPCom includes three kind of interfaces.
 
 -----
 
-#### 聊天图标
-当用户打开一个集成了PPCom的网站，网站右下角会显示PPCom聊天图标。
+#### PPCom Icon
+When you open a website integrated with PPCom, the floating icon in right-bottom corner is called `PPCom Icon`.
 
-* 当用户将鼠标悬停在网页右下角的PPCom聊天图标上时，图标上方会显示一个 `悬浮卡片`，卡片显示了`客服团队名`和`欢迎信息`，默认的`欢迎信息`是：
+When you move mouse over `PPCom Icon`, a floating card will show above it. The card shows service team name and team's welcome note.
 
-      有什么可以帮忙的，一起聊两句吧？
-
-  客服管理员可以在PPConsole的 **团队设置** 里修改`客服团队名称`和`欢迎信息`。
+`Service Agent Administrator` can change service team in `PPConsole/Team Settings/Basic info`, team's welcome note and PPCom icon color in `PPConsole/Team Settings/User interface`.
     
-  `悬浮卡片`中还显示了`对话图标`和`开始对话输入框`。用户可以点击`开始对话输入框`打开对话，效果和直接点击PPCom`聊天图标`一样。`对话图标`是对话里所有客服的头像组合，如果客服未设置头像，则会用一个默认头像代替。
-    
-* 在`聊天图标`界面下，如果客服给用户发来消息，`聊天图标`上会显示未读消息数目，并在图标左侧显示最新一条消息内容。
 
-* 客服管理员可以在PPConsole的 **团队设置-PPCom界面** 里修改PPCom图标颜色。
+#### PPCom Conversation 
+When you click `PPCom Icon`, it will open `PPCom Conversation` interface.
 
+* In the header bar of `PPCom Conversation` interface, left side is `toggle` button, right side is `minimize` button, center area is conversation name and `show member` button.
 
-#### 对话界面
-用户点击`聊天图标`或者`悬浮卡片`中的`开始对话输入框`，会打开的PPCom对话界面。
+  `toggle` button: open `PPCom Conversation List` interface
 
-* 标题栏左边是`切换对话列表按钮`，右边是`最小化按钮`，中间是`对话名`和`下拉按钮`。对它们的具体描述如下：
-        
-  `切换对话列表按钮`：打开对话列表界面；
-       
-  `最小化按钮`：会最小化当前对话，回到`聊天图标`页面；
+  `minimize` button: hide `PPCom Conversation` interface, and show `PPCom Icon` interface
   
-  `对话名`：客服团队名称；
-
-  `下拉按钮`：打开对话里的客服列表，鼠标悬浮在某个客服上，会显示一个开始对话卡片，点击开始对话可以单独和这个客服建立对话。
+  `show member` button: click the button will show all members of this conversation. You can click a service agent and open a conversation with him.
   
-* 标题栏下方是聊天窗口，显示了对话里的消息，下方是用户输入栏。用户可以发送文字，图片，文件消息。
+* The footer bar of `PPCom Conversation` interface is the chat textarea, you can type words in chat textarea and send message to service agents.
 
+#### PPCom Conversation List
+In `PPCom Conversation` interface, if you click `toggle` button, PPCom will show `PPCom Conversation List` interface.
 
-#### 对话列表界面
-用户在`对话界面`点击`切换对话界面按钮`后显示的`PPCom`对话列表界面。
-  
-* 如果客服管理员设置客服团队的消息分发策略为`ALL`或者`SMART`，`对话列表界面`只会显示PPCom所有的对话。用户点击一个对话会进入这个对话，即进入`对话界面`。
+* If `PPCom Message Dispatch Policy` is `ALL` or `SMART`, `PPCom Conversation List` interface will show all conversations. If you click a conversation, PPCom will open that conversation.
 
-* 如果客服管理员设置客服团队的消息分发策略为`GROUP`，`对话列表界面`最上面显示所有的客服组，客服组下面显示所有的对话。用户点击一个客服组能和这个组里的一个客服建立对话。
+* If `PPCom Message Dispatch Policy` is `GROUP`, `PPCom Conversation List` interface will show all service groups and conversations. If you click a service group, PPCom will establish a conversation with the service group.
 
-* 标题栏中间显示的是`客服团队名`，右边的是`最小化`按钮。点击`最小化`按钮关闭对话界面，显示PPCom聊天图标界面。
+#### Usage: Establish Conversation
+PPCom's usage is to establish conversation with service agents. When PPCom user open PPCom, he must wait PPMessage Server to assign one or more service agents to him before conversation is established. If PPMessage Server can't find any available service agents, PPCom user will continue waiting. PPCom user can cancel this process at any time though.
 
-#### 使用-建立对话
-PPCom的功能是让用户和客服建立对话。当用户通过点击`聊天图标`或者点击`对话列表界面`的客服组建立对话时，需要先等待系统分配一个或多个客服给他，然后才能建立和客服之间的对话。具体分配方法见 [消息分发策略](./message-dispatch.md)。如果系统找不到任何在线的客服，或者所有的客服都处于忙碌状态，则让用户继续等待。用户随时可以取消等待过程。
+Check [PPCom Message Dispatch Policy](./message-dispatch.md) for more details.

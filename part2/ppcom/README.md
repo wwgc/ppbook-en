@@ -1,10 +1,10 @@
 # PPCom
 
-PPCom是PPMessage的客户端应用，它可以作为聊天组件集成到网页或者移动应用中。
+PPCom is the customer's chat app of PPMessage, which can be integrated with website or mobile app.
 
 ------
 
-* [PPCom界面](./interface.md)
-* [消息分发策略](./message-dispatch.md)
-* [集成web-sdk](./web-sdk.md)
-* [集成ios-sdk](./ios-sdk.md)
+* [PPCom Interface](./interface.md)
+* [PPCom Message Dispatch Policy](./message-dispatch.md)
+* [PPCom Web SDK](./web-sdk.md)
+* [PPCOm iOS SDK](./ios-sdk.md)
