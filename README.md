@@ -1,6 +1,6 @@
 # PPMessage Document - PPBook
 
-This book includes everything of PPMessage, using, installing, developing PPMessage.
+This book includes everything about using, installing, developing PPMessage.
 
 ### [ppmessage.com](https://ppmessage.com) 
 
@@ -11,4 +11,4 @@ PPMessage is an open source project, which hosted in [Github](https://github.com
 
 ### Need Help
 
-If you have any questions about PPMessage or PPBook, you can visit [PPMessage Official Site](https://ppmessage.com) to ask us or open an issue in [github.com/PPMESSAGE](https://github.com/PPMESSAGE/ppmessage.git).
+If you have any questions about PPMessage or PPBook, visit [PPMessage Official Site](https://ppmessage.com) to ask us or open an issue in [github.com/PPMESSAGE](https://github.com/PPMESSAGE/ppmessage.git).
