@@ -1,5 +1,5 @@
-# 搭建开发环境
+# Set Up PPMessage
 
-* [在Mac和Linux上搭建开发环境](./set-up-ppmessage.md)
-* [用Docker搭建开发环境](./set-up-ppmessage-with-docker.md)
-* [配置PPMessage](./config-ppmessage.md)
+* [Set Up PPMessage in Mac & Linux](./set-up-ppmessage.md)
+* [Set Up PPMessage With Docker](./set-up-ppmessage-with-docker.md)
+* [Config PPMessage](./config-ppmessage.md)

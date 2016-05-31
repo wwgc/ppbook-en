@@ -1,20 +1,22 @@
-# 配置PPMessage
+# Config PPMessage
 
-运行PPMessage前，需要对PPMessage做一些全局设置。
+Before bootstrap PPMessage, we need to config PPMessage.
 
-### 生成配置文件
-进入配置文件目录，生成config.py
+---
+
+### Create config.py
+Suppose your PPMessage is in `~/Documents/ppmessage`.
 
 ```bash
 cd ~/Documents/ppmessage/ppmessage/bootstrap
 cp config.template.py config.py
 ```
 
-### 配置文件说明
+### Describe config.py
 
-配置文件里有如下设置项目：
+config.py contains following settings.
 
-#### 超级管理员
+#### Super Administrator
 
 ```python
 "user": {
@@ -27,19 +29,20 @@ cp config.template.py config.py
 },
 ```
 
-此用户是超级管理员，可以管理PPMessage下的所有用户和客服团队。各项设置介绍如下：
+This user is the super administrator of PPMessage, who has access to all users and service teams. When PPMessage bootstrap, super administrator will be created.
 
-选项              | 说明          
------------------|-------------
-user_language    |  管理员的语言设置，决定系统创建PPCom匿名用户时，用何种语言生成用户名，以及PPCom的默认欢迎信息语言。可选zh_cn(简体中文), zh_tw(繁体中文), en_us(英文)
-user_firstname   | 管理员的名
-user_lastname    |  管理员的姓
-user_fullname    |  管理员的全名
-user_email       |     管理员的登录邮箱
-user_password    |  管理员的登录密码
+Parameter        | Description
+-----------------|-------------------------------
+`user_language`  | language decides what language PPMessage will use to create PPCom anonymous user and set PPCom's default welcome note, can be "zh_cn", "en", "zh_tw" 
+`user_firstname` | admin's firstname
+`user_lastname`  | admin's lastname
+`user_fullname`  | admin's fullname
+`user_email`     | admin's email
+`user_password`  | admin's password
 
 
-#### 超级管理员客服团队
+
+#### Super Administrator's Service Team
 
 ```python
 "team": {
@@ -48,15 +51,16 @@ user_password    |  管理员的登录密码
 }
 ```
 
-此团队是超级管理员的客服团队，各项设置解释如下：
-
-选项              | 说明          
------------------|-------------
-app_name         | 客服团队的名称
-company_name     | 公司或组织名称
+This is the service team of super administrator.
 
 
-#### mysql 设置
+Parameter        | Description
+-----------------|------------------------------
+`app_name`       | service team name
+`company_name`   | company name
+
+
+#### Mysql Settings
 
 ```python
 "mysql": {
@@ -67,16 +71,15 @@ company_name     | 公司或组织名称
 },
 ```
 
-此处设置PPMessage登录mysql时所需要的参数，各项设置解释如下：
+Parameter        | Description
+-----------------|---------------------------------------------------
+`db_host`        | msyql server address, default to be `127.0.0.1`
+`db_user`        | mysql login user, default to be `root`
+`db_pass`        | mysql login password, should match your msql password (when you install mysql, it will tell you to set password)
+`db_name`        | ppmessage database name, default to be `ppmessage`, no need to change
 
-选项              | 说明          
------------------|-------------
-db_host          | mysql server地址，默认连接本地数据库，值为`127.0.0.1`，无需修改
-db_user          | mysql 登录用户名，默认为`root`，无需修改
-db_pass          | mysql 登录密码，需要将其设置为你的mysql登录密码（安装mysql时会提示设置密码）
-db_name          | ppmessage数据库名，默认为`ppmessage`，无需修改
 
-#### 服务器设置
+#### Server Settings
 
 ```python
 "server": {
@@ -86,34 +89,31 @@ db_name          | ppmessage数据库名，默认为`ppmessage`，无需修改
 },
 ```
 
-此处设置PPMessage服务器IP，文件存储路径。
+Parameter        | Description
+-----------------|-------------------------------------------------------------------------------
+name             | server ip, such as `192.168.0.52`, PPKefu need this to connect to right server
+identicon_store  | PPCom user icon store path
+generic_store    | common file store path
 
-选项              | 说明          
------------------|-------------
-name             | 服务器IP，例如`191.168.0.110`，PPKefu需要读取此设置，决定要连接哪个服务器
-identicon_store  | PPCom用户头像文件存储路径
-generic_store    | 普通文件存储路径
 
-#### js 设置
+#### js Settings
 ```python
 "js": {
     "min": "no", # "no" or "yes"
 },
 ```
 
-设置`js.min`为`yes`，PPCom，PPConsole执行gulp任务时会压缩js, css文件，为`no`则不压缩。
+If you set `js.min` to `yes`, when run gulp task for PPCom, PPKefu, PPConsole, their javascript, css files will be compressed.
 
-#### nginx 设置
+#### Nginx Settings
 
 ```python
 "nginx": {
     "nginx_conf_path": "/usr/local/nginx/conf/nginx.conf",
     "server_name": ["ppmessage.com", "www.ppmessage.com"],
     "listen": "8080", #80
-
     "upload_store": "/usr/local/opt/ppmessage/uploads 1",
     "upload_state_store": "/usr/local/opt/ppmessage/upload_state",
-
     "ssl": "off", # off/on
     "ssl_listen": "443",
     "ssl_certificate": "/Users/dingguijin/ppmessage/ppmessage/certs/ppmessage.cn.instant/issue/ssl_bundle.crt",
@@ -122,22 +122,20 @@ generic_store    | 普通文件存储路径
 
 ```
 
-各项设置说明如下：
-
-选项              | 说明          
------------------|-------------
-nginx_conf_path  | nginx配置文件路径，在Mac下部署时，路径为`/usr/local/etc/nginx/nginx.conf`，在Linux下或用Docker部署时，路径为`/usr/local/nginx/conf/nginx.conf`
-server_name      | 服务器名称，格式为 `[some-server.com`, `www.some-server.com]`
-listen           | nginx监听的端口，开发时设为8080，发布时设为80
-upload_store     | 通过nginx上传文件时的存储路径
-upload_state_store | 通过nginx上传文件时保存进度的目录
-ssl              | 设为off使用http协议，设为on使用https协议
-ssl_listen       | ssl 端口
-ssl_certificate  | ssl 证书
-ssl_certifcate_key | ssl 证书密钥
+Parameter               | Description
+------------------------|---------------------------------------------------
+`nginx_conf_path`       | nginx conf path, When set up in Mac, it's `/usr/local/etc/nginx/nginx.conf`. When set up in Linux or Docker, it's `/usr/local/nginx/conf/nginx.conf`
+`server_name`           | server name, should be like: `[some-server.com`, `www.some-server.com]`
+`listen`                | nginx listen port, `8080` for development, `80` for production
+`upload_store`          | nginx upload store
+`upload_state_store`    | nginx upload state store
+`ssl`                   | set to `on` for `https` protocol, set to `off` for `http` protocol
+`ssl_listen`            | ssl listen port
+`ssl_certificate`       | ssl certificate
+`ssl_certificate_key`   | ssl certificate key
 
 
-#### apns 设置
+#### Apns Settings (optional)
 
 ```python
 "apns": {
@@ -147,7 +145,7 @@ ssl_certifcate_key | ssl 证书密钥
 },
 ```
 
-#### gcm 设置
+#### GCM Settings (optional)
 
 ```python
 "gcm": {
