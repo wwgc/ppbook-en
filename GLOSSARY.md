@@ -10,19 +10,19 @@ PPMessage client end software, which is used by the user of developer's website 
 
 ## PPKefu
 
-PPMessage client end software, which is used by the creator or service user of developer's company.
+PPMessage client end software, which is used by the creator or service agents of developer's company.
 
 ## PPConsole
 
-PPMessage Web admin software which is used by developer or operator who can create more service user and check the message data of PPMessage.
+PPMessage Web admin software which is used by developer or operator who can create more service agents and check the message data of PPMessage.
 
-## Service team manager
+## Service team administrator / Service agent administrator
 
-The first user of PPMessage, who signup a user into PPMessage and create service team.
+The creator of service team, who registers account and create service team and service agents in PPConsole.
 
-## Service user
+## Service agent
 
-Servuice user is created by service team manager.
+Belong to a service team, created by service team administrator
 
 
 
