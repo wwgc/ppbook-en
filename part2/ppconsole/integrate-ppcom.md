@@ -1,14 +1,14 @@
-# 集成 PPCom
+# App Integrate 
 
-集成PPCom界面提供了集成PPCom的嵌入代码，以及预览PPCom的网址。
+`App Integrate` interface shows the PPCom's insert code and PPCom's preview website address.
 
 ------
 
-#### 集成 PPCom
+#### integrate PPCom
 
-这里介绍的是通过Web端嵌入代码的方式集成PPCom，关于集成PPCom的完整介绍见[PPCom](../ppcom/web-sdk.md)。
+Here we only introduce the `insert code` way to integrate PPCom. For more details please check [PPCom Web SDK](../ppcom/web-sdk.md).
 
-嵌入代码格式如下，window.ppSettings对象中的app_uuid指的是客服团队的UUID。你可以在**团队基本信息**找到团队UUID。
+The code to insert is as follows. `app_uuid` in `window.ppSettings` is your service team's uuid, which you can find in `PPConsole/Team Settings/Basic Info`.
 
 ```html
 <script> 
@@ -17,7 +17,7 @@
 </script>
 ```
 
-集成PPCom界面已经给出了这段嵌入代码，你需要复制这段代码，然后把代码粘贴到你的网页html文件的**body**标签之间。类似这样：
+`App Integrate` interface shows above code. To integrate PPCom with your website, you need to copy the code and insert it between `<body></body>` tag in the source file(index.html e.g.) of your website. Like this:
 
 ```html
 <!DOCTYPE html>
@@ -35,11 +35,8 @@
 </html>
 ```
 
-之后再打开这个网页，PPCom聊天图标就会出现在网页右下角。
+Then open your website, PPCom will show in the right-bottom corner of the website.
 
+#### Preview PPCom
 
-#### 预览PPCom
-
-预览PPCom概念：当你点击`预览PPCom`按钮时，浏览器会打开生成一个临时网页，这个网页上集成了PPCom（用到的app_uuid是你的客服团队UUID），你可以在这个网页上使用PPCom。
-
-在往你自己的网站上集成PPCom之前，你可以通过预览PPCom来测试PPCom的功能。
+Concept of previewing PPCom: in `App Integrate` interface, if you click `Preview PPCom` button, your browser will open a temporary website. This website is integrate with PPCom (using your service team uuid). You can test PPCom in this website before actually integrate PPCom with your own website.

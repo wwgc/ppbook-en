@@ -1,19 +1,17 @@
-# PPCom 界面设置
+# User Interface
 
-在PPCom界面设置页面，你可以修改PPCom的欢迎信息以及PPCom聊天图标颜色。
+`User Interface` show PPCom's welcome note and PPCom icon color.
 
 ---------
 
-#### 欢迎信息
-当用户将鼠标悬停在PPCom聊天图标上时，图标上方会显示一个`悬浮卡片`，`悬浮卡片`里显示了欢迎信息。默认的欢迎信息是：
+#### Welcome note
 
-    有什么可以帮忙的，一起聊两句吧？
+When PPCom user move mouse over PPCom icon, it will show a floating card above. The floating card shows PPCom's welcome note.
 
-你可以在PPCom界面设置里修改欢迎信息。
+You can change PPCom's welcome note in `User Interface`.
 
+#### PPCom Icon
 
-#### 聊天图标颜色
+When you integrate PPCom with your website, the icon appears in the right-bottom corner of the website is called `PPCom Icon`. Default icon color is `#54c6d6`.
 
-网页集成了PPCom后，显示在网页右下角的图标就是PPCom聊天图标，默认图标颜色是青色(#54c6d6)。
-
-你可以在PPCom界面设置里将PPCom图标颜色改成任意颜色。
+You can change PPCom's icon color in `User Interface`.

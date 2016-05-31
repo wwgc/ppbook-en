@@ -1,46 +1,43 @@
-# PPConsole 快速向导
+# Quick Guide
 
-快速向导包括对注册用户、创建客服团队、集成PPCom、使用PPKefu的简要介绍。
+`Quick Guide` intruduces account registeration, team managment, PPCom integration, PPKefu usage.
 
 -----
 
-#### 注册用户、创建团队
+#### Account Registeration
     
-1. 打开 [PPMessage官网](https://ppmessage.com) , 点击[开始使用PPMessage]按钮，打开PPConsole登录页面。
+1. Open [PPMessage Official Site](https://ppmessage.com), click `Start to use PPMessage` button and open PPConsole sign up page.
 
-2. 点击PPConsole网页右上角的注册按钮，打开注册界面。
+2. Choose `Sign Up` interface. Enter your service team name, your full name, email and password, choose your language, then click `Sign Up` button. 
 
-3. 在注册界面，填入邮箱地址（作为登录账户名），名称（作为账户显示名称）和密码，点击下方的注册按钮完成注册，进入创建团队界面。
+3. After signing up, you have an account and a service team. Your account is the first service agent and also the service agent administrator of your service team. You will use this account to manage your service team and other service agents.
 
-4. 在创建团队界面，填入团队名称，点击下方的创建团队按钮，进入开始使用界面。
-
-5. 在开始使用页面，点击下方的开始按钮，进入设置页面，你可以在此页面管理你的账户和团队。
-
-6. 下一步，我们将开始集成PPCom。
+3. Next step, we start to integrate PPCom.
 
 
-#### 集成PPCom
+#### Integrate PPCom
     
-1. 在设置页面，打开左侧栏的应用集成进入应用集成界面，界面分为上下两栏，上栏内容是在你的网站集成PPCom所需的代码，下栏内容是预览PPCom的网址。
-
-  如果你没有自己的网站，或者暂时不想在自己的网站上集成PPCom，你可以访问预览网址来测试PPCom。如果你想在自己的网站上集成PPCom，请看下一步。
-
-2. 复制应用集成界面上栏的代码，打开你的网站主页面的源文件（index.html）, 将代码插入到 **body**标签中。
+In PPConsole settings page, open `PPConsole/Team Settings/App Integrate` interface. It shows PPCom' insert code and PPCom's preview website address. 
    
-3. 刷新你的网站，PPCom会显示在网站右下角。现在网站用户可以通过PPCom发送消息了，但是你如何接收他们的消息呢？ 你需要PPKefu。
+If you don't have your own website or don't want to integrate PPCom with your website yet, you can open the preview website to try using PPCom,and skip to next step `Using PPKefu` directly.
+  
+If you want to integrate PPCom with your own website, finish following steps:
 
-4. 下一步，我们将使用PPKefu与PPCom通话。
+1. Copy PPCom's insert code and insert it between the `<body></body>` tag in the source file of your website.
+ 
+2. Refesh your website and PPCom will appear in the right-bottom corner. You can open PPCom and send message to service agents.
+
+3. The service team you created before only have one service agent (your PPConsole account), you will use PPKefu to sign in to this service agent and receive PPCom user' message. Go to next step `Using PPKefu`.
 
 
-#### 使用PPKefu
-    
-1. 你可能已经注意到，当你登录到PPConsole后，页面上方的导航栏会出现[开始服务]按钮（在你的名称左边）。
+#### Using PPKefu
 
-2. 点击[开始服务]按钮，PPConsole会在新标签中打开网页版PPKefu，并自动以当前账号登录。
+1. Sign in to PPConsole using your account, you will see `Start Service` button in PPConsole's navbar.
 
-3. 现在你就可以接收你的网站用户发来的消息，也能给他们回复消息了。
+2. Click `Start Service` button, it will open PPKefu in new browser tab and automatically sign in with your account.
 
-#### 总结
+3. Now you can see the message PPCom user has sent to you, and send message back to him.
 
-PPConsole 是使用PPMessage客服服务的关键。除了部署代码，打开PPKefu, PPConsole还有很多其他功能，你可以
-在[PPConsole功能](./README.md)查看。
+#### Conclusion
+
+PPConsole is the key to use PPMessage. For more details about PPConsole, check [PPConsole](./README.md).

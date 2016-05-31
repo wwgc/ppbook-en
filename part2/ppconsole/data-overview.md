@@ -1,34 +1,36 @@
-# 数据总览
+# Data Overview
 
-数据总览界面展示客服团队下PPCom用户，客服，消息的汇总信息。
+`Data Overview` interface shows information about PPCom users, service agents, messages in service team.
 
 --------
 
-#### PPCom用户
-PPCom用户数：某个时间段内，在集成了PPCom的网站上，网站用户通过打开或刷新网页启动了PPCom，我们就认为PPCom用户数目增加一个（重复用户只计算第一次）。
+#### PPCom User
 
-数据总览界面显示如下有关PPCom用户的信息：
+PPCOm user number: in one period, in any website that integrates with PPCom, if website user open or referesh the website, we think PPCom user number increase by one (repeated user is only counted once).
 
-    今日PPCom用户数
-    昨日PPCom用户数
-    PPCom用户总数
-    今天每小时PPCom用户数变化图
-    每天PPCom用户数变化图
+`Data Overview` interface shows following information about PPCom user:
     
-#### 客服
-客服登录数：某个时间段内，客服团队里的客服登录了PPKefu，我们就认为客服登录数目增加一个（重复用户只计算第一次）。
+    PPCom user number today
+    PPCom user number yesteday
+    all PPCom user number
+    PPCom user number change map per hour today
+    PPCom user number change map per day
+    
+#### Service Agents
 
-数据总览界面显示如下有关客服的信息：
+Service agents sign in number: in one period, if a service agent in the service team sign in to PPKefu, we think service agent sign in number increase by one. (repeat agent is only counted once)
 
-    今天每小时客服登录数变化图
-    每天客服登录数变化图
+`Data Overview` interface shows following information about service agents:
 
-#### 消息
-消息数：某个时间段内，客服或PPCom用户发送一条消息，我们就认为消息数增加一个。
+    service agents number change map per hour today
+    service agents number change map per day
 
-数据总览界面显示如下有关消息数的信息：
+#### Messages
 
-    消息总数
-    今天每小时消息数变化图
-    每天消息数变化图
+Message number: in one period, if a service agent or PPCom user send a message, we think message number increase by one.
 
+`Data Overview` interface shows following information about message number:
+
+    all message number
+    message number change map per hour today
+    message number change map per day

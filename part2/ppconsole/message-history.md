@@ -1,20 +1,20 @@
-# 消息历史
+# Message History
 
-消息历史界面展示客服团队下所有客服与PPCom用户之间，客服与客服之间的对话，以及对话里的消息历史。
+`Message History` interface shows all conversations between service agents and PPCom users, between service agents and service agents. You can view message history of every conversation.
 
 -------
 
-#### 对话记录
+#### All Conversations
 
-每条对话记录都显示了以下信息：
-    
-    对话头像，
-    对话名称，
-    对话总消息数目，
-    对话最后一条消息的内容，发送时间
+Every conversation shows following information:
 
-点击总消息数目，会打开一个消息记录窗口。类似于PPKefu的聊天窗口，但是只能查看消息。
+    conversation icon
+    conversation name
+    conversation message number
+    conversation latest message's content, send time
 
-#### 消息记录
+Click conversation message number link, it will open a conversation window, in which you can view message history of this conversation.
 
-当你点击一个对话的总消息数目时，打开的消息记录窗口会显示这个对话里的所有历史消息。
+#### Message History
+
+When you open a conversation window, you can view all message history of this conversation.
