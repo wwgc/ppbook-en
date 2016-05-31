@@ -1,6 +1,6 @@
-# 配置开发环境
+# Set up PPConsole
 
-### 准备工作
+### Preparation
     
     cd ~/Documents/ppmessage/ppmessage/ppconsole
     bower install
@@ -8,10 +8,10 @@
     npm install 
     gulp
     
-### 注意事项
-开发时需要执行gulp watch 任务
+### Notice
+When develope, run `gulp watch` firstly
 
     cd ~/Documents/ppmessage/ppmessage/ppconsole/gulp
     gulp watch
 
-添加新js文件时，需要同时更新 gulp/build.config.js。
+When add new javascript files, update gulp/build.config.js.
