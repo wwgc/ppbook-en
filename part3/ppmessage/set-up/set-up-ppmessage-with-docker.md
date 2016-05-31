@@ -1,200 +1,200 @@
-# 使用 Docker 搭建开发环境
+# Set Up PPMessage With Docker 
 
-依照以下操作，你可使用`Docker`在`Mac`，`Linux`上搭建`PPMessage`开发环境。
+Following below steps, you can set up PPMessage with docker in Mac and Linux.
 
 ---
 
-### 前言：Docker 的作用 ？
+### Concept of Docker 
 > Docker allows you to package an application with all of its dependencies into a standardized unit for software development. Docker containers wrap up a piece of software in a complete filesystem that contains everything it needs to run: code, runtime, system tools, system libraries – anything you can install on a server. This guarantees that it will always run the same, regardless of the environment it is running in.
 
-简而言之，`Docker`可以将`PPMessage`运行时的所有依赖软件打包成为一个`Docker`镜像。借助于此镜像，`PPMessage`可以在任何支持`Docker`的机器上运行，并且效果完全一样。
 
-#### 安装 Docker
-首先仔细阅读`Docker`的官方引导文档 [docker getting started](https://docs.docker.com/mac/) ，了解`Docker`的基本概念和安装、使用方法。
+#### Install Docker
+Firstly read [docker getting started](https://docs.docker.com/mac/) to have a basic understanding of docker and install docker in your machine.
 
-当你安装完`Docker`后，应该首先验证一下`Docker`命令是否可用。
+After installing docker, you should check whether docker command is available.
 
-* `Mac`
+* Mac
  
-  点击 **启动面板(LaunchPad)** 里的 `Docker Quickstart Terminal` 打开 `Terminal`。
+  Open LaunchPad and click `Docker Quickstart Terminal` to open a terminal.
   
-  等待`Docker`启动完毕，输入命令`docker info`。如果没有显示错误，说明`Docker`命令可用。
+  Wait unitl docker is started, type command: `docker info`. If nothing goes wrong, docker command is available.
   
-  需要注意的是，在`Mac`下，必须通过`Docker Quickstart Terminal`打开的`Terminal`才可以使用`Docker`命令。
-
-* `Linux`
+* Linux
   
-  打开系统Terminal， 输入命令`docker info`。如果没有错误，则说明 Docker 命令可用。
+  Open a terminal， type command: `docker info`.  If nothing goes wrong, docker command is available.
   
-  如果提示以下错误：
+  If terminal shows below error:
 
   > Cannot connect to the Docker daemon. Is 'docker -d' running on this host?
 
-  则先尝试重启 Docker 服务
+  You should at first check docker service is started. type command:
 
   ```
   sudo service docker restart
   ```
-  
-  如果之后执行`docker info`还是出错的话，则将当前用户加入到`docker group`中，执行
+
+  If that doesn't work, you need to add your current user to docker group, run 
 
   ```bash
   sudo usermod -aG docker $USER
   ```
+  
+  Then logout & login with current user, now docker command should be available.
 
-  然后重新以当前用户登录系统，再打开系统`Terminal`，就应该可以使用`Docker`命令了。
 
-#### 下载 PPMessage镜像
-安装好`Docker`之后，下一步是下载`PPMessage`镜像。镜像托管在[Docker Hub](https://hub.docker.com/r/ppmessage/ppmessage/)上，你可以搜索`ppmessage`找到它。要下载`PPMessage`镜像，打开`Terminal`，输入命令：
+#### Download PPMessage Docker Mirror
+After install docker, the next step is to download PPMessage docker mirror. It is hosted in [Docker Hub](https://hub.docker.com/r/ppmessage/ppmessage/), you can find it by searching `ppmessage` in docker hub. To download it, open a terminal and run
 
 ```
 docker pull ppmessage/ppmessage
 ```
 
-下载过程可能比较漫长，等待过程中你可继续执行下面的步骤。
+while waiting for download to complete, you can continue performing below steps.
 
-#### 下载 PPMessage 源码
-启动 PPMessage 之前，首先需要获取PPMessage的源码。源码托管在 [github](https://github.com/PPMESSAGE/ppmessage) 上。
 
-假设你将PPMessage克隆到目录`~/Documents/ppmessage`。
+#### Download PPMessage Source Files
+Before starting PPMessage, you need to download PPMessage source files from [github](https://github.com/PPMESSAGE/ppmessage).
 
-```
-git clone git@github.com:PPMESSAGE/ppmessage.git
-```
-
-#### 下载geolite2
-进入`~/Documents/ppmessage`目录，执行
+Suppose you save PPMessage to `~/Documents/ppmessage`.
 
 ```
-ppmessage/scripts/download_geolite2.sh
+git clone git@github.com:PPMESSAGE/ppmessage.git  ~/Documents/ppmessage
 ```
 
-#### 下载bower, npm依赖
-首先需要安装`nodejs`，在`Mac`上通过以下命令安装
+#### Download Geolite2
+Enter `~/Documents/ppmessage`, run
+
+```
+./ppmessage/scripts/download_geolite2.sh
+```
+
+#### Download Bower Components, Npm Packages
+Firstly you need to download `nodejs`.
+
+In Mac, to install `nodejs`, run 
 
 ```
 brew install nodejs
 ```
 
-在`Debian\Ubuntu`上，通过以下命令安装`nodejs 4.x`
+In Linux(Debian\Ubuntu), to install `nodejs 4.x`, run 
 
 ```
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
-然后，用`npm`安装`cnpm, bower, gulp`
+Then, use `npm` to install `bower, gulp`
 
 ```
-sudo npm install -g cnpm bower gulp
+sudo npm install -g bower gulp
 ```
 
-最后，下载`PPCom, PPKefu, PPConsole`的`bower，npm`依赖。进入`~/Documents/ppmessage`目录，执行
+Finally, Download bower & npm dependencies of `PPCom, PPKefu, PPConsole`. Enter`~/Documents/ppmessage`, run
 
 ```
 ./dist.sh bower
 ./dist.sh npm
 ```
-在国内，从`npm`官方镜像源下载`npm`包速度比较慢，且会出现资源被屏蔽的现象。此时可以用`./dist.sh cnpm`代替上面的`./dist.sh npm`, 这会从淘宝`npm`镜像源下载`npm`依赖。
 
-#### 配置 PPMessage
-参考[配置PPMessage](./config-ppmessage.md)，生成配置文件。
+#### Config PPMessage
+Check [Config PPMessage](./config-ppmessage.md) and create your config.py.
 
-#### 启动 PPMessage
-启动 PPMessage 之前，确认你已经完成以下步骤：
-* 下载`PPMessage`镜像
-* 下载`PPMessage`源码
-* 配置`PPMessage`
-* 下载`bower, npm`依赖
+#### Start PPMessage
+Before starting PPMessage, ensure you have finished following steps:
+* Download PPMessage docker mirror
+* Download PPMessage source files
+* Config PPMessage
+* Download bower, npm dependencies
 
-然后，输入以下命令启动`PPMessage`(根据实际情况，你可能需要改变某些参数)
+Then, run following command to bootstrap PPMessage (You may modify this command based on your PPMessage Configuration).
 
 ```
 docker run -it -p 8080:8080 -v ~/Documents/ppmessage:/ppmessage ppmessage/ppmessage
 ```
 
-`-p 8080:8080` 表示将本地的`8080`端口映射到`Docker`容器的`8080`端口，如此就可以通过本地的`8080`端口访问在`Docker`容器中运行的`PPMessage`。
+`-p 8080:8080` means mapping local port 8080 to docker container port 8080, thus you can access PPMessage in docker container via port 8080.
 
-`-v ~/Documents/ppmessage:/ppmessage` 表示将本地的`PPMessage`源码目录映射到`Docker`容器`/ppmessage`目录，如此可实现在本机开发源码，在`Docker`容器里运行代码。
+`-v ~/Documents/ppmessage:/ppmessage` means mapping local PPMessage directory(`~/Docuemnts/ppmessage`) to docker container PPMessage directory(`/ppmessage`).
 
-你也可以通过运行脚本 `~/Documents/ppmessage/ppmessage/docker/run-ppmessage.sh` 来启动 `PPMessage`。
+You can run `~/Documents/ppmessage/ppmessage/docker/run-ppmessage.sh` to bootstrap PPMessage too.
 
 
-#### 访问 PPMessage
-在用`Docker`启动`PPMessage`之后，我们还需要生成`PPCom, PPKefu, PPConsole`运行时所需要的`js，css`文件，才能使用这三个模块。
+#### Use PPMessage
+After start PPMessage with docker, we need to generate javascript and css files of PPCom, PPKefu, PPConsole to visit them.
 
-进入`~/Documents/ppmessage`目录，执行
+Enter`~/Documents/ppmessage`, run 
 
 ```
 ./dist.sh gulp
 ```
-以后，当你更新`PPMessage`源码后，都要重复这一操作。
 
-现在，你可以访问`PPMessage`的各模块，
+Now, you can visit modules of PPMessage.
 
-访问地址格式为：`http_protocol://server_ip:server_port/xxxx`。例如`http://127.0.0.1:8080/ppkefu`, `http://192.168.99.100:8080/user`。
+The address is like: `http_protocol://server_ip:server_port/xxxx`, such as `http://127.0.0.1:8080/ppkefu`, `http://192.168.99.100:8080/user`.
 
-* `http_protocol`与配置文件里`nginx`的`ssl`设置有关，为`http`或者`https`；
+* `http_protocol` is related to your PPMesssage configuration `nginx.ssl`, `on` for `https`, `off` for `http`
 
-* `server_port`是配置文件里`nginx`监听端口，为80或8080。
+* `server_port` is related to your PPMessage configuration `nginx.listen`
 
-* `server_ip`是`Docker Machine`的`IP`，在`linux`和`Mac`下获取方式不同。
+* `server_ip` is the ip of docker Machine
 
-  * `Linux`
+  * in Linux
   
-    `Docker`直接运行在操作系统上，`server_ip`就是'127.0.0.1'。
+    docker is running directly on your system, `server_ip` is '127.0.0.1'.
 
-  * `Mac`
+  * in Mac
 
-    `Docker`运行在虚拟机中，`server_ip`是虚拟机的`IP`。要获取这个`IP`，打开`Terminal`，执行
+    docker is runing on virtual machine, `server_ip` is the ip of docker virtual machine. To get this ip, open terminal, run
 
     ```
     docker-machine ip default
     ```
 
-    这会给出`Docker`虚拟机的 IP 地址，例如IP是 `192.168.99.100`。
+    It will give the ip of docker virtual machine, such as `192.168.99.100`.
 
-可能出现的错误：
+Possible errors：
 
-* 登录、注册时，出现ppauth 400 error
+* When sign in to PPConsole, browser console throw ppauth 400 error.
   
-  解决办法：先更新PPMessage源码（`git pull`），然后执行`./dist.sh gulp`，最后清空浏览器缓存。
+  Solution: Firstly update PPMessage (`git pull`), then run `./dist.sh gulp`, finally clean browser cache.
 
-#### 关闭、重新启动 PPMessage
-通过`docker run`启动`PPMessage`总是会新建一个`Docker`容器，然后在新容器中初始化并运行 `PPMessage`。
 
-实际上我们总是希望可以重用第一次创建的容器，因为这样才可以保留使用过程中产生的数据。
+#### Stop, Restart PPMessage
+Using `docker run` to start PPMessage will always create a new container and init PPMessage in it. 
 
-要做到这点，我们需要获取到容器的`ID`，然后对容器进行启动，重启，关闭等操作。
+In fact, you may want to reuse the container that you create at the first time, thus the data created during running PPMessage will be kept.
 
-请参考以下命令。
+To do that, you need to get the id of that container, then perform start, restart, close operations to it.
 
-* 查看所有容器 
+Check following commands.
+
+* View All Containers
   
   ```
   docker ps -a
   ```
-  这会给出所有`Docker`容器的列表，你需要记住`ppmessage/ppmessage` 对应的容器id，以便对其进行关闭、启动、重启操作。
+  This will give list of all docker container. You need to record the if of PPMessage container.
 
-* 关闭容器
+* Stop Container
   
   ```
   docker stop container_id
   ```
 
-* 启动容器
+* Start Container
   
   ```
   docker start container_id
   ```
 
-* 重启容器
+* Restart Container
   
   ```
   docker restart container_id
   ```
 
-* 删除容器
+* Remove Container
  
  ```
  docker rm contaniner_id

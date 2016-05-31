@@ -1,63 +1,61 @@
-# 在Mac、Linux上搭建开发环境
+# Set Up PPMessage In Mac & Linux
 
-依照以下操作，你可在`Mac`，`Linux(Debia/Ubuntu)`上搭建`PPMessage`开发环境。
+Following below steps, you can set up PPMessage in Mac & Linux(Debia/Ubuntu).
 
 ---
 
-### 下载PPMessage源代码
-首先需要安装`git`，然后从`github`下载源代码，假设保存路径为`~/Documents/ppmessage`。
+### Download PPMessage
+Firstly, you need to install git, then clone PPMessage from github.com. Suppose you save PPMessage to `~/Documents/ppmessage`.
 
 ```
-git clone git@github.com:PPMESSAGE/ppmessage.git
+git clone git@github.com:PPMESSAGE/ppmessage.git  ~/Documents/ppmessage
 ```
 
-### 下载geolite2
-源代码下载完成后，进入`~/Documents/ppmessage`目录，执行
+### Download Geolite2
+After downloading PPMessage, enter `~/Documents/ppmessage` and run:
 
 ```
-ppmessage/scripts/download_geolite2.sh
+./ppmessage/scripts/download_geolite2.sh
 ```
 
-### 安装依赖软件
-进入`~/Documents/ppmessage/ppmessage/scripts`目录。
+### Install Dependency Softwares
+Enter `~/Documents/ppmessage/ppmessage/scripts`.
 
-* 在`Mac`下, 执行
+* In Mac, run
 
   ```
   bash set-up-ppmessage-on-mac.sh
   ```
 
-* 在`Linux(Debian/Ubuntu)`下, 执行
+* In Linux(Debian/Ubuntu), run
 
   ```
   bash set-up-ppmessage-on-linux.sh
   ```
 
-注意：当执行脚本安装依赖时，操作系统原有的软件可能会被更新、覆盖。你需要注意以下事项，并在必要的时候DIY脚本。
+Notice: when run shell script to install software, your system's software may be upgraded. You need to know following tips and change the install script if necessary.
 
-* `Mac`下，配置脚本会通过源码编译安装`mysql-connector-python-2.1.3`, 会覆盖你机器上已安装版本。
+* In Mac, run the script will install `mysql-connector-python-2.1.3`.
 
-* `Linux`下，配置脚本会通过源码编译安装`nginx-1.8.0`，`ffmpeg-3.0.2`，`mysql-connector-python-2.1.3`, 会覆盖你机器上已安装版本。
+* In Linux, run the script will install `nginx-1.8.0`，`ffmpeg-3.0.2`，`mysql-connector-python-2.1.3`.
 
 
-### 安装npm, bower包
-进入`~/Documents/ppmessage`目录
+### Install Bower Components, Npm Packages
+Enter `~/Documents/ppmessage`, run 
 
 ```
 ./dist.sh bower
 ./dist.sh npm
 ```
 
-如果执行`./dist.sh npm`出现资源被屏蔽、无法下载的错误，可以执行`./dist.sh cnpm`，这会从淘宝的`npm`镜像源下载`npm`包。
-
-### 配置PPMessage
-参考[配置PPMessage](./config-ppmessage.md)，生成配置文件。
+### Config PPMessage
+Check [Config PPMessage](./config-ppmessage.md), and create your config file.
 
 
-### 启动PPMessage
-首先，确保`mysql server`, `redis-server`, `nginx`已启动。
+### Bootstrap PPMessage
+Firstly, ensure `mysql server`, `redis-server`, `nginx` is started.
 
-* 在`Mac`下，输入以下命令启动上述服务
+* In Mac, run them by
 
   ```
   brew services start mysql
@@ -65,7 +63,7 @@ ppmessage/scripts/download_geolite2.sh
   nginx
   ```
 
-* 在`Linux（Debian/Ubuntu）`下，输入以下命令启动上述服务
+* In Linux(Debian/Ubuntu), run them by
   
   ```
   sudo service mysql start
@@ -73,82 +71,89 @@ ppmessage/scripts/download_geolite2.sh
   sudo nginx
   ```
 
-然后，进入`~/Documents/ppmessage`目录，执行以下操作
+Then, enter `~/Documents/ppmessage`, perform following operations.
 
-1. 将`ppmessage`加入`Python PATH`
+1. add `ppmessage` into `Python PATH`
 
   ```
   sudo ./dist.sh dev
   ```
   
-2. 初始化数据库，初始化缓存，更新`nginx`配置文件（`Linux`下需要`sudo`）
+2. init databse, cache, update nginx conf (need `sudo` in Linux)
 
   ```
   ./dist.sh bootstrap
   ```
   
-3. 重新加载`nginx`配置文件(`Linux`下需要`sudo`)
+3. reload nginx conf (needd `sudo` in Linux)
 
   ```
   nginx -s reload
   ```
-4. 生成`PPKefu`, `PPConsole`, `PPCom`的`js`, `css`文件
+
+4. generate PPKefu, PPConsole, PPCom javascript, css files
   
   ```
   ./dist.sh gulp
   ```
   
-5. 启动`PPMessage`(`Linux`下需要`sudo`)
+5. start PPMessage(need `sudo` in Linux)
 
   ```
   ./dist.sh start
   ```
 
-### 访问PPMessage
-一旦`PPMessage`成功运行，我们就可以访问`PPMessage`各模块。
 
-地址格式为：`http_protocol://server_ip:server_port/service_name`。
+### Using PPMessage
 
-其中，`http_protocol`与配置文件里`nginx`的`ssl`设置有关，为`http`或者`https`, `server_ip`是配置文件里的服务器名字，`server_port`是配置文件里`nginx`监听端口。
+Once PPMessage is running, we can visit modules of PPMessage.
 
-例子：
+The address is: `http_protocol://server_ip:server_port/service_name`.
+
+it is related to your PPMessage configuration.
+
+`http_protocol` is related to `nginx.ssl`, `on` for `https`, `off` for `http`.
+`server_ip` is `server.name`
+`server_port` is `nginx.listen`
+
+Example：
 
     PPKefu: http://192.168.0.52:8080/ppkefu
     PPConsole: http://192.168.0.52:8080
 
-可能出现的错误：
+Possible errors：
 
-* 登录、注册时，出现ppauth 400 error
+* When sign in to PPConsole, browser console throw ppauth 400 error.
   
-  解决办法：先更新PPMessage源码（`git pull`），然后执行`./dist.sh gulp`，最后清空浏览器缓存。
+  Solution: Firstly update PPMessage (`git pull`), then run `./dist.sh gulp`, finally clean browser cache.
 
-其他命令列举如下：
+Other commands:
 
-* 启动`PPMessage`（`Linux`下需要`sudo`）
+* Start `PPMessage` (need `sudo` in Linux)
 
-  执行`./dist.sh bootstrap`会初始化数据库，平时启动`PPMessage`只需要执行
+  Run `./dist.sh bootstrap` will init database. After initialization, to start `PPMessage`, just run
 
   ```
   ./dist.sh start
   ```
 
-* 停止PPmessage（`Linux`下需要`sudo`）
+* Stop PPmessage (need `sudo` in Linux)
 
   ```
   ./dist.sh stop
   ```
   
-* 查看运行状态
+* View PPMessage running status
     
   ```
   supervisorctrl
   ```
     
-* 查看日志
+* View Logs
   
-  日志保存目录为 `/usr/local/var/log`
+  Logs are saved in `/usr/local/var/log`.
 
   ```
-  ./dist.sh log                                  # 所有日志
-  tail -f /usr/local/var/log/ppmessage-api.log   # 单独某模块的日志
+  ./dist.sh log                                  # view all logs
+  tail -f /usr/local/var/log/ppmessage-api.log   # view log of a module seperatly
   ```

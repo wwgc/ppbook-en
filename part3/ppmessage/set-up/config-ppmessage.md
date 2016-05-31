@@ -153,24 +153,3 @@ Parameter               | Description
     "sender_id": "your gcm sender id"
 },
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
