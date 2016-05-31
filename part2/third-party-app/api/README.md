@@ -1,11 +1,11 @@
-# API 列表
+# API List
 
-调用API:
+request:
 ```
 POST https://ppmessage.com/api/xxxxx
 ```
 
-`https header`应为(`xxxx`应该用`token`替代)：
+`headers`:
 ```
 {
     'Content-Type': 'application/json',
@@ -13,20 +13,26 @@ POST https://ppmessage.com/api/xxxxx
 }
 ```
 
-`api_level`：获取到的`token`有固定的`api level`，使用该`token`只用调用该`api_level`对应的`API`接口。`api_level`有以下几种。
+`api_level`: Each api support one or more api_level. You must use token with the right api_level to invoke certain API.
 
 api_level                 | Description
 --------------------------|-------------
-`PPCOM`                   | 用PPCOM的api_key, api_secret获取的token，可以调用此级别的API
-`PPKEFU`                  | 用PPKEFU的api_key, api_secret获取的token，可以调用此级别的API
-`PPCONSOLE`               | 用PPCONSOLE的api_key, api_secret获取的token，可以调用此级别的API
-`THIRD_PARTY_KEFU`        | 用THIRD_PARTY_KEFU的api_key, api_secret获取的token，可以调用此级别的API
-`THIRD_PARTY_CONSOLE`     | 用THIRD_PARTY_CONSOLE的api_key, api_secret获取的token，可以调用此级别的API
-`PPCONSOLE_BEFORE_LOGIN`  | 用PPCONSOLE_BEFORE_LOGIN的api_key, api_secret获取的token，可以调用此级别的API
+`PPCOM`                   | To invoke the api, you must request a token using PPCom `api_key` and `api_secret`
+`PPKEFU`                  | To invoke the api, you must request a token using PPKefu `api_key` and `api_secret`
+`PPCONSOLE`               | To invoke the api, you must request a token using PPConsole `api_key` and `api_secret`
+`PPCONSOLE_BEFORE_LOGIN`  | To invoke the api, you must request a token using PPCONSOLE `api_key` and `api_secret`
+`THIRD_PARTY_KEFU`        | To invoke the api, you must request a token using THIRD PARTY Kefu `api_key` and `api_secret`
+`THIRD_PARTY_CONSOLE`     | To invoke the api, you must request a token using THIRD PARTY Console `api_key` and `api_secret`
+
+As this doc is for third party app, we only care about `THIRD_PARTY_KEFU` and `THIRD_PARTY_CONSOLE` api_level.
+
+note:
+
+* required parameters will show with bold font.
 
 ---
 
-#### 创建匿名用户
+#### Create Anonymous User
 ```
 POST /PP_CREATE_ANONYMOUS
 ```
@@ -36,14 +42,14 @@ api_level:
 PPCom
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队的app_uuid
-**ppcom_trace_uuid**   | string    | ppcom在浏览器端标示该匿名用户的uuid
+**app_uuid**           | string    | your service team's uuid
+**ppcom_trace_uuid**   | string    | ppcom trace uuid to target user in browser
 
-返回结果（例子）：
+Response (example):
 ```
 {
     'error_code': 0,
@@ -57,7 +63,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 创建用户
+#### Create User
 ```
 POST /PP_CREATE_USER
 ```
@@ -67,20 +73,19 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | 客服团队的app_uuid
-**user_email**         | string    | 用户的登录邮箱
-**user_fullname**      | string    | 用户的全称
-user_language          | string    | 用户语言，可为"en", "zh-cn", "zh-tw"
-user_password          | string    | 用户密码
-is_service_user        | boolean   | 用户是否是客服
-user_status            | string    | 用户状态，值可为"OWNER_0", "OWNER_1", "OWNER_2", "OWNER_3", "ADMIN", "SERVICE", "ANONYMOUS", "THIRDPARTY"。如果不提供，默认为"THIRDPARTY"
+-----------------------|-----------|-----------------------------
+**app_uuid**           | string    | your service team's app_uuid
+**user_email**         | string    | user's sign in email
+**user_fullname**      | string    | user's fullname
+user_language          | string    | user's language, can be: "en", "zh-cn"
+user_password          | string    | user's password
+is_service_user        | boolean   | whether user is a sevice agent or not
+user_status            | string    | user's status, can be: "OWNER_0", "OWNER_1", "OWNER_2", "OWNER_3", "ADMIN", "SERVICE", "ANONYMOUS", "THIRDPARTY". default is "THIRDPARTY"
 
-
-返回结果（例子）：
+Response (example):
 ```
 {
     'user_status': u'SERVICE',
@@ -98,7 +103,7 @@ user_status            | string    | 用户状态，值可为"OWNER_0", "OWNER_1
 ```
 
 
-#### 删除用户
+#### Remove User
 ```
 POST /PP_REMOVE_USER
 ```
@@ -108,14 +113,14 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
------------------------|-----------|------------
-**user_uuid**          | string    | 用户uuid
-**user_password**      | string    | 用户密码
+-----------------------|-----------|------------------------
+**user_uuid**          | string    | user's uuid
+**user_password**      | string    | user's password
 
-返回结果（例子）
+Response (example):
 
 ```
 {
@@ -126,7 +131,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 更新用户
+#### Update User
 ```
 POST /PP_UPDATE_USER
 ```
@@ -136,17 +141,17 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**user_uuid**          | string    | 用户uuid
-is_distributor_user    | boolean   | 设置用户是否是distributor user
-old_password           | string    | 旧密码
-new_password           | string    | 新密码
+**app_uuid**           | string    | service team's uuid
+**user_uuid**          | string    | user's uuid
+is_distributor_user    | boolean   | whether use is a distributor user
+old_password           | string    | old password
+new_password           | string    | new password
 
-返回结果（例子）
+Response (example):
 
 ```
 {
@@ -157,7 +162,7 @@ new_password           | string    | 新密码
 ```
 
 
-#### 创建设备
+#### Create Device
 ```
 POST /PP_CREATE_DEVICE
 ```
@@ -167,17 +172,17 @@ api_level:
 PPCOM
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**user_uuid**          | string    | 用户uuid
-**device_id**          | string    | 设备id
-**device_ostype**      | string    | 设备操作系统类型
-**ppcom_trace_uuid**   | string    | PPCom在浏览器端标示用户的uuid
+**app_uuid**           | string    | service team's uuid
+**user_uuid**          | string    | user's uuid
+**device_id**          | string    | device id
+**device_ostype**      | string    | device os type
+**ppcom_trace_uuid**   | string    | ppcom trace uuid to target use in browser
 
-说明
+device ostype:
 ```
 "AND", # ANDROID
 "IOS", # IOS
@@ -194,7 +199,7 @@ Name                   | Type      | Description
 "W64", # WINDOWS 64 BIT
 ```
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 25,
@@ -205,7 +210,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 更新设备
+#### Update Device
 ```
 POST /PP_UPDATE_DEVICE
 ```
@@ -215,24 +220,24 @@ api_level:
 PPCOM, PPKEFU, THIRD_PARTY_KEFU
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**device_uuid**        | string    | 设备uuid
-device_fullname        | string    | 设备全称
-device_phonenumber     | string    | 设备电话号码
-device_ostype          | string    | 设备操作系统类型
-device_osversion       | string    | 设备操作系统版本
-device_android_apilevel| string    | 安卓设备api level
-device_android_gcmtoken| string    | 安卓设备gcm token
-device_android_gcmpush | boolean   | 安卓设备是否使用gcm推送
-device_ios_model       | string    | iOS设备model
-device_ios_token       | string    | iOS设备token
-device_is_online       | string    | 设备是否在线
+**device_uuid**        | string    | device uuid
+device_fullname        | string    | device fullname
+device_phonenumber     | string    | device phone number
+device_ostype          | string    | device os type
+device_osversion       | string    | device os version
+device_android_apilevel| string    | android device api level
+device_android_gcmtoken| string    | android device gcm token
+device_android_gcmpush | boolean   | whether android device use gcm push
+device_ios_model       | string    | iOS device model
+device_ios_token       | string    | iOS device token
+device_is_online       | boolean   | whether device is online
 
 
-返回结果（例子）
+Response (example):
 
 ```
 {
@@ -243,7 +248,7 @@ device_is_online       | string    | 设备是否在线
 ```
 
 
-#### 创建对话
+#### Create Conversation
 ```
 POST /PP_CREATE_CONVERSATION
 ```
@@ -253,18 +258,18 @@ api_level:
 PPCOM, PPKEFU, THIRD_PARTY_KEFU
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**user_uuid**          | string    | 设备全称
-**conversation_type**  | string    | 对话类型，可为"P2S", "S2S"
-conversation_name      | string    | 对话名称
-member_list            | list      | 成员列表，如果对话类型为S2S，则必须提供此参数
-group_uuid             | string    | 对话的组uuid
+-----------------------|-----------|-----------------------------
+**app_uuid**           | string    | service team's uuid
+**user_uuid**          | string    | user's uuid
+**conversation_type**  | string    | conversation type, can be: "P2S", "S2S"
+conversation_name      | string    | conversation name
+member_list            | list      | conversation member list, must provided if conversation type is "S2S"
+group_uuid             | string    | conversation's group uuid
 
-返回结果（例子）
+Response (example):
 
 ```
 {
@@ -288,36 +293,7 @@ group_uuid             | string    | 对话的组uuid
 }
 ```
 
-
-#### 更新对话（弃用）
-```
-POST /PP_UPDATE_CONVERSATION
-```
-
-api_level:
-```
-PPCOM, PPKEFU, THIRD_PARTY_KEFU
-```
-
-参数
-
-Name                   | Type      | Description
------------------------|-----------|------------
-**conversation_uuid**  | string    | 对话uuid
-**assigned_uuid**      | string    | 对话被分配给这个客服
-
-返回结果（例子）
-
-```
-{
-    'uri': '/PP_UPDATE_CONVERSATION',
-    'error_code': 0,
-    'error_string': 'success.'
-}
-```
-
-
-#### 获取对话信息
+#### Get Conversation Info
 ```
 POST /PP_GET_CONVERSATION_INFO
 ```
@@ -327,15 +303,15 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
------------------------|-----------|------------
-**conversation_uuid**  | string    | 对话uuid
-**app_uuid**           | string    | 客服团队uuid
-**user_uuid**          | string    | 用户uuid
+-----------------------|-----------|---------------------------
+**conversation_uuid**  | string    | conversation uuid
+**app_uuid**           | string    | service team's uuid
+**user_uuid**          | string    | user's uuid
 
-返回结果（例子）
+Response (example):
 
 ```
 {
@@ -372,7 +348,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 获取客服团队下的所有对话
+#### Get All Conversations In A Service Team
 ```
 POST /PP_GET_APP_CONVERSATION_LIST
 ```
@@ -382,13 +358,13 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
+-----------------------|-----------|-------------------------
+**app_uuid**           | string    | service team's uuid
 
-返回结果（例子）
+Response (example):
 
 ```
 {
@@ -484,7 +460,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 获取用户的所有对话
+#### Get User Conversation List
 ```
 POST /PP_GET_USER_CONVERSATION_LIST
 ```
@@ -494,14 +470,14 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**user_uuid**          | string    | 用户uuid
+**app_uuid**           | string    | service team's uuid
+**user_uuid**          | string    | user's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'list': [],
@@ -512,8 +488,9 @@ Name                   | Type      | Description
 ```
 
 
-#### 开启对话
-一个对话的状态为`CLOSE`状态，当调用API接口获取对话列表时，这个对话总是会被忽略。要取消忽略，需要设置对话状态为`OPEN`，即开启对话。
+#### Open Conversation
+
+If a conversation status is `CLOSE`, when you invoke api to get conversation list, this conversation will always be ignored. To cancel this feature, you need to set conversation status to be `OPEN`.
 
 ```
 POST /PP_OPEN_CONVERSATION
@@ -524,15 +501,15 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**user_uuid**          | string    | 用户uuid
-**conversation_uuid**  | string    | 对话uuid
+**app_uuid**           | string    | service team's uuid
+**user_uuid**          | string    | user uuid
+**conversation_uuid**  | string    | conversation uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'uri': '/PP_OPEN_CONVERSATION',
@@ -542,8 +519,9 @@ Name                   | Type      | Description
 ```
 
 
-#### 关闭对话
-一个对话的状态为`CLOSE`状态，当调用API接口获取对话列表时，这个对话总是会被忽略。要忽略对话，需要设置对话状态为`CLOSE`，即关闭对话。
+#### Close Conversation
+
+If a conversation status is `CLOSE`, when you invoke api to get conversation list, this conversation will always be ignored.
 
 ```
 POST /PP_CLOSE_CONVERSATION
@@ -554,15 +532,15 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**user_uuid**          | string    | 用户uuid
-**conversation_uuid**  | string    | 对话uuid
+**app_uuid**           | string    | service team's uuid
+**user_uuid**          | string    | user uuid
+**conversation_uuid**  | string    | conversation uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'uri': '/PP_OPEN_CONVERSATION',
@@ -572,7 +550,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 获取客服团队信息
+#### Get service team info
 ```
 POST /PP_GET_APP_INFO
 ```
@@ -582,13 +560,13 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
+**app_uuid**           | string    | service team's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'return_offline_message': None,
@@ -625,7 +603,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 获取客服团队下所有客服
+#### Get All Service User In A Service Team
 ```
 POST /PP_GET_APP_SERVICE_USER_LIST
 ```
@@ -635,13 +613,13 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
+**app_uuid**           | string    | service team's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'list': [
@@ -680,35 +658,9 @@ Name                   | Type      | Description
 }
 ```
 
+#### Get User Uuid
 
-#### 发送消息(待完善)
-```
-POST /PP_SEND_MESSAGE
-```
-
-api_level:
-```
-PPCOM, PPKEFU, THIRD_PARTY_KEFU
-```
-
-参数
-
-Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-
-返回结果（例子）
-```
-{
-    'error_code': 0,
-    'error_string': 'success.',
-    'uri': '/PP_SEND_MESSAGE'
-}
-```
-
-
-#### 获取用户uuid（需改名）
-检查服务器是否有某个email对应的用户，如果没有，则创建这个用户，并返回用户uuid；如果有这个用户并且这个用户是客服，则返回错误；如果有这个用户并且这个用户不是客服，则返回用户uuid。
+Check whether there is a user corresponding to a email. If there is no such user, create this user and return his uuid. Otherwise, if user is a service agent, return error, or return user's uuid.
 
 ```
 POST /PP_GET_USER_UUID
@@ -719,16 +671,16 @@ api_level:
 PPCOM
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**user_email**         | string    | 用户邮箱
-user_icon              | string    | 用户头像，如果需要创建用户，会用到
-user_fullname          | string    | 用户全称，如果需要创建用户，会用到
+**app_uuid**           | string    | service team's uuid
+**user_email**         | string    | user email
+user_icon              | string    | user icon, used when need to create user
+user_fullname          | string    | user fullname, used when need to create user
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -739,8 +691,10 @@ user_fullname          | string    | 用户全称，如果需要创建用户，�
 ```
 
 
-#### 获取对话历史消息
-获取对话中的历史消息，可以按页(`page_size, page_offset`)获取；也可以按照消息id范围(`since_id, max_id`)获取。
+#### Get History Message Of A Conversation
+
+Get history messages in a conversation, by page(`page_size` and `page_offset`), or message id region(`since_id` and `max_id`)
+
 ```
 POST /PP_GET_HISTORY_MESSAGE
 ```
@@ -750,18 +704,18 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**conversation_uuid**  | string    | 客服团队uuid
-**page_offset**        | string    | 第几页消息
-page_size              | string    | 一页消息的数目
-since_id               | string    | 最早一条历史消息的id
-max_id                 | string    | 最近一条历史消息的id
+**conversation_uuid**  | string    | conversation uuid
+**page_offset**        | string    | which page server returns
+page_size              | string    | how many messages server returns in one page
+since_id               | string    | since message id
+max_id                 | string    | max message id
 
 
-返回结果（例子）
+Response (example):
 ```
 {
    'error_code': 0,
@@ -779,7 +733,7 @@ max_id                 | string    | 最近一条历史消息的id
 ```
 
 
-#### 获取用户信息
+#### Get User Info
 ```
 POST /PP_GET_USER_INFO
 ```
@@ -789,15 +743,15 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**user_uuid**          | string    | 用户uuid
+**app_uuid**           | string    | servie team's uuid
+**user_uuid**          | string    | user's uuid
 
 
-返回结果（例子）
+Response (example):
 ```
 {
 ...
@@ -805,7 +759,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 获取客服团队的客服组列表
+#### Get All Service Group In A Service Team
 ```
 POST /PP_GET_APP_ORG_GROUP_LIST
 ```
@@ -815,13 +769,13 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
+**app_uuid**           | string    | service team's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'list': [
@@ -845,7 +799,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 获取客服组信息
+#### Get service group's info
 ```
 POST /PP_GET_ORG_GROUP_DETAIL
 ```
@@ -855,14 +809,14 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**group_uuid**         | string    | 客服组uuid
+**app_uuid**           | string    | service team's uuid
+**group_uuid**         | string    | service group's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'group_route_algorithm': None,
@@ -887,7 +841,8 @@ Name                   | Type      | Description
 ```
 
 
-#### 获取客服组的客服列表
+#### Get All Service Users In A Service Group
+
 ```
 POST /PP_GET_ORG_GROUP_USER_LIST
 ```
@@ -897,14 +852,14 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**group_uuid**         | string    | 客服组uuid
+**app_uuid**           | string    | service team's uuid
+**group_uuid**         | string    | service group's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'list': [
@@ -944,7 +899,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 创建客服组
+#### Create Service Group
 ```
 POST /PP_CREATE_ORG_GROUP
 ```
@@ -954,16 +909,16 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**group_name**         | string    | 客服组名称
-**group_desc**         | string    | 客服组描述信息
-is_distributor         | boolean   | 是否设置为首选组
+**app_uuid**           | string    | service group's uuid
+**group_name**         | string    | service group's name
+**group_desc**         | string    | service group's decription
+is_distributor         | boolean   | whether service group is primary group
 
-返回结果（例子）
+Response (example):
 ```
 {
     'group_visible_order_for_ppcom': None,
@@ -986,7 +941,7 @@ is_distributor         | boolean   | 是否设置为首选组
 ```
 
 
-#### 更新客服组
+#### Update Service Group
 ```
 POST /PP_UPDATE_ORG_GROUP
 ```
@@ -996,19 +951,19 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**group_uuid**         | string    | 客服组uuid
-group_name             | string    | 客服组名称
-group_desc             | string    | 客服组描述信息
-group_icon             | string    | 客服组头像
-is_distributor         | boolean   | 是否设置为首选组
+-----------------------|-----------|-----------------------------
+**app_uuid**           | string    | service team's uuid
+**group_uuid**         | string    | service group's uuid
+group_name             | string    | service group's name
+group_icon             | string    | service group's icon
+group_desc             | string    | service group's description
+is_distributor         | boolean   | whether service group is primary group
 
 
-返回结果（例子）
+Response (example):
 ```
 {
     'group_route_algorithm': None,
@@ -1032,7 +987,7 @@ is_distributor         | boolean   | 是否设置为首选组
 ```
 
 
-#### 删除客服组
+#### Remove Service Group
 ```
 POST /PP_REMOVE_ORG_GROUP
 ```
@@ -1042,14 +997,14 @@ api_level:
 PPCONOSLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**group_uuid**         | string    | 客服组uuid
+**app_uuid**           | string    | service team's uuid
+**group_uuid**         | string    | service group's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -1059,7 +1014,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 添加客服组成员
+#### Add Service Agent To A Service Group
 ```
 POST /PP_ADD_ORG_GROUP_USER
 ```
@@ -1069,15 +1024,15 @@ api_level:
 PPCONOSLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**group_uuid**         | string    | 客服组uuid
-**user_list**          | list      | 用户列表
+-----------------------|-----------|-----------------------------
+**app_uuid**           | string    | service team's uuid
+**group_uuid**         | string    | service group's uuid
+**user_list**          | list      | service agents to add to service group
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -1087,7 +1042,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 移除客服组成员
+#### Remove Service Agents From A Service Group
 ```
 POST /PP_REMOVE_ORG_GROUP_USER
 ```
@@ -1097,15 +1052,15 @@ api_level:
 PPCONOSLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**group_uuid**         | string    | 客服组uuid
-**user_list**          | list      | 用户列表
+**app_uuid**           | string    | service team's uuid
+**group_uuid**         | string    | service group's uuid
+**user_list**          | list      | service agents to remove from service group
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -1115,7 +1070,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 获取客服团队中不归属任何客服组的客服列表
+#### Get All Service Agents That Don't Belong To Any Service Group In A Service Team.
 ```
 POST /PP_GET_NO_GROUP_USER_LIST
 ```
@@ -1125,13 +1080,13 @@ api_level:
 PPCOM, PPKEFU, PPCONOSLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
+**app_uuid**           | string    | service team's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'list': [
@@ -1183,8 +1138,8 @@ Name                   | Type      | Description
 ```
 
 
-#### 获取客服组的对话
-PPCom调用此API接口来获取某个客服组下，与当前PPCom用户关联的对话。
+#### Get All Conversations Related To A Service Group
+
 ```
 POST /PP_GET_ORG_GROUP_CONVERSATION
 ```
@@ -1194,15 +1149,15 @@ api_level:
 PPCOM
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**group_uuid**         | string    | 客服组uuid
-**user_uuid**          | string    | 用户uuid，此用户是PPCom用户
+-----------------------|-----------|----------------------------
+**app_uuid**           | string    | service team's uuid
+**group_uuid**         | string    | service group's uuid
+**user_uuid**          | string    | user's uuid，this user is a PPCom user
 
-返回结果（例子）
+Response (example):
 ```
 {
     'conversation_uuid': '68a2feca-1c1d-11e6-a4dd-0242ac110002',
@@ -1213,7 +1168,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 更新对话成员
+#### Update Conversation Member
 ```
 POST /PP_UPDATE_CONVERSATION_MEMBER
 ```
@@ -1223,17 +1178,17 @@ api_level:
 PPCOM, PPKEFU, THIRD_PARTY_KEFU
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**conversation_uuid**  | string    | 用户uuid，此用户是PPCom用户
-group_uuid             | string    | 客服组uuid，设定此对话与那个客服组关联
-action                 | string    | 操作类型，添加为"ADD", 删除为"REMOVE"
-member_list            | list      | 需要添加或者删除的成员列表
+**app_uuid**           | string    | service team's uuid
+**conversation_uuid**  | string    | conversation uuid
+group_uuid             | string    | service group uuid, set this conversation related to that service group
+action                 | string    | operation type，can be: "ADD" or "REMOVE"
+member_list            | list      | the member list to add or remove
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -1243,8 +1198,10 @@ member_list            | list      | 需要添加或者删除的成员列表
 ```
 
 
-#### 获取默认对话
-PPCom调用此API来获取默认对话。
+#### Get Default Conversation
+
+PPCom invoke this api the get default conversation.
+
 ```
 POST /PPCOM_GET_DEFAULT_CONVERSATION
 ```
@@ -1254,15 +1211,15 @@ api_level:
 PPCOM
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**user_uuid**          | string    | 用户uuid，此用户是PPCom用户
-**device_uuid**        | string    | 用户设备uuid，此用户是PPCom用户
+**app_uuid**           | string    | service team's uuid
+**user_uuid**          | string    | user's uuid, this user is a PPCom user
+**device_uuid**        | string    | user device uuid, this user is a PPCom user
 
-返回结果（例子）
+Response (example):
 ```
 {
     'status': 'OPEN',
@@ -1321,7 +1278,7 @@ Name                   | Type      | Description
 ```
 
 
-#### 按组策略选择可加入到某个对话中的用户
+#### Select Service Agents By Group Algorithm
 ```
 POST /PP_SELECT_USERS_BY_GROUP_ALGORITHM
 ```
@@ -1331,15 +1288,15 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-**group_uuid**         | string    | 客服组uuid
-**conversation_uuid**  | string    | 对话uuid
+**app_uuid**           | string    | service team's uuid
+**group_uuid**         | string    | service group's uuid
+**conversation_uuid**  | string    | conversation uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'list': [
@@ -1352,7 +1309,7 @@ Name                   | Type      | Description
 }
 ```
 
-#### 更新客服团队信息
+#### Update Service Team Info
 ```
 POST /PP_UPDATE_APP_INFO
 ```
@@ -1362,19 +1319,19 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                   | Type      | Description
 -----------------------|-----------|------------
-**app_uuid**           | string    | 客服团队uuid
-app_name               | string    | 客服团队名称
-app_icon               | string    | 客服团队头像
-app_route_policy       | string    | 客户团队消息分发策略, 可为"ALL", "SMART", "GROUP"
-welcome_message        | string    | PPCom显示的欢迎信息
-ppcom_launcher_color   | string    | PPCom图标颜色
-ppcom_launcher_style   | string    | PPCom图标样式
+**app_uuid**           | string    | service team uuid
+app_name               | string    | service team name
+app_icon               | string    | service team icon
+app_route_policy       | string    | service team messsage dispatch policy, can be: "ALL", "SMART", "GROUP"
+welcome_message        | string    | service team PPCom welcome note
+ppcom_launcher_color   | string    | service team PPCom Icon color
+ppcom_launcher_style   | string    | service team PPCom Icon style
 
-返回结果（例子）
+Response (example):
 ```
 {
     'return_offline_message': None,
@@ -1411,7 +1368,8 @@ ppcom_launcher_style   | string    | PPCom图标样式
 ```
 
 
-#### 获取某用户拥有的客服团队
+#### Get Service Team Owned By User
+
 ```
 POST /PP_GET_APP_OWNED_BY_USER
 ```
@@ -1421,13 +1379,13 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
-------------------------|-----------|------------
-**user_uuid**           | string    | 客服团队uuid
+------------------------|-----------|-------------------------
+**user_uuid**           | string    | service team uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'app': {
@@ -1467,9 +1425,9 @@ Name                    | Type      | Description
 ```
 
 
-#### 验证邮箱是否有效
+#### Validate Email Is Valid
 ```
-POST /PP_IS_EMAIL_VALID
+Post /PP_IS_EMAIL_VALID
 ```
 
 api_level:
@@ -1477,13 +1435,13 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**user_email**          | string    | 客服团队uuid
+**user_email**          | string    | service team's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'valid': False,
@@ -1494,7 +1452,7 @@ Name                    | Type      | Description
 ```
 
 
-#### 创建客服团队
+#### Create Service Team
 ```
 POST /PP_CREATE_APP
 ```
@@ -1504,14 +1462,14 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
-------------------------|-----------|------------
-**user_uuid**           | string    | 用户uuid，用户是客服团队的创建者，同时也是管理员
-**app_name**            | string    | 客服团队名称
+------------------------|-----------|----------------------------------
+**user_uuid**           | string    | user uuid, this user is the service team's administrator
+**app_name**            | string    | service team's name
 
-返回结果（例子）
+Response (example):
 ```
 {
     'uri': '/PP_CREATE_APP',
@@ -1527,7 +1485,7 @@ Name                    | Type      | Description
 ```
 
 
-#### 将客服移出客服团队
+#### Remove Service Agents From A Service Team
 ```
 POST /PP_LEAVE_APP
 ```
@@ -1537,14 +1495,14 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**user_list**           | list      | 要移除的客服列表
+**app_uuid**            | string    | service team uuid
+**user_list**           | list      | the member list to remove from service team
 
-返回结果（例子）
+Response (example):
 ```
 {
     'uri': '/PP_LEAVE_APP',
@@ -1554,7 +1512,7 @@ Name                    | Type      | Description
 ```
 
 
-#### 删除客服团队
+#### Remove Service Team
 ```
 POST /PP_REMOVE_APP
 ```
@@ -1564,14 +1522,14 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**user_uuid**           | string    | 该客服团队的所有者uuid
+**app_uuid**            | string    | service team's uuid
+**user_uuid**           | string    | the service team administrator's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'uri': '/PP_REMOVE_APP',
@@ -1581,7 +1539,7 @@ Name                    | Type      | Description
 ```
 
 
-#### 获取对话成员列表
+#### Get Conversation Member List
 ```
 POST /PP_GET_CONVERSATION_USER_LIST
 ```
@@ -1591,14 +1549,14 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**conversation_uuid**   | string    | 对话uuid
+**app_uuid**            | string    | service team's uuid
+**conversation_uuid**   | string    | conversation uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'list': [
@@ -1649,7 +1607,8 @@ Name                    | Type      | Description
 ```
 
 
-#### 按页获取某个用户的对话
+#### Get Conversations Related To A Service Agent By Page
+
 ```
 POST /PP_PAGE_USER_CONVERSATION
 ```
@@ -1659,18 +1618,18 @@ api_level:
 PPCOM, PPKEFU, THIRD_PARTY_KEFU
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**user_uuid**           | string    | 用户uuid
-page_offset             | number    | 页码索引，按页获取时需提供此参数
-page_size               | number    | 每页对话数目，按页获取时需提供此参数
-min_uuid                | string    | 最旧一个对话的uuid，按uuid范围获取时需提供此参数
-max_uuid                | string    | 最新一个对话的uuid，按uuid范围获取时需提供此参数
+**app_uuid**            | string    | service team's uuid
+**user_uuid**           | string    | user uuid
+page_offset             | number    | page offset, need to provide when get by page
+page_size               | number    | page size, need to provide when get by page
+min_uuid                | string    | oldest conversation's uuid, need to provide when get by conversation uuid section
+max_uuid                | string    | newest conversation's uuid, need to provide when get by conversation uuid section
 
-返回结果（例子）
+Response (example):
 ```
 {
     'list': [
@@ -1740,7 +1699,8 @@ max_uuid                | string    | 最新一个对话的uuid，按uuid范围�
 ```
 
 
-#### 按页获取对话历史消息
+#### Get History Messages By Page
+
 ```
 POST /PP_PAGE_HISTORY_MESSAGE
 ```
@@ -1750,17 +1710,17 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**conversation_uuid**   | string    | 对话uuid
-**page_offset**         | number    | 页码索引，如果按页获取需要提供此参数
-**page_size**           | number    | 每页消息数目，如果按页获取需要提供此参数
-**min_uuid**            | string    | 最旧一条消息uuid
-**max_uuid**            | string    | 最新一条消息uuid
+**conversation_uuid**   | string    | conversation uuid
+page_offset             | number    | page offset, need to provide when get by page
+page_size               | number    | page size, need to provide when get by page
+min_uuid                | string    | oldest message's uuid, need to provide when get by message uuid section
+max_uuid                | string    | newest message's uuid, need to provide when get by message uuid section
 
-返回结果（例子）
+Response (example):
 ```
 {
     'return_count': 1,
@@ -1813,7 +1773,7 @@ Name                    | Type      | Description
 ```
 
 
-#### 按页获取在线的PPCom用户
+#### Get Online PPCom Users By Page
 ```
 POST /PP_PAGE_ONLINE_PORTAL_USER
 ```
@@ -1823,21 +1783,30 @@ api_level:
 PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**page_offset**         | number    | 页码索引
-**page_size**           | number    | 每页用户数目
+**app_uuid**            | string    | service team's uuid
+**page_offset**         | number    | page offset
+**page_size**           | number    | page size
 
-返回结果（例子）
+Response (example):
+```
+{
+    'list': [],
+    'page_offset': 0,
+    'page_size': 12,
+    'total_count': 0,
+    'return_count': 0,
+    'error_code': 0,
+    'error_string': 'success',
+    'uri': '/PP_PAGE_ONLINE_PORTAL_USER'
+}
 ```
 
-```
 
-
-#### PPKefu用户登录
+#### PPKefu User Login
 ```
 POST /PPKEFU_LOGIN
 ```
@@ -1847,20 +1816,20 @@ api_level:
 PPKEFU
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
-------------------------|-----------|------------
-**user_email**          | string    | 用户登录邮箱
-**terminal**            | string    | 登录设备uuid
-**ostype**              | string    | 登录设备操作系统类型
-token                   | string    | iOS设备token
-osmodel                 | string    | 设备model
-osversion               | string    | 设备操作系统版本
-device_fullname         | string    | 设备全称
-ios_app_development     | string    | iOS APP是否处于开发模式
+------------------------|-----------|---------------------------------------
+**user_email**          | string    | user email
+**terminal**            | string    | device uuid
+**ostype**              | string    | device ostype
+token                   | string    | iOS device token
+osmodel                 | string    | device model
+osversion               | string    | device os version
+device_fullname         | string    | device fullname
+ios_app_development     | string    | whether ios app is under development
 
-返回结果（例子）
+Response (example):
 ```
 {
     'app': {
@@ -1935,7 +1904,7 @@ ios_app_development     | string    | iOS APP是否处于开发模式
 ```
 
 
-#### PPKefu用户退出登录
+#### PPKefu User Logout
 ```
 POST /PPKEFU_LOGOUT
 ```
@@ -1945,15 +1914,15 @@ api_level:
 PPKEFU
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**user_uuid**           | string    | 用户uuid
-**device_uuid**         | string    | 设备uuid
+**app_uuid**            | string    | service team's uuid
+**user_uuid**           | string    | user uuid
+**device_uuid**         | string    | device uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'uri': '/PPKEFU_LOGOUT',
@@ -1962,7 +1931,7 @@ Name                    | Type      | Description
 }
 ```
 
-#### 获取用户详细信息
+#### Get User Detail
 ```
 POST /PP_GET_USER_DETAIL
 ```
@@ -1972,14 +1941,14 @@ api_level:
 PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**user_uuid**           | string    | 用户uuid
-return_password         | boolean   | 是否返回用户密码
+**user_uuid**           | string    | user uuid
+return_password         | boolean   | whether to return user's password
 
-返回结果（例子）
+Response (example):
 ```
 {
     'user_firstname': 'Jin',
@@ -2022,7 +1991,7 @@ return_password         | boolean   | 是否返回用户密码
 }
 ```
 
-#### PPConsole客服管理员退出登录
+#### PPConsole Logout
 ```
 POST /PPCONSOLE_LOGOUT
 ```
@@ -2032,13 +2001,13 @@ api_level:
 PPCONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**user_uuid**           | string    | 用户uuid
+**user_uuid**           | string    | user uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'uri': '/PPCONSOLE_LOGOUT',
@@ -2048,8 +2017,9 @@ Name                    | Type      | Description
 ```
 
 
-#### PPConsole客服注册
-注册时会同时创建客服团队。
+#### PPConsole Service Agent Sign Up
+
+When sign up, both your service agent administrator and service team is created.
 
 ```
 POST /PPCONSOLE_SIGNUP
@@ -2060,17 +2030,17 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE, PPCONSOLE_BEFORE_LOGIN
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**app_name**            | string    | 客服团队名称
-**user_email**          | string    | 用户登录邮箱
-**user_fullname**       | string    | 用户全称
-**user_password**       | string    | 用户密码
+**app_uuid**            | string    | service team's uuid
+**app_name**            | string    | service team's name
+**user_email**          | string    | user email
+**user_fullname**       | string    | user fullname
+**user_password**       | string    | user password
 
-返回结果（例子）
+Response (example):
 ```
 {
     'app': {
@@ -2099,8 +2069,8 @@ Name                    | Type      | Description
 ```
 
 
-#### PPConsole获取用户数目、消息数目
-包括今日用户数，昨日用户数，所有用户数，所有消息数。
+#### PPConsole Get Data Overview Number
+
 ```
 POST /PPCONSOLE_GET_OVERVIEW_NUMBER
 ```
@@ -2110,13 +2080,13 @@ api_level:
 PPCONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
+**app_uuid**            | string    | service team's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2133,7 +2103,7 @@ Name                    | Type      | Description
 ```
 
 
-#### PPConsole获取实时用户数目
+#### PPConsole Get Real Time Customer Number
 ```
 POST /PPCONSOLE_GET_REAL_TIME_CUSTOMER_NUMBER
 ```
@@ -2143,13 +2113,13 @@ api_level:
 PPCONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
+**app_uuid**            | string    | service team's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2165,7 +2135,8 @@ Name                    | Type      | Description
 ```
 
 
-#### PPConsole获取实时消息数目
+#### PPConsole Get Real Time Service Agent Number
+
 ```
 POST /PPCONSOLE_GET_REAL_TIME_SERVICE_NUMBER
 ```
@@ -2175,13 +2146,13 @@ api_level:
 PPCONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
+------------------------|-----------|--------------------
+**app_uuid**            | string    | service team's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2197,7 +2168,8 @@ Name                    | Type      | Description
 ```
 
 
-#### PPConsole获取实时消息数目
+#### PPConsole Get Real Time Message Number
+
 ```
 POST /PPCONSOLE_GET_REAL_TIME_MESSAGE_NUMBER
 ```
@@ -2207,13 +2179,13 @@ api_level:
 PPCONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
+**app_uuid**            | string    | service team's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2229,7 +2201,8 @@ Name                    | Type      | Description
 ```
 
 
-#### PPConsole获取某段日期内每天的用户数目
+#### PPConsole Get Customer Number By Range
+
 ```
 POST /PPCONSOLE_GET_CUSTOMER_NUMBER_BY_RANGE"
 ```
@@ -2239,13 +2212,13 @@ api_level:
 PPCONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
+**app_uuid**            | string    | service team's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2263,7 +2236,7 @@ Name                    | Type      | Description
 ```
 
 
-#### PPConsole获取某段时期内每天的客服数目
+#### PPConsole Get Service Agent Number By Range
 ```
 POST /PPCONSOLE_GET_SERVICE_NUMBER_BY_RANGE"
 ```
@@ -2273,13 +2246,13 @@ api_level:
 PPCONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
+**app_uuid**            | string    | service team' suuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2297,7 +2270,7 @@ Name                    | Type      | Description
 ```
 
 
-#### PPConsole获取某段日期内每天的消息数目
+#### PPConsole Get Message Number By Range
 ```
 POST /PPCONSOLE_GET_MESSAGE_NUMBER_BY_RANGE"
 ```
@@ -2307,13 +2280,13 @@ api_level:
 PPCONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
+------------------------|-----------|--------------------
+**app_uuid**            | string    | service team's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2331,8 +2304,8 @@ Name                    | Type      | Description
 ```
 
 
-#### 获取客服团队的第三方应用api信息
-包括ppkefu_thirdparty 和 ppconsole_thirdparty 信息(api_key, api_secret, api_uuid, api_level)
+#### Get Third Party App Info About A Service Team
+
 ```
 POST /PP_GET_API_INFO
 ```
@@ -2342,14 +2315,14 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**user_uuid**           | string    | 用户uuid
+**app_uuid**            | string    | service team's uuid
+**user_uuid**           | string    | user uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'ppconsole_thirdparty': {
@@ -2371,8 +2344,8 @@ Name                    | Type      | Description
 ```
 
 
-#### 获取所有客服团队列表
-超级管理员可以调用此API接口获取所有客服团队的列表。
+#### Get All service team list
+
 ```
 POST /PP_GET_ALL_APP_LIST
 ```
@@ -2382,13 +2355,13 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**user_uuid**           | string    | 用户uuid
+**user_uuid**           | string    | user uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'app': [
@@ -2444,7 +2417,8 @@ Name                    | Type      | Description
 ```
 
 
-#### 验证某设备是否在线
+#### Validate Online Device
+
 ```
 POST /PP_VALIDATE_ONLINE_DEVICE
 ```
@@ -2454,14 +2428,14 @@ api_level:
 PPKEFU, THIRD_PARTY_KEFU
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
-------------------------|-----------|------------
-**user_uuid**           | string    | 用户uuid
-**device_uuid**         | string    | 设备uuid
+------------------------|-----------|-------------------------
+**user_uuid**           | string    | user uuid
+**device_uuid**         | string    | device uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'valid': False,
@@ -2472,7 +2446,7 @@ Name                    | Type      | Description
 ```
 
 
-#### 设置客服状态
+#### Set Service Agent Status
 ```
 POST /PPKEFU_SET_SERVICE_USER_STATUS
 ```
@@ -2482,15 +2456,15 @@ api_level:
 PPKEFU, THIRD_PARTY_KEFU
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**user_uuid**           | string    | 用户uuid
-**user_status**         | string    | 用户状态
+------------------------|-----------|-------------------------
+**app_uuid**            | string    | service team's uuid
+**user_uuid**           | string    | user uuid
+**user_status**         | string    | user status, can be 'BUSY', 'READY', 'REST'
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2500,8 +2474,8 @@ Name                    | Type      | Description
 ```
 
 
-#### 获取客服团队下所有预定义问答
-预定义问答即事先设置好某个问题的答案。
+#### Get All Predefined Script
+
 ```
 POST /PP_GET_ALL_PREDEFINED_SCRIPT
 ```
@@ -2511,13 +2485,13 @@ api_level:
 PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
+**app_uuid**            | string    | service team's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2531,8 +2505,8 @@ Name                    | Type      | Description
 ```
 
 
-#### 获取客服团队下所有预定义问答组
-预定义问答即事先设置好某个问题的答案，一个问答组包括数个预定义问答。
+#### Get All Predefined Script Group
+
 ```
 POST /PP_GET_ALL_PREDEFINED_SCRIPT_GROUP
 ```
@@ -2542,13 +2516,13 @@ api_level:
 PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
+**app_uuid**            | string    | service team's uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2567,8 +2541,8 @@ Name                    | Type      | Description
 ```
 
 
-#### 获取客服团队某个问答组的所有预定义问答
-预定义问答即事先设置好某个问题的答案。一个问答组包括数个预定义问答。
+#### Get Predefined Script In A Group
+
 ```
 POST /PP_GET_PREDEFINED_SCRIPT_WITH_GROUP
 ```
@@ -2578,14 +2552,14 @@ api_level:
 PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**group_uuid**          | string    | 问答组uuid
+**app_uuid**            | string    | service team's uuid
+**group_uuid**          | string    | group uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2604,8 +2578,8 @@ Name                    | Type      | Description
 ```
 
 
-#### 添加预定义问答
-预定义问答即事先设置好某个问题的答案。
+#### Add Predefined Script
+
 ```
 POST /PP_ADD_PREDEFINED_SCRIPT
 ```
@@ -2615,16 +2589,16 @@ api_level:
 PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-group_uuid              | string    | 问答组uuid
-script_question         | string    | 预定义问答的问题
-**script_answer**       | string    | 预定义问答的答案
+**app_uuid**            | string    | service team's uuid
+**script_question**     | string    | script question
+**script_answer**       | string    | script answer
+group_uuid              | string    | group uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2639,8 +2613,8 @@ script_question         | string    | 预定义问答的问题
 ```
 
 
-#### 删除预定义问答
-预定义问答即事先设置好某个问题的答案。
+#### Remove Predefined Script
+
 ```
 POST /PP_REMOVE_PREDEFINED_SCRIPT
 ```
@@ -2650,14 +2624,14 @@ api_level:
 PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**script_uuid**         | string    | 问答uuid
+**app_uuid**            | string    | service team's uuid
+**script_uuid**         | string    | script uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2667,8 +2641,8 @@ Name                    | Type      | Description
 ```
 
 
-#### 添加预定义问答组
-预定义问答即事先设置好某个问题的答案，一个问答组包括数个预定义问答。
+#### Add Predefined Script Group
+
 ```
 POST /PP_ADD_PREDEFINED_SCRIPT_GROUP
 ```
@@ -2678,14 +2652,15 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**group_name**          | string    | 问答组名称
+------------------------|-----------|-------------------
+**app_uuid**            | string    | service team's uuid
+**group_name**          | string    | group name
 
-返回结果（例子）
+
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2700,8 +2675,8 @@ Name                    | Type      | Description
 ```
 
 
-#### 删除预定义问答组
-预定义问答即事先设置好某个问题的答案，一个问答组包括数个预定义问答。
+#### Remove Predefined Script Group
+
 ```
 POST /PP_REMOVE_PREDEFINED_SCRIPT_GROUP
 ```
@@ -2711,14 +2686,15 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**group_uuid**          | string    | 问答组uuid
+**app_uuid**            | string    | service team's uuid
+**group_uuid**          | string    | group uuid
 
-返回结果（例子）
+
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2728,7 +2704,8 @@ Name                    | Type      | Description
 ```
 
 
-#### 添加预定义问答到某个问答组
+#### Move Predefined Script Into Group
+
 ```
 POST /PP_MOVE_PREDEFINED_SCRIPT_INTO_GROUP
 ```
@@ -2738,15 +2715,16 @@ api_level:
 PPCONSOLE, THIRD_PARTY_CONSOLE
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**group_uuid**          | string    | 问答组uuid
-**script_uuid**         | string    | 问答uuid
+------------------------|-----------|-------------------------
+**app_uuid**            | string    | service team's uuid
+**group_uuid**          | string    | group uuid
+**script_uuid**         | string    | script uuid
 
-返回结果（例子）
+
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2756,8 +2734,8 @@ Name                    | Type      | Description
 ```
 
 
-#### 发送修改密码邮件
-当用户在登录PPConsole前，修改了密码，调用此接口用邮件通知他。
+#### PPConsole Send User Email When His Password Is Changed
+
 ```
 POST /PPCONSOLE_SEND_NEW_PASSWORD
 ```
@@ -2767,13 +2745,14 @@ api_level:
 PPCONSOLE_BEFORE_LOGIN
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**user_email**          | string    | 问答组uuid
+**user_email**          | string    | user uuid
 
-返回结果（例子）
+
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2783,35 +2762,8 @@ Name                    | Type      | Description
 ```
 
 
-#### 发送修改密码邮件
-当用户在登录PPConsole前，修改了密码，调用此接口用邮件通知他。
-```
-POST /PPCONSOLE_SEND_NEW_PASSWORD
-```
+#### Cancel Waiting Create Conversation
 
-api_level:
-```
-PPCONSOLE_BEFORE_LOGIN
-```
-
-参数
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**user_email**          | string    | 问答组uuid
-
-返回结果（例子）
-```
-{
-    'error_code': 0,
-    'uri': '/PPCONSOLE_SEND_NEW_PASSWORD',
-    'error_string': 'success.',
-}
-```
-
-
-#### 取消等待创建对话
-PPCom在等待后台创建对话过程中，可以调用此接口取消等待。
 ```
 POST /PP_CANCEL_WAITING_CREATE_CONVERSATION
 ```
@@ -2821,16 +2773,16 @@ api_level:
 PPCOM
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**user_uuid**           | string    | 用户uuid
-**device_uuid**         | string    | 设备uuid
-group_uuid              | string    | 对话对应的客服组uuid
+**app_uuid**            | string    | service team's uuid
+**user_uuid**           | string    | user uuid
+**device_uuid**         | string    | device uuid
+group_uuid              | string    | service group uuid
 
-返回结果（例子）
+Response (example):
 ```
 {
     'error_code': 0,
@@ -2840,8 +2792,8 @@ group_uuid              | string    | 对话对应的客服组uuid
 ```
 
 
-#### PPCom创建对话
-客服团队的消息分配策略不同，PPCom创建对话的方式也不同。
+#### PPCom Create Conversation
+
 ```
 POST /PPCOM_CREATE_CONVERSATION
 ```
@@ -2851,17 +2803,18 @@ api_level:
 PPCOM
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
-**user_uuid**           | string    | 用户uuid
-**device_uuid**         | string    | 设备uuid
-group_uuid              | string    | 客服组uuid
-member_list             | list      | 对话成员uuid列表
+------------------------|-----------|---------------------------------
+**app_uuid**            | string    | service team's uuid
+**user_uuid**           | string    | user uuid
+**device_uuid**         | string    | device uuid
+group_uuid              | string    | service group uuid
+member_list             | list      | member list in the conversation
 
-返回结果（例子）
+
+Response (example):
 ```
 {
     'status': 'NEW',
@@ -2883,7 +2836,7 @@ member_list             | list      | 对话成员uuid列表
 ```
 
 
-#### PPCom获取正在等待创建对话的PPCom用户数
+#### PPCom Get waiting Queue Length
 
 ```
 POST /PP_GET_AMD_QUEUE_LENGTH
@@ -2894,14 +2847,14 @@ api_level:
 PPCOM
 ```
 
-参数
+Parameters:
 
 Name                    | Type      | Description
 ------------------------|-----------|------------
-**app_uuid**            | string    | 客服团队uuid
+**app_uuid**            | string    | service team's uuid
 
 
-返回结果（例子）
+Response (example):
 ```
 {
     'length': 10,

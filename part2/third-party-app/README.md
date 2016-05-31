@@ -1,4 +1,4 @@
-# 第三方应用
+# Third Party App
 
-* [获取token](./get-token.md)
-* [API列表](./api/README.md)
+* [Get Token](./get-token.md)
+* [API List](./api/README.md)
