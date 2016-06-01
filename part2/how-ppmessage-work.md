@@ -1,6 +1,6 @@
 # How PPMessage work
 
-PPMessage includes PPConsole, PPKefu, PPCom and PPMessage Server. The former three are client applicaitons that connect PPMessage Server.
+PPMessage includes PPConsole, PPKefu, PPCom and PPMessage Server. The former three are client applicaitons that connect to PPMessage Server when they run.
 --------
 
 #### PPKefu, PPConsole, PPCom and PPMessage Server
