@@ -14,7 +14,7 @@ You can download & Use `PPKefu` in these ways (app name is `PPMessage`)
 
 1. Download `PPKefu` (Mac, Windows, Android) in [ppmessage.com](https://ppmessage.com)
 
-2. Download `PPKefu` (iOS, Mac, android) from iOS App Store, Mac App Store and Google Play Store, just search key word "ppmessage".
+2. Download `PPKefu` (iOS, Mac, android) from iOS App Store, Mac App Store and Google Play Store. Search key word "ppmessage" to find it.
 
 3. Sign in to `PPConsole` and Open `PPKefu` (Web Browsers) by click `Start Service` button in `PPConsole` navbar.
 

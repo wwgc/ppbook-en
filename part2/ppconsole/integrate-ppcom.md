@@ -4,9 +4,9 @@
 
 ------
 
-#### integrate PPCom
+#### Integrate PPCom
 
-Here we only introduce the `insert code` way to integrate PPCom. For more details please check [PPCom Web SDK](../ppcom/web-sdk.md).
+Here we introduce the `insert code` way to integrate PPCom. For more details please check [PPCom Web SDK](../ppcom/web-sdk.md).
 
 The code to insert is as follows. `app_uuid` in `window.ppSettings` is your service team's uuid, which you can find in `PPConsole/Team Settings/Basic Info`.
 
