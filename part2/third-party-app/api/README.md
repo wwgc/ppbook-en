@@ -1,6 +1,7 @@
 # API List
 
-request:
+
+request uri:
 ```
 POST https://ppmessage.com/api/xxxxx
 ```
@@ -20,7 +21,7 @@ api_level                 | Description
 `PPCOM`                   | To invoke the api, you must request a token using PPCom `api_key` and `api_secret`
 `PPKEFU`                  | To invoke the api, you must request a token using PPKefu `api_key` and `api_secret`
 `PPCONSOLE`               | To invoke the api, you must request a token using PPConsole `api_key` and `api_secret`
-`PPCONSOLE_BEFORE_LOGIN`  | To invoke the api, you must request a token using PPCONSOLE `api_key` and `api_secret`
+`PPCONSOLE_BEFORE_LOGIN`  | To invoke the api, you must request a token using PPConsole `api_key` and `api_secret`
 `THIRD_PARTY_KEFU`        | To invoke the api, you must request a token using THIRD PARTY Kefu `api_key` and `api_secret`
 `THIRD_PARTY_CONSOLE`     | To invoke the api, you must request a token using THIRD PARTY Console `api_key` and `api_secret`
 
