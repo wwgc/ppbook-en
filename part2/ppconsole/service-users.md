@@ -1,14 +1,21 @@
-# 客服页面
+# Service Agents
 
-在客服页面，你可以在客服团队里创建客服，删除客服。
+In `Service Agent` interface, you can create/remove service agent for your service team.
 
 -------
 
-#### 创建客服
+#### Create Service Agent
 
-点击**创建客服**按钮，在打开的创建页面填入客服名称，客服邮箱（以后用该邮箱登录PPKefu），密码，点击确认即可创建一个客服。需要注意的是，客服邮箱不能重复。如果你的客服团队或者PPMessage下的其他客服团队已经使用某个邮箱，你再使用这个邮箱创建客服会收到错误提示。
+In `Service Agent` interface, to create a new service agent, click `Create Service User` button. In the window popups afterwards, enter service agent's email, name, password, click `Create` button to finish creating service agent. Service agent's email should be unique, or you will get a error when create it.
+
+The service agent you create has the role `Service Agent` in your service team, while you have the role `Admin` (because you are the creator of your service team). If you are a service agent with role `Service Agent`, when you sign in to PPConsole, you will be redirect to sign in to PPKefu. If you are a service agent with role `Admin`, when you sign in to PPConsole, you will enter PPConsole's settings page.
 
 
-#### 删除客服
+#### Modify Service Agent
 
-通过选中一个或多个客服，然后点击**删除**按钮，可以删除这些客服。一旦客服被删除，又可以用该客服的邮箱重新注册客服。你只能删除客服管理员创建的客服，不能删除客服管理员。
+In `Service Agent` interface, choose one service agent, click `Modify` button. In the window popups afterwards, you can modify service angent's name, email and password.
+
+
+#### Remove Service Agent
+
+In `Service Agent` interface, choose one service agent, click `Remove` button to remove a service agent from your service team.

@@ -1,40 +1,38 @@
-# 客服组
+# Service Group
 
-在客服组界面，你可以创建、修改、删除客服组，将客服添加到客服组、从客服组移除。
+In `Service Group` interface, you can create, modify and remove service group. You can also add service agent to a service group or remove service agent from it.
 
 -----
 
-#### 管理客服组
+#### Manage Service Group
 
-* 创建客服组
+* Create Service Group
 
-  在客服组界面，点击**创建客服组**按钮，在弹出的创建界面填入客服组名称，客服组简介，选择是否设为`首选组`，点击确定创建一个客服组。客服组名称不能重复。
+  In `Service Group` interface, click `Create` button. In the window pops up afterwards, enter service group name, description, check whether it is a primary group, then click `Create Group` button to finish creating service group.
 
-  `首选组`是一个特殊的组，如果你在**消息分发策略**里选择了GROUP策略，PPCom用户请求和客服建立对话时，系统会从`首选组`里选择一个在线且处于空闲状态的客服分配给这个用户。
-
-* 修改客服组
+  Primary group is a special group under service team. A service team can only have one primary group. If you choose `GROUP` policy for your service team in `Message Dispatch Policy` interface, when a PPCom user requests to establish conversation with service agents, PPMessage Server will try to choose a service agent who is in READY status and assign him to this PPCom user.
   
-  客服组界面，显示了所有客服团队下的客服组列表。点击一个客服组的`修改`按钮，可以在打开的修改界面修改客服组名称，客服组简介，设置是否是`首选组`。
+* Modify Service Group
+  
+  `Service Group` interface shows all service groups under your service team. click `modify` button of a service group, you can modify service group's name, description and whether it is a primary group.
 
-* 删除客服组
+* Remove Service Group
 
-  客服组界面，显示了所有客服团队下的客服组列表。点击一个客服组的`删除`按钮，可以删除这个客服组。
+  `Service Group` interface shows all service groups under your service team. click `remove` button of a service group, you can remove this service group from your service team. all service agent in this service group will move to service group: `Not grouped`.
+  
 
+#### Manage Service Agents
 
-#### 管理客服
+* Add Service Agents to Service Group
 
-* 将客服添加到客服组
-
-  在客服组界面，选择`所有客服`类别，你可以看到客服组里所有的客服列表。每一列显示了客服的以下信息。
+  In `Service Group` interface, click `All Service Agents` button, you will see all service agents in your service team. each service agent shows following info:
       
-        邮箱：客服的登录邮箱。
-        角色：客服管理员角色是Team admin，客服管理员创建的客服角色是Service user。
-        所属组：客服所属于的客服组，一个客服只能归属于一个客服组。
+        email: the sign in email of service agent
+        role: the role service agent play in service team, either `Admin` or `Service Agent`
+        group: the service group that this service user belongs to, a service user can belong to up to one service group
   
-  你可选择一个或多个客服，然后点击`选择客服组`，在客服组下拉列表中选择目标客服组，就可以将客服加入到目标客服组中。
+  To add service agents into a service group, you need to choose one or more service agents, then click `Select Group` button, finally click the target service group to finish.
 
-* 将客服从客服组中移除
+* Remove Service Agents from Service Group
 
-  一个客服不能同时归属于两个客服组，当你想把某个客服从他所属的客服组中移除时，你可以把他移动到`未分组`或者直接移动到另一个客服组里。
-  
-  假设客服a归属于客服组A，要将客服a从客服组A移除，首先要在`所有客服`或者`客服组A`类别下找到并选中客服a，在客服组下拉列表中选中`未分组`，就可以将客服a从客服组A中移除，让其重新成为一个未分组客服。
+  One service agent can only belongs to one service group. If you want to remove a service agent from a service group, you can move him to another service group.

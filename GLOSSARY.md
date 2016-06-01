@@ -16,13 +16,13 @@ PPMessage client end software, which is used by the creator or service agents of
 
 PPMessage Web admin software which is used by developer or operator who can create more service agents and check the message data of PPMessage.
 
-## Service team administrator / Service agent administrator
+## Service Team Administrator / Service Agent Administrator
 
 The creator of service team, who registers account and create service team and service agents in PPConsole.
 
-## Service agent
+## Service Agent / Service User
 
-Belong to a service team, created by service team administrator
+Service agent (also called service user) belongs to a service team, created by service team administrator.
 
 
 

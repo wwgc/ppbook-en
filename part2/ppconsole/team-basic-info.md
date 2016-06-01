@@ -1,23 +1,25 @@
-# 团队基本信息
+# Basic Info
 
-团队基本信息界面展示集成PPCom，开发第三方PPKefu和第三方PPConsole所需要的信息。
+`Basic Info` interface shows information about integrating PPCom, developing third party Kefu and Console.
 
 ---------
 
-#### PPCom
+#### Team UUID / App UUID
 
-集成PPCom时，你需要获取客服团队的`app_uuid`，也就是**团队基本信息**里的 `Team UUID`。`app_uuid`将PPCom和你的客服团队关联起来。
-    
-#### 第三方PPKefu
+Team uuid (also called `app_uuid`) is your service team's uuid. You will need it when you integrate PPCom with your website and invoke PPMessage's APIs.
 
-如果你想开发自己的客服端软件（第三方PPKefu），你需要获取客服团队的`PPKefu api_key`和`PPKefu api_secret`。
 
-PPMessage系统支持OAuth 2.0验证框架，你需要使用`api_key`和`api_secret`从PPMessage服务器获取一个`access_token`，之后就可以用这个`access_token`调用PPMessage服务器的API。
+#### Team Name
 
-具体开发方法参见[第三方软件开发](../third-party-app.md)
+You can change your service team name here.
 
-#### 第三方PPConsole
 
-与第三方PPKefu类似，只是获取的`api_key`和`api_secret`是客服团队的`PPConsole api_key`和`PPConsole api_secret`。
+#### Third Party App
 
-具体开发方法参见[第三方软件开发](../third-party-app.md)
+`PPKefu api_key`, `PPKefu api_sercret` are for Third Party Kefu.
+
+`PPConsole api_key`, `PPConsole api_secret` are for Third Party Console.
+
+To Develop your third party app (invoke PPMessage's APIs), you need to get a token using `api_key` and `api_secret`.
+
+For more details, please check [third party app](../third-party-app.md).

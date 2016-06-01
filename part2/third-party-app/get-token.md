@@ -23,12 +23,39 @@ Parameter        | Description
 
 Response:
 
-After getting authorization code, PPMessage Server will redirect user to PPMessage's Authorization page. This page carrys authorization code.
+After getting authorization code, PPMessage Server will redirect user to PPMessage's Authorization page. 
 
+In PPMessage's Authorization page, user enters his email and password, then click `Continue`. If the email and password matches, PPMessage Server will redirect user to the `redirect_uri` you provided in last step and attach `authorization code` and `state` with it.
 
-### Get Token
+the uri will something like this:
+```
+http://you-site.com?code=xxxxxx&state=xxxx
+```
 
-In PPMessage's Authorization page, user enters his email and password, then click `Continue`. If the email and password matches, PPMessage Server will redirect user to the `redirect_uri` you provided in last step and attach the token with it.
+### get token
+
+After PPMessage Server redirect user to your `redirect_uri`, you have got the `authorization code` and `state`.
+
+The `state` should match the `state` you provided in last step.
+
+Now you can use the `authorizaiton code` to get token.
+
+Request: 
+
+```
+POST https://ppmessage.com/ppauth/token
+```
+
+Body Parameters:
+
+Parameter         | Description
+------------------|-------------------------
+`code`            | the authorization code you get
+`client_id`       | the client's id (your `PPKefu api_key` or `PPConsole api_key` in `PPConsole/Team Settings/Basic Info`)
+`client_secret`   | the client's id (your `PPKefu api_secret` or `PPConsole api_secret` in `PPConsole/Team Settings/Basic Info`)
+`redirect_uri`    | should be the same as last step's `redirect_uri`
+`grant_type`      | token type, value is `authorization_code`
+
 
 Response:
 
@@ -37,6 +64,7 @@ Parameter        | Description
 `access_token`   | the token you use to invoke PPMessage API
 `token_type`     | the token type，value is `Bearer`
 `expires_in`     | the token expire time，valuee is `3600*24s (24h)`
+
 
 ### Invoke API
 
