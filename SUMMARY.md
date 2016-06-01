@@ -10,6 +10,7 @@
        * [PPCOM MESSAGE DISPATCH POLICY](part2/ppcom/message-dispatch.md)
        * [INTEGRATE IN WEBSITE](part2/ppcom/web-sdk.md)
        * [INTEGRATE IN iOS APP](part2/ppcom/ios-sdk.md)
+       * [INTEGRATE IN ANDROID APP](part2/ppcom/android-sdk.md)
    * [PPConsole](part2/ppconsole/README.md)
        * [QUICK GUIDE](part2/ppconsole/quick-guide.md)
        * [DATA OVERVIEW](part2/ppconsole/data-overview.md)
