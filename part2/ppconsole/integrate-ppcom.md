@@ -1,6 +1,6 @@
 # App Integrate 
 
-`App Integrate` interface shows the PPCom's insert code and PPCom's preview website address.
+`App Integrate` shows the `PPCom` insert code and `PPCom` preview website address.
 
 ------
 
@@ -17,7 +17,7 @@ The code to insert is as follows. `app_uuid` in `window.ppSettings` is your serv
 </script>
 ```
 
-`App Integrate` interface shows above code. To integrate PPCom with your website, you need to copy the code and insert it between `<body></body>` tag in the source file(index.html e.g.) of your website. Like this:
+`App Integrate` shows above code. To integrate `PPCom` with your website, you need to copy the code and insert it between `<body></body>` tag in the source file(index.html e.g.) of your website. Like this:
 
 ```html
 <!DOCTYPE html>
@@ -35,8 +35,8 @@ The code to insert is as follows. `app_uuid` in `window.ppSettings` is your serv
 </html>
 ```
 
-Then open your website, PPCom will show in the right-bottom corner of the website.
+Then open your website, `PPCom` will show in the right bottom corner of the website.
 
-#### Preview PPCom
+#### Preview `PPCom`
 
 Concept of previewing PPCom: in `App Integrate` interface, if you click `Preview PPCom` button, your browser will open a temporary website. This website is integrate with PPCom (using your service team uuid). You can test PPCom in this website before actually integrate PPCom with your own website.

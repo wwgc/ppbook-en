@@ -1,6 +1,6 @@
 # Message History
 
-`Message History` interface shows all conversations between service agents and PPCom users, between service agents and service agents. You can view message history of every conversation.
+`Message History` shows all conversations between service agents and `PPCom` users. You can view message history of every conversation.
 
 -------
 
@@ -13,7 +13,7 @@ Every conversation shows following information:
     conversation message number
     conversation latest message's content, send time
 
-Click conversation message number link, it will open a conversation window, in which you can view message history of this conversation.
+Click conversation message number link, it will open a conversation window. You can view message history of this conversation window.
 
 #### Message History
 

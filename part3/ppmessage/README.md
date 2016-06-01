@@ -1,3 +1,3 @@
-# 开发PPMessage
+# Develop PPMessage
 
-* [搭建开发环境](./set-up/README.md)
+* [SET UP PPMESSAGE](./set-up/README.md)

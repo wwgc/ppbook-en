@@ -1,4 +1,4 @@
-## PPCom iOS SDK
+## `PPCom iOS SDK`
 
 ### Interface
 
@@ -10,28 +10,28 @@
 
 #### Conversation List
 
-`Conversation List` interface is corresponding to `PPConversationsViewController`, all conversations that belongs to current user will show in this `Controller`. Click a conversation will open this conversation's `Conversation Window` interface. This is also the root interface of PPCom iOS SDK.
+`Conversation List` is corresponding to `PPConversationsViewController`. All conversations that belongs to current user will show in this `Controller`. Click a conversation will open this conversation's `Conversation Window` interface. This is also the root interface of `PPCom iOS SDK`.
 
-#### Converation Window
+#### Conversation Window
 
-`Conversation Window` interface is corresponding to `PPMessagesViewController`, PPCom user can chat with service agents in conversation window.
+`Conversation Window` is corresponding to `PPMessagesViewController`. `PPCom` user can chat with service agents in conversation window.
 
 #### Conversation Member
 
-In `Conversation Window` interface, if you click the `group` button in right-top corner, it will open `Conversation Member` interface(corresponding to `PPGroupMembersViewController`), which shows all members of current conversation. Conversaiton members include the PPCom user and one or more service agents. You can click one of service agents to open a new conversation with him.
+In `Conversation Window`, if you click the `group` button in right-top corner, it will open `Conversation Member` (corresponding to `PPGroupMembersViewController`). It shows all members of current conversation. Conversation members include the `PPCom` user and one or more service agents. You can click one of service agents to open a new conversation with him.
 
 ### Integration
 
-#### Download `PPComLib.framework`和`PPComLib.bundle`
-  [Download PPCom iOS SDK]()
+#### Download `PPComLib.framework` and `PPComLib.bundle`
+  [Download PPCom iOS SDK](https://github.com/PPMESSAGE/ppmessage/tree/master/ppmessage/ppcom/ios)
 
 #### Import Into Your Project
 
-Open your project via Xcode, then drag `PPComLib.framework` and `PPComLib.bundle` into it. In the window Xcode popups, check `Copy items if needed` option to ensure files are copied to your project.
+Open your project via `Xcode`, then drag `PPComLib.framework` and `PPComLib.bundle` into it. In the window `Xcode` popups, check `Copy items if needed` option to ensure files are copied to your project.
 
 #### Import Dynamic Link Library
 
-Click the "+" button in the bottom of `TARGET/general` interface. In the window Xcode popups, search `libicucore.dylib` or `libicucore.tbd` and add it to your project.
+Click the "+" button in the bottom of `TARGET/general` interface. In the window `Xcode` popups, search `libicucore.dylib` or `libicucore.tbd` and add it to your project.
 
 #### Modify Project Compile Parameters
 

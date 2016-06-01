@@ -2,6 +2,8 @@
 
 You need to get a token to use PPMessage's APIs. To get it, you must firstly get the authorization code, then get the token.
 
+view demo [Here](https://github.com/PPMESSAGE/ppmessage/tree/master/ppmessage/ppauth/demo).
+
 ---
 
 ### Get Authorization Code
