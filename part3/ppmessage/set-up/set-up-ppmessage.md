@@ -4,21 +4,21 @@ Following below steps, you can set up PPMessage in Mac & Linux(Debia/Ubuntu).
 
 ---
 
-### Download PPMessage
+#### Download PPMessage
 Firstly, you need to install git, then clone PPMessage from github.com. Suppose you save PPMessage to `~/Documents/ppmessage`.
 
 ```
 git clone git@github.com:PPMESSAGE/ppmessage.git  ~/Documents/ppmessage
 ```
 
-### Download Geolite2
+#### Download Geolite2
 After downloading PPMessage, enter `~/Documents/ppmessage` and run:
 
 ```
 ./ppmessage/scripts/download_geolite2.sh
 ```
 
-### Install Dependency Softwares
+#### Install Dependency Softwares
 Enter `~/Documents/ppmessage/ppmessage/scripts`.
 
 * In Mac, run
@@ -40,7 +40,7 @@ Notice: when run shell script to install software, your system's software may be
 * In Linux, run the script will install `nginx-1.8.0`，`ffmpeg-3.0.2`，`mysql-connector-python-2.1.3`.
 
 
-### Install Bower Components, Npm Packages
+#### Install Bower Components, Npm Packages
 Enter `~/Documents/ppmessage`, run 
 
 ```
@@ -48,11 +48,11 @@ Enter `~/Documents/ppmessage`, run
 ./dist.sh npm
 ```
 
-### Config PPMessage
+#### Config PPMessage
 Check [Config PPMessage](./config-ppmessage.md), and create your config file.
 
 
-### Bootstrap PPMessage
+#### Bootstrap PPMessage
 Firstly, ensure `mysql server`, `redis-server`, `nginx` is started.
 
 * In Mac, run them by
@@ -104,7 +104,7 @@ Then, enter `~/Documents/ppmessage`, perform following operations.
   ```
 
 
-### Using PPMessage
+#### Using PPMessage
 
 Once PPMessage is running, we can visit modules of PPMessage.
 

@@ -1,6 +1,6 @@
 # Set Up PPCom
 
-### Preparation
+#### Preparation
     
     cd ~/Documents/ppmessage/ppmessage/ppcom
     bower install
@@ -8,7 +8,7 @@
     npm install 
     gulp
     
-### notice
+#### notice
 When develope, run `gulp watch` firstly
 
     cd ~/Documents/ppmessage/ppmessage/ppcom/gulp

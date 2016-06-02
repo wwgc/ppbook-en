@@ -4,7 +4,7 @@ Before bootstrap PPMessage, we need to config PPMessage.
 
 ---
 
-### Create config.py
+#### Create config.py
 Suppose your PPMessage is in `~/Documents/ppmessage`.
 
 ```bash
@@ -12,7 +12,7 @@ cd ~/Documents/ppmessage/ppmessage/bootstrap
 cp config.template.py config.py
 ```
 
-### Describe config.py
+#### Describe config.py
 
 config.py contains following settings.
 

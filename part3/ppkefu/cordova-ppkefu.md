@@ -2,13 +2,13 @@
 
 PPKefu is a [Cordova](https://cordova.apache.org/) project, support Android, iOS.
 
-### Preparation
+#### Preparation
 install nodejs, check [nodejs](https://nodejs.org/) for install method. Then use npm to install cordova and ionic.
 
     sudo npm install -g cordova
     sudo npm install -g ionic
     
-### initialize
+#### initialize
 enter ppkefu root directory
 
     cd ~/Documents/ppmessage/ppmessage/ppkefu/ppkefu

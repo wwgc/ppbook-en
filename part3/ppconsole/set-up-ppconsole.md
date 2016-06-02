@@ -1,6 +1,6 @@
 # Set up PPConsole
 
-### Preparation
+#### Preparation
     
     cd ~/Documents/ppmessage/ppmessage/ppconsole
     bower install
@@ -8,7 +8,7 @@
     npm install 
     gulp
     
-### Notice
+#### Notice
 When develope, run `gulp watch` firstly
 
     cd ~/Documents/ppmessage/ppmessage/ppconsole/gulp
