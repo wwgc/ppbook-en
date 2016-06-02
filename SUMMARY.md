@@ -18,7 +18,7 @@
        * [TEAM PROFILE](part2/ppconsole/team-basic-info.md)
        * [UI INTERFACE](part2/ppconsole/ppcom-interface.md)
        * [SERVICE USER](part2/ppconsole/service-users.md)
-       * [SERVICE TEAM](part2/ppconsole/service-groups.md)
+       * [SERVICE GROUP](part2/ppconsole/service-groups.md)
        * [INTEGRATION](part2/ppconsole/integrate-ppcom.md)
        * [ACCOUNT](part2/ppconsole/account-settings.md)
    * [PPKEFU](part2/ppkefu/README.md)
