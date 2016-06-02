@@ -20,11 +20,11 @@ PPMessage Web admin software which is used by developer or operator who can crea
 
 Service team is created by service team administrator. A service team has service agents and service groups.
 
-## Service Team Administrator / Service Agent Administrator
+## Service Team Administrator
 
-The creator of service team, who registers account and create service team and service agents in PPConsole.
+The creator of service team (also called service agent administrator), who registers account and create service team and service agents in PPConsole.
 
-## Service Agent / Service User
+## Service Agent
 
 Service agent (also called service user) belongs to a service team, created by service team administrator.
 
