@@ -1,6 +1,6 @@
-# Basic Info
+# Team Profile
 
-`Basic Info` shows information about integrating `PPCom`, developing `third party Kefu and Console`.
+`Team Profile` shows information about integrating `PPCom`, developing `third party Kefu and Console`.
 
 ---------
 
