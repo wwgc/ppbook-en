@@ -7,4 +7,5 @@
 * [PPCom Interface](./interface.md)
 * [Message Dispatch Policy](./message-dispatch.md)
 * [PPCom Web SDK](./web-sdk.md)
-* [PPCOm iOS SDK](./ios-sdk.md)
+* [PPCom iOS SDK](./ios-sdk.md)
+* [PPCom Android SDK](./android-sdk.md)
