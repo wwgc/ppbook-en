@@ -23,7 +23,7 @@
        * [ACCOUNT](part2/ppconsole/account-settings.md)
    * [PPKefu](part2/ppkefu/README.md)
    * [OAuth](part2/third-party-app/README.md)
-       * [ACCESS TOKEN](part2/third-party-app/get-token.md)
+       * [GET TOKEN](part2/third-party-app/get-token.md)
        * [API](part2/third-party-app/api/README.md)
 * [DEVELOPING PPMESSAGE](part3/README.md)
    * [PPMessage](part3/ppmessage/README.md)
