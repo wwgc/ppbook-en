@@ -16,10 +16,10 @@
 
 [MESSAGE DISPATCH POLICY](../ppcom/message-dispatch.md)
 
-[SERVICE USERS](./service-users.md)
+[SERVICE AGENT](./service-users.md)
 
-[SERVICE GROUPS](./service-groups.md)
+[SERVICE GROUP](./service-groups.md)
 
-[INTEGRATE PPCOM](./integrate-ppcom.md)
+[APP INTEGRATION](./integrate-ppcom.md)
 
 [ACCOUNT SETTINGS](./account-settings.md)
