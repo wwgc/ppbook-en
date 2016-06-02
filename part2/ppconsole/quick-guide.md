@@ -15,7 +15,7 @@
 3. Next step, we start to integrate `PPCom`.
 
 
-#### Integrate `PPCom`
+#### Integrate PPCom
     
 In `PPConsole` settings page, open `PPConsole/Team Settings/App Integrate` interface. It shows `PPCom`'s insert code and `PPCom` preview website address. 
    
@@ -30,7 +30,7 @@ If you want to integrate `PPCom` with your own website, finish following steps:
 3. The service team you created before only have one service agent (your `PPConsole` account). You will use `PPKefu` to sign in to this service agent and receive PPCom user' message. Go to next step `Using PPKefu`.
 
 
-#### Using `PPKefu`
+#### Using PPKefu
 
 1. Sign in to `PPConsole` using your account, you will see `Start Service` button in `PPConsole`'s navbar.
 

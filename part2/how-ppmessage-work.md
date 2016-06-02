@@ -4,7 +4,7 @@
 
 --------
 
-#### `PPKefu`, `PPConsole`, `PPCom`, `PPMessage Server`
+#### PPKefu, PPConsole, PPCom, PPMessage Server
 
     +--------------------+     1      +-----------------------+      2      +--------------------+
     |  Customer Client   +----------->+        Server         +------------>+   Service Client   |

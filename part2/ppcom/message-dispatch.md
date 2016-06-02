@@ -1,10 +1,10 @@
-# `Message Dispatch Policy`
+# Message Dispatch Policy
 
 `Service Agent Administrator` can set `Message Dispatch Policy` in `PPConsole/Team Settings/Message Dispatch`. It decides which service agents should be added to chat when `PPCom` user establishes chat with service agents.
 
 --------
 
-#### `Target Service Agents`
+#### Target Service Agents
 
 `Target Service Agents`: When `PPCom` user establishes chat with service agents, service agents who can be added to the chat is `Target Service Agents`.
 
@@ -19,7 +19,7 @@ When `PPCom` opens, it will firstly try to find an existing conversation. If it 
 > READY: Service agents who is in READY status will be added to new conversation.
 
 
-#### `Message Dispatch Policy`
+#### Message Dispatch Policy
 
 **All**
 

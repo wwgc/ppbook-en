@@ -37,6 +37,6 @@ The code to insert is as follows. `app_uuid` in `window.ppSettings` is your serv
 
 Then open your website, `PPCom` will show in the right bottom corner of the website.
 
-#### Preview `PPCom`
+#### Preview PPCom
 
 Concept of previewing PPCom: in `App Integrate` interface, if you click `Preview PPCom` button, your browser will open a temporary website. This website is integrate with PPCom (using your service team uuid). You can test PPCom in this website before actually integrate PPCom with your own website.

@@ -6,7 +6,7 @@ View demo [Here](https://github.com/PPMESSAGE/ppmessage/tree/master/ppmessage/pp
 
 ---
 
-### Get Authorization Code
+#### Get Authorization Code
 
 Request:
 
@@ -35,7 +35,7 @@ http://you-site.com?code=xxxxxx&state=xxxx
 ```
 
 
-### Get Token
+#### Get Token
 
 After `PPMessage Server` redirect user to your `redirect_uri`, you have got the `authorization code` and `state`.
 
@@ -69,7 +69,7 @@ Parameter        | Description
 `expires_in`     | The token expire time, value is `3600*24s (24h)`
 
 
-### Invoke API
+#### Invoke API
 
 After you get the token, you can use it to invoke PPMessage's API.
 * `uri`: Request uri

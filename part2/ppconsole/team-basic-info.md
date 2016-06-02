@@ -4,7 +4,7 @@
 
 ---------
 
-#### `Team UUID` / `App UUID`
+#### Team UUID / App UUID
 
 `Team uuid` (also called `app_uuid`) is your service team's uuid. You will need it when you integrate `PPCom` with your website and invoke `PPMessage`'s APIs.
 

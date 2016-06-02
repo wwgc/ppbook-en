@@ -1,10 +1,10 @@
-# `PPCom Web SDK`
+# PPCom Web SDK
 
 `PPCom Web SDK` enables developer to integrate `PPCom` in websites.
 
 ----
 
-#### Integrate `PPCom Web SDK`
+#### Integrate PPCom Web SDK
 First of all, you must register an account in `PPConsole` (`PPConsole` will automatically create a service team for you and set you as the `Service Agent Administrator`). After that, you can find your service team's `app_uuid` in `PPConsole/Team Settings/Basic Info`.
 
 There is two ways to integrate `PPCom` with your website.

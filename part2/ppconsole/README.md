@@ -1,4 +1,4 @@
-# `PPConsole`
+# PPConsole
 
 `PPConsole` is `PPMessage`'s customer service management system. It provides functions like account registration, team management and `PPCom` deployment.
 

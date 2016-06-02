@@ -1,4 +1,4 @@
-## `PPCom iOS SDK`
+## PPCom iOS SDK
 
 ### Interface
 

@@ -1,10 +1,10 @@
-# `PPCom` Interface
+# PPCom Interface
 
 `PPCom` includes three interfaces: `PPCom Icon`, `PPCom Conversation`, `PPCom Conversation List`.
 
 -----
 
-#### `PPCom Icon`
+#### PPCom Icon
 
 When you open a website integrated with `PPCom`, the floating icon in right bottom corner is `PPCom Icon`.
 
@@ -13,7 +13,7 @@ When you move mouse over `PPCom Icon`, a floating card will show above it. The c
 `Service Agent Administrator` can change service team in `PPConsole/Team Settings/Basic info`, team's welcome note and `PPCom Icon` color in `PPConsole/Team Settings/User interface`.
     
 
-#### `PPCom Conversation` 
+#### PPCom Conversation
 When you click `PPCom Icon`, it will open `PPCom Conversation` interface.
 
 * In the header bar of `PPCom Conversation` interface, left side is `Toggle` button, right side is `Minimize` button, center area is conversation name and `Show Member` icon button.
@@ -26,7 +26,7 @@ When you click `PPCom Icon`, it will open `PPCom Conversation` interface.
   
 * The footer bar of `PPCom Conversation` interface is the chat text area, you can type words in chat text area and send message to service agents.
 
-#### `PPCom Conversation List`
+#### PPCom Conversation List
 In `PPCom Conversation`, if you click `Toggle` button, `PPCom` will show `PPCom Conversation List`.
 
 * If `PPCom Message Dispatch Policy` is `ALL` or `SMART`, `PPCom Conversation List` interface will show all conversations. If you click a conversation, `PPCom` will open that conversation.

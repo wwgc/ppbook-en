@@ -1,4 +1,4 @@
-# `PPCom`
+# PPCom
 
 `PPCom` is the customer's chat app of `PPMessage`, which can be integrated with website or mobile app.
 

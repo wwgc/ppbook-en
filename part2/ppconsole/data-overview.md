@@ -4,7 +4,7 @@
 
 --------
 
-#### `PPCom` User
+#### PPCom User
 
 `PPCOm user number`: In one period, in any website that integrates with `PPCom`. If website user open or refresh the website, `PPCom user number` increase by one (repeated user is only counted once).
 
