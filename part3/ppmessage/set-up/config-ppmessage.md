@@ -4,25 +4,29 @@ Before bootstrap PPMessage, we need to config PPMessage.
 
 ---
 
-#### Create config.py
-Suppose your PPMessage is in `~/Documents/ppmessage`.
+#### Config PPMessage if PPMessage is never configed. If configed `config.json` is created and `configed` is `true`.
+Suppose your are under root of PPMessage is in `~/Documents/ppmessage`.
+
+```
+python ppmessage.py
+```
+> Access `http://127.0.0.1:8945` with your browser to config PPMessage, once configed, the config.json will be created. If you want reconfig PPMessage, delete the config.json file, and run ppmessage.py.
 
 ```bash
 cd ~/Documents/ppmessage/ppmessage/bootstrap
-cp config.template.py config.py
+more config.json
 ```
 
-#### Describe config.py
 
-config.py contains following settings.
 
-#### Super Administrator
+#### Describe config.json
+
+
+**The first user of PPMessage is the administrator of PPMessage**
 
 ```python
 "user": {
     "user_language": "",
-    "user_firstname": "",
-    "user_lastname": "",
     "user_fullname": "",
     "user_email": "",
     "user_password": "",
@@ -33,21 +37,18 @@ This user is the super administrator of PPMessage, who has access to all users a
 
 Parameter        | Description
 -----------------|-------------------------------
-`user_language`  | language decides what language PPMessage will use to create PPCom anonymous user and set PPCom's default welcome note, can be "zh_cn", "en", "zh_tw" 
-`user_firstname` | admin's firstname
-`user_lastname`  | admin's lastname
-`user_fullname`  | admin's fullname
-`user_email`     | admin's email
-`user_password`  | admin's password
+`user_language`  | language decides what language PPMessage will use, especially the anonymous user's name.
+`user_fullname`  | fullname
+`user_email`     | email
+`user_password`  | password
 
 
-
-#### Super Administrator's Service Team
+#### Service Team
 
 ```python
 "team": {
+    "app_uuid": "",
     "app_name": "",
-    "company_name": "",
 }
 ```
 
@@ -56,8 +57,8 @@ This is the service team of super administrator.
 
 Parameter        | Description
 -----------------|------------------------------
+`app_uuid`       | service team uuid
 `app_name`       | service team name
-`company_name`   | company name
 
 
 #### Mysql Settings
@@ -65,6 +66,7 @@ Parameter        | Description
 ```python
 "mysql": {
     "db_host": "127.0.0.1",
+    "db_port": "3306",
     "db_user": "root",
     "db_pass": "test",
     "db_name": "ppmessage",
@@ -75,9 +77,8 @@ Parameter        | Description
 -----------------|---------------------------------------------------
 `db_host`        | msyql server address, default to be `127.0.0.1`
 `db_user`        | mysql login user, default to be `root`
-`db_pass`        | mysql login password, should match your msql password (when you install mysql, it will tell you to set password)
-`db_name`        | ppmessage database name, default to be `ppmessage`, no need to change
-
+`db_pass`        | mysql login password
+`db_name`        | ppmessage database name, default to be `ppmessage`
 
 #### Server Settings
 
@@ -91,57 +92,18 @@ Parameter        | Description
 
 Parameter        | Description
 -----------------|-------------------------------------------------------------------------------
-name             | server ip, such as `192.168.0.52`, PPKefu need this to connect to right server
+name             | server name or ip address, PPKefu PPCom need this to know where is the server.
 identicon_store  | PPCom user icon store path
 generic_store    | common file store path
 
 
-#### js Settings
-```python
-"js": {
-    "min": "no", # "no" or "yes"
-},
-```
+#### iOS apns config (optional)
 
-If you set `js.min` to `yes`, when run gulp task for PPCom, PPKefu, PPConsole, their javascript, css files will be compressed.
-
-#### Nginx Settings
+> if iOS push is configed, it is true, otherwise no ios field in this json or configed is false.
 
 ```python
-"nginx": {
-    "nginx_conf_path": "/usr/local/nginx/conf/nginx.conf",
-    "server_name": ["ppmessage.com", "www.ppmessage.com"],
-    "listen": "8080", #80
-    "upload_store": "/usr/local/opt/ppmessage/uploads 1",
-    "upload_state_store": "/usr/local/opt/ppmessage/upload_state",
-    "ssl": "off", # off/on
-    "ssl_listen": "443",
-    "ssl_certificate": "/Users/dingguijin/ppmessage/ppmessage/certs/ppmessage.cn.instant/issue/ssl_bundle.crt",
-    "ssl_certificate_key": "/Users/dingguijin/ppmessage/ppmessage/certs/ppmessage.cn.instant/server.key",
-},
-
-```
-
-Parameter               | Description
-------------------------|---------------------------------------------------
-`nginx_conf_path`       | nginx conf path, When set up in Mac, it's `/usr/local/etc/nginx/nginx.conf`. When set up in Linux or Docker, it's `/usr/local/nginx/conf/nginx.conf`
-`server_name`           | server name, should be like: `[some-server.com`, `www.some-server.com]`
-`listen`                | nginx listen port, `8080` for development, `80` for production
-`upload_store`          | nginx upload store
-`upload_state_store`    | nginx upload state store
-`ssl`                   | set to `on` for `https` protocol, set to `off` for `http` protocol
-`ssl_listen`            | ssl listen port
-`ssl_certificate`       | ssl certificate
-`ssl_certificate_key`   | ssl certificate key
-
-
-#### Apns Settings (optional)
-
-```python
-"apns": {
-    "name": "your-app's-bundle-id",
-    "dev": "/path-to-your-apns-development.p12",
-    "pro": "/path-to-your-apns-production.p12"
+"ios": {
+   "configed": true
 },
 ```
 
@@ -150,6 +112,5 @@ Parameter               | Description
 ```python
 "gcm": {
     "api_key": "your gcm api key",
-    "sender_id": "your gcm sender id"
 },
 ```
