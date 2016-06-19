@@ -35,8 +35,6 @@
            * [SET UP](part3/ppconsole/set-up-ppconsole.md)
        * [PPKEFU](part3/ppkefu/README.md)
            * [SET UP](part3/ppkefu/set-up-ppkefu.md)
-           * [CORDOVA-PPKEFU](part3/ppkefu/cordova-ppkefu.md)
-           * [ELECTRON-PPKEFU](part3/ppkefu/electron-ppkefu.md)
        * [PPCOM](part3/ppcom/README.md)
            * [SET UP](part3/ppcom/set-up-ppcom.md)
 
