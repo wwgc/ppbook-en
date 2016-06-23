@@ -23,7 +23,7 @@ Enter `~/Documents/ppmessage/ppmessage/scripts`.
 * In Linux(Debian/Ubuntu), run
 
   ```
-  bash set-up-ppmessage-on-linux.sh
+  bash set-up-ppmessage-on-debina-or-ubuntu.sh
   ```
 
 Notice: when run shell script to install software, your system's software may be upgraded. You need to know following tips and change the install script if necessary.
