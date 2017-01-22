@@ -5,14 +5,14 @@
 ----
 
 #### Integrate PPCom Web SDK
-First of all, you must register an account in `PPConsole` (`PPConsole` will automatically create a service team for you and set you as the `Service Agent Administrator`). After that, you can find your service team's `app_uuid` in `PPConsole/Team Settings/Basic Info`.
+> Get app_uuid from PPKefu/Settings/Developer Keys.
 
 There is two ways to integrate `PPCom` with your website.
 
 #### Insert Code
-`PPConsole` settings page(**Team Settings/Integration**) provides the min-version insert code.
+`PPKefu` settings page(**Settings/Widget Code**) provides the min-version insert code.
 
-To integrate `PPCom` with a website, open the source file(`index.html` e.g.) of the website, then copy the code and insert it between `<body></body>` tag. 
+To integrate `PPCom` with a website, open the source file(`index.html` e.g.) of the website, then copy the code and insert it between `<head></head>` tag. 
 
 After refreshing the website, you should see `PPCom` appear in the right bottom corner of the website. 
 
@@ -49,7 +49,7 @@ Just insert below code to your website's source file(`index.html` e.g.). Then yo
 
   ```javascript
   window.ppSettings = {
-    // required, it is your service team' uuid, can be found in PPConsole/Team Settings/Basic Info
+    // required, it is your service team' uuid, can be found in PPKefu/Settings/Developer Keys
     app_uuid: "xxxxxx",
 	
     // optional, it is the website visitor's email. If provided, PPMessage Server uses this email to target this visitor. Otherwise PPMessage Server treats this visitor as an anonymous user.
@@ -103,7 +103,7 @@ Just insert below code to your website's source file(`index.html` e.g.). Then yo
  
   Show `PPCom Message Interface`.
   
-  `PPCom Message Interface` is either the `conversation list`  or `chat window`. User can hide `PPCom Message Interface` by click the `Minimize` button. 
+  `PPCom Message Interface` is either the `conversation list`  or `chat window`. User can hide `PPCom Message Interface` by click the chat button again. 
   
   To show `PPCom Message Interface`, invoke `PP.show`.
 
@@ -115,7 +115,7 @@ Just insert below code to your website's source file(`index.html` e.g.). Then yo
  
   Hide `PPCom Message Interface`.
   
-  `PPCom Message Interface` is either the `conversation list` or `chat window`. User can hide `PPCom Message Interface` by click the `Minimize` button. 
+  `PPCom Message Interface` is either the `conversation list` or `chat window`. 
   
   To hide `PPCom Message Interface` programmatically, invoke `PP.hide`.
   
@@ -136,7 +136,7 @@ Just insert below code to your website's source file(`index.html` e.g.). Then yo
 
 #### Usage Occasions
 
-When `PPCom` bootstrap, it sends a request to `PPMessage Server` to create(if that user doesn't exist) and return a `PPMessage User` based on the parameter passed to `PP.boot`. If `user_email` is not specified, `PPMessage Server` will generate a random email address for this user.
+When `PPCom` bootstrap, it sends a request to `PPMessage Server` to create(if that user doesn't exist) and return a `PPMessage User` based on the parameter passed to `PP.boot`. 
 
 Classic occasions: suppose you have a website with its own user system and you integrate PPCom with you website. Your website user can perform operations like sign in, change profile and log out. When user performs these operations, you should invoke `Web SDK API` to display `PPCom` correctly.
 
@@ -175,7 +175,7 @@ Consider below user operations:
   
   When a visitor signs in to your website, you should change `PPCom` current user to be current sign-in user.
   
-  The key is to provide `user_email` when pass parameter to invoke `PP.update`. `PPMessage Server` will create or return the `PPMessage User` based on `user_email`.
+  The key is to provide `ent_user_id` when pass parameter to invoke `PP.update`. `PPMessage Server` will create or return the `PPMessage User` based on `ent_user_id`. The id belongs to website not to PPMessage, based `ent_user_id`, PPMessage knows the user is a registered user of website.
   
   You can provide `user_name` and `user_icon` if needed, or `PPMessage Server` will generate random `user_name` or `user_icon` instead.
   
@@ -185,6 +185,8 @@ Consider below user operations:
     user_email: 'nameduser@test.com',
     user_name: 'named-user',
     user_icon: 'http://xxx/named-user/icon.png',
+    ent_user_id: 123,
+
     language: 'zh-CN'
   });
   ```
@@ -223,7 +225,7 @@ When something goes wrong and PPCom fails to bootstrap, it will print error info
 Error Code        | Error description
 ----------------- | -------------------------------
 10000             | `app_uuid` is not valid
-10001             | can't get `PPMessage User` linked to provided `user_email`
+10001             | `reseverd`
 10002             | `PPCom` can't run in IE browser (version<=9)
 10003             | `PPCom` can't connect to `PPMessage Server`
 10004             | `user_email` is not valid

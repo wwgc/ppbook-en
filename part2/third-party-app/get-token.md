@@ -54,8 +54,8 @@ Body Parameters:
 Parameter         | Description
 ------------------|-------------------------
 `code`            | The authorization code you get
-`client_id`       | The client's id (your `PPKefu api_key` or `PPConsole api_key` in `PPConsole/Team Settings/Basic Info`)
-`client_secret`   | The client's id (your `PPKefu api_secret` or `PPConsole api_secret` in `PPConsole/Team Settings/Basic Info`)
+`client_id`       | The client's id (your `PPKefu api_key` displayed in `PPKefu/Settings/Developer Keys`)
+`client_secret`   | The client's id (your `PPKefu api_secret` displayed in `PPKefu/Settings/Developer Keys`)
 `redirect_uri`    | Should be the same as last step's `redirect_uri`
 `grant_type`      | Token type, value is `authorization_code`
 
@@ -100,7 +100,7 @@ After you get the token, you can use it to invoke PPMessage's API.
       "list": [],
       "error_code": "0",
       "error_string": "success",
-      "uri": "/PP_GET_APP_SERVICE_USER_LIST"
+      "uri": "/PP_GET_SERVICE_USER_LIST"
   }
   ```
   

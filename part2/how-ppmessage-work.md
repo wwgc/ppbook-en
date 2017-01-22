@@ -1,40 +1,38 @@
 # How PPMessage Work
 
-`PPMessage` includes `PPConsole`, `PPKefu`, `PPCom` and `PPMessage Server`. The former three are clients that must connect to `PPMessage Server` when they run.
+`PPMessage` includes `PPConfig`, `PPKefu`, `PPCom` and `PPMessage Server`. The former three are clients that must connect to `PPMessage Server` to run.
 
 --------
 
-#### PPKefu, PPConsole, PPCom, PPMessage Server
+#### PPConfig, PPKefu, PPCom, PPMessage Server
 
-    +--------------------+     1      +-----------------------+      2      +--------------------+
+
+    +--------------------+     3      +-----------------------+      4      +--------------------+
     |  Customer Client   +----------->+        Server         +------------>+   Service Client   |
     |                    |  message   |                       |   message   |                    |
     |     [PPCom]        +<-----------+      [PPMessage]      +<------------+      [PPKefu]      |
-    +--------+-----------+     4      +--------+----+---------+      3      +----------+---------+
-             ^                                 |    ^                                  ^
-             |                                 |    |                                  |
-           7 |                               5 |    | 6                              8 |
-             |                                 |    |                                  |
-             |                                 v    |                                  |
-             |                        +--------+----+---------+                        |
-             |                        |   Service Management  |                        |
-             +------------------------+                       +------------------------+
-                                      |      [PPConsole]      |
+    +--------+-----------+     6      +--------+----+---------+      5      +----------+---------+
+                                               |    ^
+                                               |    |
+                                             1 |    | 2
+                                               |    |
+                                               v    |
+                                      +--------+----+---------+
+                                      |   Service Management  |
+                                      +                       +
+                                      |      [PPConfig]       |
                                       +-----------------------+
 
 
-1. Website visitor sends message to service agents via `PPCom`. `PPMessage Server` receives and handles the message before sending it to service agents.
+1. PPConfig config and init PPMessage Server.
 
-2. `PPMessage Server` sends the message to service agents, who receive and view it by using `PPKefu`.
+2. PPMessage Server show init status to PPConfig.
 
-3. Service agents send message to Website user via `PPKefu`. `PPMessage Server` receives and handles the message before sending it to Website user.
+3. Website visitor sends message to service agents via `PPCom`. `PPMessage Server` receives and handles the message before sending it to service agents.
 
-4. `PPMessage Server` send the message to Website user, who receives and views the message via `PPCom`.
+4. `PPMessage Server` sends the message to service agents, who receive and view it by using `PPKefu`.
 
-5. `Service Agent Administrator` sign in to `PPConsole`, which loads all information about the service team from `PPMessage Server`.
+5. Service agents send message to Website user via `PPKefu`. `PPMessage Server` receives and handles the message before sending it to Website visitor.
 
-6. `Service Agent Administrator` modify service team settings, add/remove service agents, `PPConsole` saves these changes to `PPMessage Server`.
+6. `PPMessage Server` send the message to Website visitor who get the message via `PPCom`.
 
-7. `Service Agent Administrator` gets the code to integrate `PPCom` from `PPConsole`, and modify settings to change `PPCom` style.
-
-8. `Service Agent Adminstrator` can sign in to `PPKefu` from `PPConsole`.

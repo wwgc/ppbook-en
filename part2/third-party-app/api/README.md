@@ -20,12 +20,7 @@ api_level                 | Description
 --------------------------|-------------
 `PPCOM`                   | To invoke the api, you must request a token using PPCom `api_key` and `api_secret`
 `PPKEFU`                  | To invoke the api, you must request a token using PPKefu `api_key` and `api_secret`
-`PPCONSOLE`               | To invoke the api, you must request a token using PPConsole `api_key` and `api_secret`
-`PPCONSOLE_BEFORE_LOGIN`  | To invoke the api, you must request a token using PPConsole `api_key` and `api_secret`
-`THIRD_PARTY_KEFU`        | To invoke the api, you must request a token using THIRD PARTY Kefu `api_key` and `api_secret`
-`THIRD_PARTY_CONSOLE`     | To invoke the api, you must request a token using THIRD PARTY Console `api_key` and `api_secret`
 
-As this doc is for third party app, we only care about `THIRD_PARTY_KEFU` and `THIRD_PARTY_CONSOLE` api_level.
 
 note:
 
@@ -71,7 +66,7 @@ POST /PP_CREATE_USER
 
 api_level:
 ```
-PPCONSOLE, THIRD_PARTY_CONSOLE
+PPKefu
 ```
 
 Parameters:
@@ -111,7 +106,7 @@ POST /PP_REMOVE_USER
 
 api_level:
 ```
-PPCONSOLE, THIRD_PARTY_CONSOLE
+PPKefu
 ```
 
 Parameters:
@@ -139,7 +134,7 @@ POST /PP_UPDATE_USER
 
 api_level:
 ```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -218,7 +213,7 @@ POST /PP_UPDATE_DEVICE
 
 api_level:
 ```
-PPCOM, PPKEFU, THIRD_PARTY_KEFU
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -256,7 +251,7 @@ POST /PP_CREATE_CONVERSATION
 
 api_level:
 ```
-PPCOM, PPKEFU, THIRD_PARTY_KEFU
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -301,7 +296,7 @@ POST /PP_GET_CONVERSATION_INFO
 
 api_level:
 ```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -351,12 +346,12 @@ Response (example):
 
 #### Get All Conversations In A Service Team
 ```
-POST /PP_GET_APP_CONVERSATION_LIST
+POST /PP_GET_CONVERSATION_LIST
 ```
 
 api_level:
 ```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -468,7 +463,7 @@ POST /PP_GET_USER_CONVERSATION_LIST
 
 api_level:
 ```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -499,7 +494,7 @@ POST /PP_OPEN_CONVERSATION
 
 api_level:
 ```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -530,7 +525,7 @@ POST /PP_CLOSE_CONVERSATION
 
 api_level:
 ```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -558,7 +553,7 @@ POST /PP_GET_APP_INFO
 
 api_level:
 ```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -606,12 +601,12 @@ Response (example):
 
 #### Get All Service User In A Service Team
 ```
-POST /PP_GET_APP_SERVICE_USER_LIST
+POST /PP_GET_SERVICE_USER_LIST
 ```
 
 api_level:
 ```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -702,7 +697,7 @@ POST /PP_GET_HISTORY_MESSAGE
 
 api_level:
 ```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -741,7 +736,7 @@ POST /PP_GET_USER_INFO
 
 api_level:
 ```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -756,415 +751,6 @@ Response (example):
 ```
 {
 ...
-}
-```
-
-
-#### Get All Service Group In A Service Team
-```
-POST /PP_GET_APP_ORG_GROUP_LIST
-```
-
-api_level:
-```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | service team's uuid
-
-Response (example):
-```
-{
-    'list': [
-        {
-            'updatetime': '2016-05-18 04:56:45 515792',
-            'user_count': 2,
-            'group_icon': 'http://127.0.0.1:8080/identicon/be625d18d0b96a0b2e2e26c95a4b59e1625348ab.png',
-            'uuid': 'e00ab5b0-1cb4-11e6-9894-0242ac110002',
-            'conversation_uuid': None,
-            'is_distributor': True,
-            'group_desc': 'a dancer club',
-            'group_name': 'Dancer Club',
-            'app_uuid': '1ca35f40-17f1-11e6-9d01-0242ac110003',
-            'createtime': '2016-05-18 04:56:26 024830'
-        }
-    ],
-    'error_code': 0,
-    'uri': '/PP_GET_APP_ORG_GROUP_LIST',
-    'error_string': 'success.'
-}
-```
-
-
-#### Get service group's info
-```
-POST /PP_GET_ORG_GROUP_DETAIL
-```
-
-api_level:
-```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | service team's uuid
-**group_uuid**         | string    | service group's uuid
-
-Response (example):
-```
-{
-    'group_route_algorithm': None,
-    'group_visible_order_for_ppcom': None,
-    'updatetime': datetime.datetime(2016, 5, 18, 4, 56, 45, 515792),
-    'uuid': 'e00ab5b0-1cb4-11e6-9894-0242ac110002',
-    'error_string': 'success.',
-    'conversation_uuid': None,
-    'createtime': datetime.datetime(2016, 5, 18, 4, 56, 26, 24830),
-    'is_distributor': True,
-    'uri': '/PP_GET_ORG_GROUP_DETAIL',
-    'group_desc': 'a dancer club',
-    'is_root': None,
-    'group_uuid': 'e00ab5b0-1cb4-11e6-9894-0242ac110002',
-    'app_uuid': '1ca35f40-17f1-11e6-9d01-0242ac110003',
-    'group_work_time_str': None,
-    'group_name': 'Dancer Club',
-    'error_code': 0,
-    'group_icon': 'http://127.0.0.1:8080/identicon/be625d18d0b96a0b2e2e26c95a4b59e1625348ab.png',
-    'group_visible_for_ppcom': None
-}
-```
-
-
-#### Get All Service Users In A Service Group
-
-```
-POST /PP_GET_ORG_GROUP_USER_LIST
-```
-
-api_level:
-```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | service team's uuid
-**group_uuid**         | string    | service group's uuid
-
-Response (example):
-```
-{
-    'list': [
-        {
-            'updatetime': 1463547414,
-            'group': {
-                'uuid': 'e00ab5b0-1cb4-11e6-9894-0242ac110002',
-                'group_name': 'Dancer Club'
-            },
-            'uuid': '1ca235d4-17f1-11e6-9d01-0242ac110003',
-            'user_fullname': 'Jin He',
-            'user_icon': '01a17ddc-1821-11e6-9b56-0242ac110003',
-            'is_browser_online': True,
-            'user_signature': 'fight to the death ~',
-            'is_mobile_online': False,
-            'user_email': 'jin.he@ppmessage.com'
-        },
-        {
-            'updatetime': 1463482387,
-            'group': {
-                'uuid': 'e00ab5b0-1cb4-11e6-9894-0242ac110002',
-                'group_name': 'Dancer Club'
-            },
-            'uuid': '89d63aee-1c1d-11e6-a4dd-0242ac110002',
-            'user_fullname': 'right',
-            'user_icon': None,
-            'is_browser_online': False,
-            'user_signature': None,
-            'is_mobile_online': False,
-            'user_email': 'right@ppmessage.com'
-        }
-    ],
-    'error_code': 0,
-    'uri': '/PP_GET_ORG_GROUP_USER_LIST',
-    'error_string': 'success.'
-}
-```
-
-
-#### Create Service Group
-```
-POST /PP_CREATE_ORG_GROUP
-```
-
-api_level:
-```
-PPCONSOLE, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | service group's uuid
-**group_name**         | string    | service group's name
-**group_desc**         | string    | service group's decription
-is_distributor         | boolean   | whether service group is primary group
-
-Response (example):
-```
-{
-    'group_visible_order_for_ppcom': None,
-    'group_desc': 'a music club',
-    'group_name': 'Music Club',
-    'is_root': None,
-    'group_work_time_str': None,
-    'group_visible_for_ppcom': None,
-    'group_route_algorithm': None,
-    'updatetime': datetime.datetime(2016, 5, 18, 6, 22, 1, 125540),
-    'uuid': 'd4c8c2bc-1cc0-11e6-b348-0242ac110002',
-    'error_string': 'success.',
-    'is_distributor': False,
-    'uri': '/PP_CREATE_ORG_GROUP',
-    'createtime': datetime.datetime(2016, 5, 18, 6, 22, 1, 125540),
-    'app_uuid': '1ca35f40-17f1-11e6-9d01-0242ac110003',
-    'error_code': 0,
-    'group_icon': 'http://127.0.0.1:8080/identicon/d4c8c2bc-1cc0-11e6-b348-0242ac110002.png'
-}
-```
-
-
-#### Update Service Group
-```
-POST /PP_UPDATE_ORG_GROUP
-```
-
-api_level:
-```
-PPCONSOLE, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                   | Type      | Description
------------------------|-----------|-----------------------------
-**app_uuid**           | string    | service team's uuid
-**group_uuid**         | string    | service group's uuid
-group_name             | string    | service group's name
-group_icon             | string    | service group's icon
-group_desc             | string    | service group's description
-is_distributor         | boolean   | whether service group is primary group
-
-
-Response (example):
-```
-{
-    'group_route_algorithm': None,
-    'group_visible_order_for_ppcom': None,
-    'updatetime': datetime.datetime(2016, 5, 18, 4, 56, 45, 515792),
-    'uuid': 'e00ab5b0-1cb4-11e6-9894-0242ac110002',
-    'error_string': 'success.',
-    'createtime': datetime.datetime(2016, 5, 18, 4, 56, 26, 24830),
-    'is_distributor': True,
-    'uri': '/PP_UPDATE_ORG_GROUP',
-    'group_desc': u'a dancer club',
-    'is_root': None,
-    'group_uuid': 'e00ab5b0-1cb4-11e6-9894-0242ac110002',
-    'app_uuid': '1ca35f40-17f1-11e6-9d01-0242ac110003',
-    'group_work_time_str': None,
-    'group_name': u'Dancer Club',
-    'error_code': 0,
-    'group_icon': 'http://127.0.0.1:8080/identicon/be625d18d0b96a0b2e2e26c95a4b59e1625348ab.png',
-    'group_visible_for_ppcom': None
-}
-```
-
-
-#### Remove Service Group
-```
-POST /PP_REMOVE_ORG_GROUP
-```
-
-api_level:
-```
-PPCONOSLE, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | service team's uuid
-**group_uuid**         | string    | service group's uuid
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PP_REMOVE_ORG_GROUP',
-    'error_string': 'success.'
-}
-```
-
-
-#### Add Service Agent To A Service Group
-```
-POST /PP_ADD_ORG_GROUP_USER
-```
-
-api_level:
-```
-PPCONOSLE, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                   | Type      | Description
------------------------|-----------|-----------------------------
-**app_uuid**           | string    | service team's uuid
-**group_uuid**         | string    | service group's uuid
-**user_list**          | list      | service agents to add to service group
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PP_ADD_ORG_GROUP_USER',
-    'error_string': 'success.'
-}
-```
-
-
-#### Remove Service Agents From A Service Group
-```
-POST /PP_REMOVE_ORG_GROUP_USER
-```
-
-api_level:
-```
-PPCONOSLE, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | service team's uuid
-**group_uuid**         | string    | service group's uuid
-**user_list**          | list      | service agents to remove from service group
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PP_REMOVE_ORG_GROUP_USER',
-    'error_string': 'success.'
-}
-```
-
-
-#### Get All Service Agents That Don't Belong To Any Service Group In A Service Team.
-```
-POST /PP_GET_NO_GROUP_USER_LIST
-```
-
-api_level:
-```
-PPCOM, PPKEFU, PPCONOSLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | service team's uuid
-
-Response (example):
-```
-{
-    'list': [
-        {
-            'user_status': 'ADMIN',
-            'updatetime': '2016-05-18 04:56:54 905611',
-            'uuid': '1ca235d4-17f1-11e6-9d01-0242ac110003',
-            'is_anonymous_user': 'False',
-            'user_lastname': 'He',
-            'user_password': '40bd001563085fc35165329ea1ff5c5ecbdbbeef',
-            'user_fullname': 'Jin He',
-            'service_user_status': 'READY',
-            'user_icon': '01a17ddc-1821-11e6-9b56-0242ac110003',
-            'user_signature': 'fight to the death ~',
-            'user_email': 'jin.he@ppmessage.com',
-            'browser_device_uuid': '68a2feca-1c1d-11e6-a4dd-0242ac110002',
-            'user_language': 'zh_cn',
-            'createtime': '2016-05-12 03:25:01 000000',
-            'latest_send_message_time': '2016-05-12 10:01:18 000000',
-            'user_firstname': 'Jin'
-        },
-        {
-            'user_status': 'SERVICE',
-            'updatetime': '2016-05-17 10:53:07 000000',
-            'uuid': '89d63aee-1c1d-11e6-a4dd-0242ac110002',
-            'is_anonymous_user': 'False',
-            'user_password': '40bd001563085fc35165329ea1ff5c5ecbdbbeef',
-            'user_fullname': 'right',
-            'user_name': 'right@ppmessage.com',
-            'createtime': '2016-05-17 10:53:07 000000',
-            'user_email': 'right@ppmessage.com'
-        },
-        {
-            'user_status': 'SERVICE',
-            'updatetime': '2016-05-18 08:15:16 552382',
-            'uuid': 'a7341f62-1cd0-11e6-950f-0242ac110002',
-            'is_anonymous_user': 'False',
-            'user_password': '40bd001563085fc35165329ea1ff5c5ecbdbbeef',
-            'user_fullname': 'gitar',
-            'user_name': 'gitar@ppmessage.com',
-            'createtime': '2016-05-18 08:15:16 552382',
-            'user_email': 'gitar@ppmessage.com'
-        }
-    ],
-    'error_code': 0,
-    'uri': '/PP_GET_NO_GROUP_USER_LIST',
-    'error_string': 'success.'
-}
-```
-
-
-#### Get All Conversations Related To A Service Group
-
-```
-POST /PP_GET_ORG_GROUP_CONVERSATION
-```
-
-api_level:
-```
-PPCOM
-```
-
-Parameters:
-
-Name                   | Type      | Description
------------------------|-----------|----------------------------
-**app_uuid**           | string    | service team's uuid
-**group_uuid**         | string    | service group's uuid
-**user_uuid**          | string    | user's uuid，this user is a PPCom user
-
-Response (example):
-```
-{
-    'conversation_uuid': '68a2feca-1c1d-11e6-a4dd-0242ac110002',
-    'error_code': 0,
-    'uri': '/PP_GET_NO_GROUP_USER_LIST',
-    'error_string': 'success.'
 }
 ```
 
@@ -1279,37 +865,6 @@ Response (example):
 ```
 
 
-#### Select Service Agents By Group Algorithm
-```
-POST /PP_SELECT_USERS_BY_GROUP_ALGORITHM
-```
-
-api_level:
-```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                   | Type      | Description
------------------------|-----------|------------
-**app_uuid**           | string    | service team's uuid
-**group_uuid**         | string    | service group's uuid
-**conversation_uuid**  | string    | conversation uuid
-
-Response (example):
-```
-{
-    'list': [
-        '1ca235d4-17f1-11e6-9d01-0242ac110003',
-        '89d63aee-1c1d-11e6-a4dd-0242ac110002'
-    ],
-    'error_code': 0,
-    'uri': '/PP_SELECT_USERS_BY_GROUP_ALGORITHM',
-    'error_string': 'success.'
-}
-```
-
 #### Update Service Team Info
 ```
 POST /PP_UPDATE_APP_INFO
@@ -1317,7 +872,7 @@ POST /PP_UPDATE_APP_INFO
 
 api_level:
 ```
-PPCONSOLE, THIRD_PARTY_CONSOLE
+PPKEFU
 ```
 
 Parameters:
@@ -1369,62 +924,6 @@ Response (example):
 ```
 
 
-#### Get Service Team Owned By User
-
-```
-POST /PP_GET_APP_OWNED_BY_USER
-```
-
-api_level:
-```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|-------------------------
-**user_uuid**           | string    | service team uuid
-
-Response (example):
-```
-{
-    'app': {
-        'return_offline_message': None,
-        'app_name': 'ppmessage123',
-        'app_secret': 'Mzg2ODliNjVlY2I2NzBlNTExMmJkMTE4YzM3MjRlMjUxN2U1MjEwMg==',
-        'robot_user_uuid': None,
-        'api_uuid': '1ca64836-17f1-11e6-9d01-0242ac110003',
-        'robot_train_track': None,
-        'app_billing_email': None,
-        'uuid': '1ca35f40-17f1-11e6-9d01-0242ac110003',
-        'welcome_message': None,
-        'robot_train_click': None,
-        'ppcom_powered_by_visible': None,
-        'ppcom_powered_by_link': None,
-        'company_name': 'YOURUI',
-        'ppcom_launcher_style': None,
-        'ppcom_powered_by_name': None,
-        'app_icon': None,
-        'offline_message': None,
-        'app_key': 'NjZlZGNiMGEzOTg4NmNjYWQ2NDIxNDZiN2ZiZTljZTA1NTFiZjdlNw==',
-        'show_ppcom_hover': None,
-        'updatetime': datetime.datetime(2016, 5, 18, 9, 57, 22, 455405),
-        'app_route_policy': None,
-        'robot_train_method': None,
-        'robot_train_chat': None,
-        'app_billing_uuid': None,
-        'user_uuid': '1ca235d4-17f1-11e6-9d01-0242ac110003',
-        'createtime': datetime.datetime(2016, 5, 12, 3, 25, 1),
-        'ppcom_launcher_color': None
-    },
-    'bill': None,
-    'error_code': 0,
-    'uri': '/PP_GET_APP_OWNED_BY_USER',
-    'error_string': 'success.'
-}
-```
-
 
 #### Validate Email Is Valid
 ```
@@ -1433,7 +932,7 @@ Post /PP_IS_EMAIL_VALID
 
 api_level:
 ```
-PPCONSOLE, THIRD_PARTY_CONSOLE
+PPKEFU
 ```
 
 Parameters:
@@ -1453,92 +952,6 @@ Response (example):
 ```
 
 
-#### Create Service Team
-```
-POST /PP_CREATE_APP
-```
-
-api_level:
-```
-PPCONSOLE, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|----------------------------------
-**user_uuid**           | string    | user uuid, this user is the service team's administrator
-**app_name**            | string    | service team's name
-
-Response (example):
-```
-{
-    'uri': '/PP_CREATE_APP',
-    'error_code': 0,
-    'error_string': 'success.',
-    'uuid': '82baa504-1ce2-11e6-b4ca-0242ac110002',
-    'app_name': 'nodejs',
-    'app_billing_email': 'nodejs@ppmessage.com',
-    'app_key': '82baa324-1ce2-11e6-b4ca-0242ac110002',
-    'app_secret': '82baa464-1ce2-11e6-b4ca-0242ac110002',
-    'app_route_policy': 'BROADCAST'
-}
-```
-
-
-#### Remove Service Agents From A Service Team
-```
-POST /PP_LEAVE_APP
-```
-
-api_level:
-```
-PPCONSOLE, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team uuid
-**user_list**           | list      | the member list to remove from service team
-
-Response (example):
-```
-{
-    'uri': '/PP_LEAVE_APP',
-    'error_code': 0,
-    'error_string': 'success.'
-}
-```
-
-
-#### Remove Service Team
-```
-POST /PP_REMOVE_APP
-```
-
-api_level:
-```
-PPCONSOLE, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-**user_uuid**           | string    | the service team administrator's uuid
-
-Response (example):
-```
-{
-    'uri': '/PP_REMOVE_APP',
-    'error_code': 0,
-    'error_string': 'success.'
-}
-```
-
 
 #### Get Conversation Member List
 ```
@@ -1547,7 +960,7 @@ POST /PP_GET_CONVERSATION_USER_LIST
 
 api_level:
 ```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -1616,7 +1029,7 @@ POST /PP_PAGE_USER_CONVERSATION
 
 api_level:
 ```
-PPCOM, PPKEFU, THIRD_PARTY_KEFU
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -1708,7 +1121,7 @@ POST /PP_PAGE_HISTORY_MESSAGE
 
 api_level:
 ```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -1772,40 +1185,6 @@ Response (example):
     'error_code': 0
 }
 ```
-
-
-#### Get Online PPCom Users By Page
-```
-POST /PP_PAGE_ONLINE_PORTAL_USER
-```
-
-api_level:
-```
-PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-**page_offset**         | number    | page offset
-**page_size**           | number    | page size
-
-Response (example):
-```
-{
-    'list': [],
-    'page_offset': 0,
-    'page_size': 12,
-    'total_count': 0,
-    'return_count': 0,
-    'error_code': 0,
-    'error_string': 'success',
-    'uri': '/PP_PAGE_ONLINE_PORTAL_USER'
-}
-```
-
 
 #### PPKefu User Login
 ```
@@ -1939,7 +1318,7 @@ POST /PP_GET_USER_DETAIL
 
 api_level:
 ```
-PPCOM, PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
+PPCOM, PPKEFU
 ```
 
 Parameters:
@@ -1992,320 +1371,8 @@ Response (example):
 }
 ```
 
-#### PPConsole Logout
-```
-POST /PPCONSOLE_LOGOUT
-```
 
-api_level:
-```
-PPCONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**user_uuid**           | string    | user uuid
-
-Response (example):
-```
-{
-    'uri': '/PPCONSOLE_LOGOUT',
-    'error_code': 0,
-    'error_string': 'success.'
-}
-```
-
-
-#### PPConsole Service Agent Sign Up
-
-When sign up, both your service agent administrator and service team is created.
-
-```
-POST /PPCONSOLE_SIGNUP
-```
-
-api_level:
-```
-PPCONSOLE, THIRD_PARTY_CONSOLE, PPCONSOLE_BEFORE_LOGIN
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-**app_name**            | string    | service team's name
-**user_email**          | string    | user email
-**user_fullname**       | string    | user fullname
-**user_password**       | string    | user password
-
-Response (example):
-```
-{
-    'app': {
-        'app_billing_email': 'cordova@ppmessage.com',
-        'app_route_policy': 'BROADCAST',
-        'uuid': '10f2cf8e-1e39-11e6-8cec-0242ac110002',
-        'app_secret': '10f2ce12-1e39-11e6-8cec-0242ac110002',
-        'app_key': '10f2c5fc-1e39-11e6-8cec-0242ac110002',
-        'user_uuid': '10f23592-1e39-11e6-8cec-0242ac110002',
-        'app_name': u'cordova'
-    },
-    'error_code': 0,
-    'uri': '/PPCONSOLE_SIGNUP',
-    'error_string': 'success.',
-    'user': {
-        'user_status': 'OWNER_2',
-        'is_anonymous_user': False,
-        'uuid': '10f23592-1e39-11e6-8cec-0242ac110002',
-        'user_language': u'English',
-        'user_password': u'40bd001563085fc35165329ea1ff5c5ecbdbbeef',
-        'user_fullname': u'cordova',
-        'user_name': u'cordova@ppmessage.com',
-        'user_email': u'cordova@ppmessage.com'
-    }
-}
-```
-
-
-#### PPConsole Get Data Overview Number
-
-```
-POST /PPCONSOLE_GET_OVERVIEW_NUMBER
-```
-
-api_level:
-```
-PPCONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PPCONSOLE_GET_OVERVIEW_NUMBER',
-    'error_string': 'success.',
-    'number': {
-        'today_customer': 2,
-        'all_customer': 9,
-        'all_message': '10',
-        'yesterday_customer': 0,
-        'agent': 3
-    }
-}
-```
-
-
-#### PPConsole Get Real Time Customer Number
-```
-POST /PPCONSOLE_GET_REAL_TIME_CUSTOMER_NUMBER
-```
-
-api_level:
-```
-PPCONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PPCONSOLE_GET_REAL_TIME_CUSTOMER_NUMBER',
-    'error_string': 'success.',
-    'number': [
-        {'0': 0}, {'1': 0}, {'2': 0}, {'3': 2}, {'4': 0}, {'5': 0},
-        {'6': 0}, {'7': 0}, {'8': 0}, {'9': 0}, {'10': 0}, {'11': 0},
-        {'12': 0}, {'13': 0}, {'14': 0}, {'15': 0}, {'16': 0}, {'17': 0},
-        {'18': 0}, {'19': 0}, {'20': 0}, {'21': 0}, {'22': 0}, {'23': 0}
-    ]
-}
-```
-
-
-#### PPConsole Get Real Time Service Agent Number
-
-```
-POST /PPCONSOLE_GET_REAL_TIME_SERVICE_NUMBER
-```
-
-api_level:
-```
-PPCONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|--------------------
-**app_uuid**            | string    | service team's uuid
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PPCONSOLE_GET_REAL_TIME_SERVICE_NUMBER',
-    'error_string': 'success.',
-    'number': [
-        {'0': 0}, {'1': 0}, {'2': 0}, {'3': 0}, {'4': 0}, {'5': 0},
-        {'6': 0}, {'7': 0}, {'8': 0}, {'9': 0}, {'10': 0}, {'11': 0},
-        {'12': 0}, {'13': 0}, {'14': 0}, {'15': 0}, {'16': 0}, {'17': 0},
-        {'18': 0}, {'19': 0}, {'20': 0}, {'21': 0}, {'22': 0}, {'23': 0}
-    ]
-}
-```
-
-
-#### PPConsole Get Real Time Message Number
-
-```
-POST /PPCONSOLE_GET_REAL_TIME_MESSAGE_NUMBER
-```
-
-api_level:
-```
-PPCONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PPCONSOLE_GET_REAL_TIME_MESSAGE_NUMBER',
-    'error_string': 'success.',
-    'number': [
-        {'0': None}, {'1': None}, {'2': None}, {'3': None}, {'4': None}, {'5': None},
-        {'6': None}, {'7': None}, {'8': None}, {'9': None}, {'10': None}, {'11': None},
-        {'12': None}, {'13': None}, {'14': None}, {'15': None}, {'16': None}, {'17': None},
-        {'18': None}, {'19': None}, {'20': None}, {'21': None}, {'22': None}, {'23': None}
-    ]
-}
-```
-
-
-#### PPConsole Get Customer Number By Range
-
-```
-POST /PPCONSOLE_GET_CUSTOMER_NUMBER_BY_RANGE"
-```
-
-api_level:
-```
-PPCONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PPCONSOLE_GET_CUSTOMER_NUMBER_BY_RANGE',
-    'error_string': 'success.',
-    'number': {
-        '2016-05-19': 0, '2016-05-18': 0, '2016-05-17': 0, '2016-05-16': 0, '2016-05-15': 0, '2016-05-14': 0,
-        '2016-05-13': 0, '2016-05-12': 0, '2016-05-11': 0, '2016-05-10': 0, '2016-04-29': 0, '2016-04-28': 0,
-        '2016-04-21': 0, '2016-04-20': 0, '2016-04-23': 0, '2016-04-22': 0, '2016-04-25': 0, '2016-04-24': 0,
-        '2016-04-27': 0, '2016-04-26': 0, '2016-05-08': 0, '2016-05-09': 0, '2016-05-01': 0, '2016-05-02': 0,
-        '2016-05-03': 0, '2016-05-04': 0, '2016-05-05': 0, '2016-05-06': 0, '2016-05-07': 0, '2016-05-20': 2,
-        '2016-04-30': 0
-    }
-}
-```
-
-
-#### PPConsole Get Service Agent Number By Range
-```
-POST /PPCONSOLE_GET_SERVICE_NUMBER_BY_RANGE"
-```
-
-api_level:
-```
-PPCONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team' suuid
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PPCONSOLE_GET_SERVICE_NUMBER_BY_RANGE',
-    'error_string': 'success.',
-    'number': {
-        '2016-05-19': 0, '2016-05-18': 0, '2016-05-17': 0, '2016-05-16': 0, '2016-05-15': 0, '2016-05-14': 0,
-        '2016-05-13': 0, '2016-05-12': 0, '2016-05-11': 0, '2016-05-10': 0, '2016-04-29': 0, '2016-04-28': 0,
-        '2016-04-21': 0, '2016-04-20': 0, '2016-04-23': 0, '2016-04-22': 0, '2016-04-25': 0, '2016-04-24': 0,
-        '2016-04-27': 0, '2016-04-26': 0, '2016-05-08': 0, '2016-05-09': 0, '2016-05-01': 0, '2016-05-02': 0,
-        '2016-05-03': 0, '2016-05-04': 0, '2016-05-05': 0, '2016-05-06': 0, '2016-05-07': 0, '2016-05-20': 2,
-        '2016-04-30': 0
-    }
-}
-```
-
-
-#### PPConsole Get Message Number By Range
-```
-POST /PPCONSOLE_GET_MESSAGE_NUMBER_BY_RANGE"
-```
-
-api_level:
-```
-PPCONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|--------------------
-**app_uuid**            | string    | service team's uuid
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PPCONSOLE_GET_MESSAGE_NUMBER_BY_RANGE',
-    'error_string': 'success.',
-    'number': {
-        '2016-05-19': 0, '2016-05-18': 0, '2016-05-17': 0, '2016-05-16': 0, '2016-05-15': 0, '2016-05-14': 0,
-        '2016-05-13': 0, '2016-05-12': 0, '2016-05-11': 0, '2016-05-10': 0, '2016-04-29': 0, '2016-04-28': 0,
-        '2016-04-21': 0, '2016-04-20': 0, '2016-04-23': 0, '2016-04-22': 0, '2016-04-25': 0, '2016-04-24': 0,
-        '2016-04-27': 0, '2016-04-26': 0, '2016-05-08': 0, '2016-05-09': 0, '2016-05-01': 0, '2016-05-02': 0,
-        '2016-05-03': 0, '2016-05-04': 0, '2016-05-05': 0, '2016-05-06': 0, '2016-05-07': 0, '2016-05-20': 2,
-        '2016-04-30': 0
-    }
-}
-```
-
-
-#### Get Third Party App Info About A Service Team
+#### Get Api Keys
 
 ```
 POST /PP_GET_API_INFO
@@ -2313,7 +1380,7 @@ POST /PP_GET_API_INFO
 
 api_level:
 ```
-PPCONSOLE, THIRD_PARTY_CONSOLE
+PPKEFU
 ```
 
 Parameters:
@@ -2326,94 +1393,15 @@ Name                    | Type      | Description
 Response (example):
 ```
 {
-    'ppconsole_thirdparty': {
-        'api_secret': u'NTg1YzUzMGE0MDk2ODA2MzUxOGNjMmE1YzczNGViYzg5ZjNhNmIwZg==',
-        'api_key': u'ZjU4YzUzYmIzOTI0YWEwMjQ5YmE2ZGEyNzM1MWFiMWQ0OTRjOWViZQ==',
-        'api_level': u'THIRD_PARTY_CONSOLE',
-        'api_uuid': u'1ca75fc8-17f1-11e6-9d01-0242ac110003'
-    },
     'error_code': 0,
     'uri': '/PP_GET_API_INFO',
     'error_string': 'success.',
-    'ppkefu_thirdparty': {
+    'ppkefu': {
         'api_secret': u'ZGVlNmY4NWI1MWJkMzc1NjlkZTJmNWRkYWMxZTZlMjlhOTNkNGY4Yw==',
         'api_key': u'Yzk4ZGNhNjFmYjJiNTgwM2RjNTg1YmQ4MWJkZDUxOGM0YmVmODhjNA==',
         'api_level': u'THIRD_PARTY_KEFU',
         'api_uuid': u'1ca6e7aa-17f1-11e6-9d01-0242ac110003'
     }
-}
-```
-
-
-#### Get All service team list
-
-```
-POST /PP_GET_ALL_APP_LIST
-```
-
-api_level:
-```
-PPCONSOLE, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**user_uuid**           | string    | user uuid
-
-Response (example):
-```
-{
-    'app': [
-        {
-            'updatetime': '2016-05-18 09:57:22 000000',
-            'uuid': '1ca35f40-17f1-11e6-9d01-0242ac110003',
-            'app_secret': 'Mzg2ODliNjVlY2I2NzBlNTExMmJkMTE4YzM3MjRlMjUxN2U1MjEwMg==',
-            'app_key': 'NjZlZGNiMGEzOTg4NmNjYWQ2NDIxNDZiN2ZiZTljZTA1NTFiZjdlNw==',
-            'company_name': 'YOURUI',
-            'api_uuid': '1ca64836-17f1-11e6-9d01-0242ac110003',
-            'user_uuid': '1ca235d4-17f1-11e6-9d01-0242ac110003',
-            'createtime': '2016-05-12 03:25:01 000000',
-            'app_name': 'ppmessage123'
-        },
-        {
-            'app_billing_email': 'nodejs@ppmessage.com',
-            'updatetime': '2016-05-18 10:23:09 000000',
-            'app_route_policy': 'BROADCAST',
-            'uuid': '82baa504-1ce2-11e6-b4ca-0242ac110002',
-            'app_secret': '82baa464-1ce2-11e6-b4ca-0242ac110002',
-            'app_key': '82baa324-1ce2-11e6-b4ca-0242ac110002',
-            'user_uuid': '82b514ea-1ce2-11e6-b4ca-0242ac110002',
-            'createtime': '2016-05-18 10:23:09 000000',
-            'app_name': 'nodejs'
-        },
-        {
-            'app_billing_email': 'cordova@ppmessage.com',
-            'updatetime': '2016-05-20 03:15:12 770747',
-            'app_route_policy': 'BROADCAST',
-            'uuid': '10f2cf8e-1e39-11e6-8cec-0242ac110002',
-            'app_secret': '10f2ce12-1e39-11e6-8cec-0242ac110002',
-            'app_key': '10f2c5fc-1e39-11e6-8cec-0242ac110002',
-            'user_uuid': '10f23592-1e39-11e6-8cec-0242ac110002',
-            'createtime': '2016-05-20 03:15:12 770747',
-            'app_name': 'cordova'
-        },
-        {
-            'app_billing_email': 'dancer@ppmessage.com',
-            'updatetime': '2016-05-17 09:16:34 000000',
-            'app_route_policy': 'BROADCAST',
-            'uuid': '0b4693e8-1c10-11e6-b5ef-0242ac110002',
-            'app_secret': '0b46933e-1c10-11e6-b5ef-0242ac110002',
-            'app_key': '0b469212-1c10-11e6-b5ef-0242ac110002',
-            'user_uuid': '0b4629f8-1c10-11e6-b5ef-0242ac110002',
-            'createtime': '2016-05-17 09:16:34 000000',
-            'app_name': 'dancer-team'
-        }
-    ],
-    'error_code': 0,
-    'uri': '/PP_GET_ALL_APP_LIST',
-    'error_string': 'success.'
 }
 ```
 
@@ -2426,7 +1414,7 @@ POST /PP_VALIDATE_ONLINE_DEVICE
 
 api_level:
 ```
-PPKEFU, THIRD_PARTY_KEFU
+PPKEFU
 ```
 
 Parameters:
@@ -2443,352 +1431,6 @@ Response (example):
     'error_code': 0,
     'error_string': 'success.',
     'uri': '/PP_VALIDATE_ONLINE_DEVICE'
-}
-```
-
-
-#### Set Service Agent Status
-```
-POST /PPKEFU_SET_SERVICE_USER_STATUS
-```
-
-api_level:
-```
-PPKEFU, THIRD_PARTY_KEFU
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|-------------------------
-**app_uuid**            | string    | service team's uuid
-**user_uuid**           | string    | user uuid
-**user_status**         | string    | user status, can be 'BUSY', 'READY', 'REST'
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'error_string': 'success.',
-    'uri': '/PP_SET_SERVICE_USER_STATUS',
-}
-```
-
-
-#### Get All Predefined Script
-
-```
-POST /PP_GET_ALL_PREDEFINED_SCRIPT
-```
-
-api_level:
-```
-PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PP_GET_ALL_PREDEFINED_SCRIPT',
-    'error_string': 'success.',
-    'list': [
-        '0b469212-1c10-11e6-b5ef-0242ac110002',
-        '0b4629f8-1c10-11e6-b5ef-0242ac110002'
-    ]
-}
-```
-
-
-#### Get All Predefined Script Group
-
-```
-POST /PP_GET_ALL_PREDEFINED_SCRIPT_GROUP
-```
-
-api_level:
-```
-PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PP_GET_ALL_PREDEFINED_SCRIPT_GROUP',
-    'error_string': 'success.',
-    'list': [
-        {
-            'uuid': '10f2c5fc-1e39-11e6-8cec-0242ac110002',
-            'app_uuid': '10f2cf8e-1e39-11e6-8cec-0242ac110002',
-            'group_name': 'install instruction',
-            'createtime': '2016-05-17 09:16:34 000000',
-            'updatetime': '2016-05-17 09:16:34 000000'
-        }
-    ]
-}
-```
-
-
-#### Get Predefined Script In A Group
-
-```
-POST /PP_GET_PREDEFINED_SCRIPT_WITH_GROUP
-```
-
-api_level:
-```
-PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-**group_uuid**          | string    | group uuid
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PP_GET_PREDEFINED_SCRIPT_WITH_GROUP',
-    'error_string': 'success.',
-    'list': [
-        {
-            'uuid': '1ca64836-17f1-11e6-9d01-0242ac110003',
-            'app_uuid': '1ca235d4-17f1-11e6-9d01-0242ac110003',
-            'group_uuid': '82baa464-1ce2-11e6-b4ca-0242ac110002',
-            'script_question': 'is PPMessage an open source project ?',
-            'script_answer': 'Yes, it is.'
-        }
-    ]
-}
-```
-
-
-#### Add Predefined Script
-
-```
-POST /PP_ADD_PREDEFINED_SCRIPT
-```
-
-api_level:
-```
-PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-**script_question**     | string    | script question
-**script_answer**       | string    | script answer
-group_uuid              | string    | group uuid
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PP_ADD_PREDEFINED_SCRIPT',
-    'error_string': 'success.',
-    'uuid': '1ca64836-17f1-11e6-9d01-0242ac110003',
-    'app_uuid': '1ca235d4-17f1-11e6-9d01-0242ac110003',
-    'group_uuid': '82baa464-1ce2-11e6-b4ca-0242ac110002',
-    'script_question': 'is PPMessage an open source project ?',
-    'script_answer': 'Yes, it is.'
-}
-```
-
-
-#### Remove Predefined Script
-
-```
-POST /PP_REMOVE_PREDEFINED_SCRIPT
-```
-
-api_level:
-```
-PPKEFU, PPCONSOLE, THIRD_PARTY_KEFU, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-**script_uuid**         | string    | script uuid
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PP_REMOVE_PREDEFINED_SCRIPT',
-    'error_string': 'success.',
-}
-```
-
-
-#### Add Predefined Script Group
-
-```
-POST /PP_ADD_PREDEFINED_SCRIPT_GROUP
-```
-
-api_level:
-```
-PPCONSOLE, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|-------------------
-**app_uuid**            | string    | service team's uuid
-**group_name**          | string    | group name
-
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PP_ADD_PREDEFINED_SCRIPT_GROUP',
-    'error_string': 'success.',
-    'uuid': '10f2c5fc-1e39-11e6-8cec-0242ac110002',
-    'app_uuid': '10f2cf8e-1e39-11e6-8cec-0242ac110002',
-    'group_name': 'install instruction',
-    'createtime': '2016-05-17 09:16:34 000000',
-    'updatetime': '2016-05-17 09:16:34 000000'
-}
-```
-
-
-#### Remove Predefined Script Group
-
-```
-POST /PP_REMOVE_PREDEFINED_SCRIPT_GROUP
-```
-
-api_level:
-```
-PPCONSOLE, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-**group_uuid**          | string    | group uuid
-
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PP_REMOVE_PREDEFINED_SCRIPT_GROUP',
-    'error_string': 'success.',
-}
-```
-
-
-#### Move Predefined Script Into Group
-
-```
-POST /PP_MOVE_PREDEFINED_SCRIPT_INTO_GROUP
-```
-
-api_level:
-```
-PPCONSOLE, THIRD_PARTY_CONSOLE
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|-------------------------
-**app_uuid**            | string    | service team's uuid
-**group_uuid**          | string    | group uuid
-**script_uuid**         | string    | script uuid
-
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PP_MOVE_PREDEFINED_SCRIPT_INTO_GROUP',
-    'error_string': 'success.',
-}
-```
-
-
-#### PPConsole Send User Email When His Password Is Changed
-
-```
-POST /PPCONSOLE_SEND_NEW_PASSWORD
-```
-
-api_level:
-```
-PPCONSOLE_BEFORE_LOGIN
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**user_email**          | string    | user uuid
-
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PPCONSOLE_SEND_NEW_PASSWORD',
-    'error_string': 'success.',
-}
-```
-
-
-#### Cancel Waiting Create Conversation
-
-```
-POST /PP_CANCEL_WAITING_CREATE_CONVERSATION
-```
-
-api_level:
-```
-PPCOM
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-**user_uuid**           | string    | user uuid
-**device_uuid**         | string    | device uuid
-group_uuid              | string    | service group uuid
-
-Response (example):
-```
-{
-    'error_code': 0,
-    'uri': '/PP_CANCEL_WAITING_CREATE_CONVERSATION',
-    'error_string': 'success.',
 }
 ```
 
@@ -2836,31 +1478,3 @@ Response (example):
 }
 ```
 
-
-#### PPCom Get waiting Queue Length
-
-```
-POST /PP_GET_AMD_QUEUE_LENGTH
-```
-
-api_level:
-```
-PPCOM
-```
-
-Parameters:
-
-Name                    | Type      | Description
-------------------------|-----------|------------
-**app_uuid**            | string    | service team's uuid
-
-
-Response (example):
-```
-{
-    'length': 10,
-    'uri': '/PPCOM_CREATE_CONVERSATION',
-    'error_code': 0,
-    'error_string': 'success.'
-}
-```

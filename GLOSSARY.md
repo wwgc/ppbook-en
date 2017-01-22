@@ -12,9 +12,6 @@ PPMessage client end software, which is used by the user of developer's website 
 
 PPMessage client end software, which is used by the creator or service agents of developer's company.
 
-## PPConsole
-
-PPMessage Web admin software which is used by developer or operator who can create more service agents and check the message data of PPMessage.
 
 ## Service Team
 
