@@ -51,12 +51,22 @@ Just insert below code to your website's source file(`index.html` e.g.). Then yo
   window.ppSettings = {
     // required, it is your service team' uuid, can be found in PPKefu/Settings/Developer Keys
     app_uuid: "xxxxxx",
-	
-    // optional, it is the website visitor's email. If provided, PPMessage Server uses this email to target this visitor. Otherwise PPMessage Server treats this visitor as an anonymous user.
+
+
+    // required if a registered user
+    user_uuid: "1231",
+
+    // required if a registered user, timestamp (ms)
+    user_createtime: 1231321312,
+
+    // optional, it is visitor's email. 
 	user_email: "somebody.web@ppmessage.com",
-    
+
+    // optional, it is visitor's mobile. 
+	user_mobile: "+81xxxxxxxxxx",
+        
     // optional, it is the website visitor's display name.
-    user_name: "张三",
+    user_name: "Alex Z",
 
     // optional, it is the website visitor's avatar
     user_icon: "http://xxxx.com/avatar.png",
@@ -133,99 +143,3 @@ Just insert below code to your website's source file(`index.html` e.g.). Then yo
   PP.shutdown();
   ```
 
-
-#### Usage Occasions
-
-When `PPCom` bootstrap, it sends a request to `PPMessage Server` to create(if that user doesn't exist) and return a `PPMessage User` based on the parameter passed to `PP.boot`. 
-
-Classic occasions: suppose you have a website with its own user system and you integrate PPCom with you website. Your website user can perform operations like sign in, change profile and log out. When user performs these operations, you should invoke `Web SDK API` to display `PPCom` correctly.
-
-Consider below user operations:
-
-* **User open your website**
-
-  User opens your website and remains as a visitor. You should bootstrap `PPCom` as a visitor. The parameter you pass to `PP.boot` should not contain `user_email`. `user_icon` and `user_name` are optional, if you don't provide them, `PPMessage Server` will generate random icon and name for this user.
-  
-  If you want `PPCom` to appear upon website opens, just create `window.ppSettings` and load it before `pp-library-min.js`. When the SDK loads, it will bootstrap `PPCom` automatically based on `window.ppSettings`.
-
-  ```html
-  <script>
-  window.ppSettings = {
-      app_uuid: 'your-app-uuid',
-      user_name: 'anonymous-user',
-      user_icon: 'http://xxx/anonymous-user/icon.png',
-      language: 'zh-CN'
-  };
-  </script>
-  <script src="https://ppmessage.com/ppcom/assets/pp-library.min.js" type="text/javascript"></script>
-  ```
-  
-  If you want to manually control when `PPCom` bootstrap, don't create `window.ppSettings`, invoke `PP.boot` instead.
-  
-  ```javascript
-  PP.boot({
-    app_uuid: 'your-app-uuid',
-    user_name: 'anonymous-user',
-    user_icon: 'http://xxx/anonymous-user/icon.png',
-    language: 'zh-CN'
-  });
-  ```
-  
-* **User sign in** 
-  
-  When a visitor signs in to your website, you should change `PPCom` current user to be current sign-in user.
-  
-  The key is to provide `ent_user_id` when pass parameter to invoke `PP.update`. `PPMessage Server` will create or return the `PPMessage User` based on `ent_user_id`. The id belongs to website not to PPMessage, based `ent_user_id`, PPMessage knows the user is a registered user of website.
-  
-  You can provide `user_name` and `user_icon` if needed, or `PPMessage Server` will generate random `user_name` or `user_icon` instead.
-  
-  ```javascript
-  PP.update({
-    app_uuid: 'your-app-uuid',
-    user_email: 'nameduser@test.com',
-    user_name: 'named-user',
-    user_icon: 'http://xxx/named-user/icon.png',
-    ent_user_id: 123,
-
-    language: 'zh-CN'
-  });
-  ```
-
-* **User modify his profile**
-
-  When user modify his profile in your website, you should invoke `PP.update` to tell `PPMessage Server` to update `PPMessage User`(use `user_email` to target the `PPMessage User`).
-  
-  ```javascript
-  PP.update({
-    app_uuid: 'your-app-uuid',
-    user_email: 'nameduser@test.com',
-    user_name: 'named-user-123',
-    user_icon: 'http://xxx/named-user-123/icon.png',
-    language: 'en'
-  });
-  ```
- 
-* **User sign out from your website**
-
-  When user sign out from your website, you should update `PPCom` to reset current user to be a website visitor.
-  
-  ```javascript
-    PP.update({
-      app_uuid: 'your-app-uuid'
-      user_name: 'anonymous-user',
-      user_icon: 'http://xxx/anonymous-user/icon.png',
-      language: 'zh-CN'
-    });
-  ```
-  
-#### Error Code
-
-When something goes wrong and PPCom fails to bootstrap, it will print error info and erro code in browser console.
-
-Error Code        | Error description
------------------ | -------------------------------
-10000             | `app_uuid` is not valid
-10001             | `reseverd`
-10002             | `PPCom` can't run in IE browser (version<=9)
-10003             | `PPCom` can't connect to `PPMessage Server`
-10004             | `user_email` is not valid
