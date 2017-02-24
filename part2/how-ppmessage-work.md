@@ -6,22 +6,7 @@
 
 #### PPConfig, PPKefu, PPCom, PPMessage Server
 
-
-+---------------+   3   +-------------+    4  +--------------+
-|Customer Client+------>+   Server    +------>+Service Client|
-|               |message|             |message|              |
-|     [PPCom]   +<------+ [PPMessage] +<------+   [PPKefu]   |
-+---------------+   6   +-------------+    5  +--------------+
-                               |    ^
-                               |    |
-                             1 |    | 2
-                               |    |
-                               v    |
-                      +--------+----+---------+
-                      |   Service Management  |
-                      +                       +
-                      |      [PPConfig]       |
-                      +-----------------------+
+![image](how-work.png)
 
 1. PPConfig config and init PPMessage Server.
 
